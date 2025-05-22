@@ -1,7 +1,7 @@
 name: elite_team_training_app
 description: "A new Flutter project."
 
-publish_to: 'none' # Remove this line if you wish to publish to pub.dev
+publish_to: 'none'
 
 version: 1.0.0+1
 
@@ -12,29 +12,50 @@ dependencies:
   flutter:
     sdk: flutter
 
-
   cupertino_icons: ^1.0.8
   dio: ^5.8.0+1
   shared_preferences: ^2.5.3
+  flutter_launcher_icons: ^0.14.3
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
-
   flutter_lints: ^5.0.0
+  flutter_native_splash: ^2.4.6
 
-
-
-# The following section is specific to Flutter packages.
 flutter:
-
   uses-material-design: true
 
-  # To add assets to your application, add an assets section, like this:
   assets:
     - assets/
+    - assets/splash/logo.png
+    - assets/fonts/Somar-Bold.otf
 
   fonts:
     - family: somar
       fonts:
         - asset: assets/fonts/Somar-Bold.otf
+
+flutter_icons:
+  android: true
+  ios: true
+  image_path: "assets/launcherIcon/app_icon_light.png"
+
+flutter_native_splash:
+  color: "#FFFFFF"
+  image: assets/splash/logo.png
+#  branding: assets/splash/branding.png
+  branding_mode: bottom
+  android: true
+  ios: true
+  fullscreen: true
+
+  android_12:
+    color: "#FFFFFF"
+    image: assets/splash/android_logo.png
+    icon_background_color: "#FFFFFF"
+    branding: assets/splash/android_branding.png
+    branding_mode: bottom # مكان البراندنغ
+    fullscreen: true
+    color_dark_android: "#121212"
+
