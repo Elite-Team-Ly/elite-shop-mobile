@@ -32,10 +32,6 @@ final ThemeData baseTheme = ThemeData(
       fontFamily: 'somar',
     ),
   ),
-);
-
-// Theme for English language (LTR)
-final ThemeData themeEnglish = baseTheme.copyWith(
   appBarTheme: AppBarTheme(
     backgroundColor: AppColors.primary_color,
     titleTextStyle: TextStyle(
@@ -45,17 +41,6 @@ final ThemeData themeEnglish = baseTheme.copyWith(
       fontFamily: 'somar',
     ),
   ),
-);
-
-// Theme for Arabic language (RTL)
-final ThemeData themeArabic = baseTheme.copyWith(
-  appBarTheme: AppBarTheme(
-    backgroundColor: AppColors.primary_color,
-    titleTextStyle: TextStyle(
-      color: AppColors.light_color,
-      fontSize: 20,
-      fontWeight: FontWeight.bold,
-      fontFamily: 'somar',
-    ),
-  ),
+  visualDensity: VisualDensity.adaptivePlatformDensity,
+  useMaterial3: true,
 );
