@@ -10,9 +10,11 @@ class NotificationUtils {
   static Future<void> initialize() async {
     const AndroidInitializationSettings initializationSettingsAndroid =
     AndroidInitializationSettings('@mipmap/ic_launcher');
+    const iosSettings = DarwinInitializationSettings();
 
     final InitializationSettings initializationSettings = InitializationSettings(
       android: initializationSettingsAndroid,
+      iOS: iosSettings
     );
 
     await _notificationsPlugin.initialize(initializationSettings);
