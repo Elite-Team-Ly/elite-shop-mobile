@@ -2,16 +2,16 @@
 
 class AppColors {
   // ======================================================
-  // Primary Colors 
-  static const Color primary_color = Color.fromARGB(255, 81, 100, 130);
-  static const Color primary_a10 = Color(0xff7288ad);
-  static const Color primary_a20 = Color(0xff8396b7);
-  static const Color primary_a30 = Color(0xff94a4c1);
-  static const Color primary_a40 = Color(0xffa6b3cb);
-  static const Color primary_a50 = Color(0xffb7c2d6);
+  // Primary Colors
+  static const Color primary_color = Color(0xff6895D9);
+  static const Color primary_a10 = Color(0xff7BA0DD);
+  static const Color primary_a20 = Color(0xff8DABE2);
+  static const Color primary_a30 = Color(0xff9EB7E6);
+  static const Color primary_a40 = Color(0xffAEC3EA);
+  static const Color primary_a50 = Color(0xffBFCEEF);
 
   // ======================================================
-  // Dark Colors 
+  // Dark Colors
   static const Color dark_color = Color(0xff000000);
   static const Color dark_a10 = Color(0xff121212);
   static const Color dark_a20 = Color(0xff282828);
@@ -61,5 +61,16 @@ class AppColors {
 class AppLink {
   static const server = "http://api.eliteteam.com/api";
   static const imageServer = "http://studio.eliteteam.com:5000/image/";
+}
+
+
+class AppAssets {
+  static const String app = "assets/app/";
+  static const String lottie = "assets/lottie/";
+
+  // logo app
+  static const String logoApp = "assets/app/logo.png";
+  static const String logoApp_2 = "assets/app/logo2.png";
+  static const String logoWidget = "assets/app/logoWidget.png";
 
 }

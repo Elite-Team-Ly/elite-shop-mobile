@@ -1,9 +1,9 @@
 import 'package:elite_team_training_app/core/utils/statusHandler.dart';
-import 'package:elite_team_training_app/views/widgets/shared/widgets.dart';
+import 'package:elite_team_training_app/views/widgets/widgets.dart';
 import 'package:flutter/material.dart';
-import '../core/data/demo/onboarding_data.dart';
-import 'widgets/onBoarding_Widgets/onboarding_dots.dart';
-import 'widgets/onBoarding_Widgets/onboarding_page.dart';
+import '../../core/data/demo/onboarding_data.dart';
+import '../widgets/onBoarding_Widgets/onboarding_dots.dart';
+import '../widgets/onBoarding_Widgets/onboarding_page.dart';
 
 class OnboardingScreen extends StatefulWidget {
   const OnboardingScreen({super.key});

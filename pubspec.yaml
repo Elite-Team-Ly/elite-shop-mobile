@@ -18,6 +18,9 @@ dependencies:
   flutter_launcher_icons: ^0.14.3
   flutter_local_notifications: ^19.2.1
   permission_handler: ^12.0.0+1
+  flutter_svg: ^2.1.0
+  intl: ^0.20.2
+  table_calendar: ^3.2.0
 
 dev_dependencies:
   flutter_test:
@@ -30,8 +33,9 @@ flutter:
 
   assets:
     - assets/
-    - assets/splash/logo.png
     - assets/fonts/Somar-Bold.otf
+    - assets/splash/
+    - assets/app/
     - assets/app/onBoarding/
 
   fonts:

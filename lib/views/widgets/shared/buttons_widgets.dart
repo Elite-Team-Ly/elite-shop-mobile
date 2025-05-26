@@ -4,6 +4,8 @@ import '../../../core/utils/statusHandler.dart';
 
 class MainButton extends StatelessWidget {
   final VoidCallback? onPressed;
+  final double? width;
+  final double? height;
   final Widget child;
   final bool isEnabled;
   final String status;
@@ -14,15 +16,19 @@ class MainButton extends StatelessWidget {
     required this.child,
     this.isEnabled = true,
     this.status = 'normal',
+    this.width,
+    this.height,
   });
 
   @override
   Widget build(BuildContext context) {
     final AppStatus appStatus = parseAppStatus(status);
 
-    return ConstrainedBox(
-      constraints: BoxConstraints(minWidth: 80, maxWidth: 220,minHeight: 33, maxHeight: 50),
-      child: IntrinsicWidth(
+    return Container(
+      margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+      child: SizedBox(
+        width: width ?? 220,
+        height: height ?? 50,
         child: RawMaterialButton(
           onPressed: isEnabled ? onPressed : null,
           fillColor: AppStatusHandler.backgroundColor(
@@ -35,7 +41,7 @@ class MainButton extends StatelessWidget {
             borderRadius: BorderRadius.circular(12),
           ),
           padding: EdgeInsets.symmetric(horizontal: 24, vertical: 12),
-          elevation: isEnabled ? 0 : 0,
+          elevation: 0,
           disabledElevation: 0,
           child: DefaultTextStyle(
             style: TextStyle(
@@ -44,7 +50,7 @@ class MainButton extends StatelessWidget {
                 isEnabled: isEnabled,
               ),
               fontSize: 14,
-              fontWeight: FontWeight.w600
+              fontWeight: FontWeight.w600,
             ),
             child: child,
           ),

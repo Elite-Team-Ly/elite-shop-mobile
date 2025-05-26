@@ -21,11 +21,11 @@ void setSystemUIStyle(BuildContext context) {
       : Brightness.dark;
 
   SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
-    statusBarColor: AppColors.primary_a50.withOpacity(0.2),
+    statusBarColor: AppColors.primary_a50.withOpacity(0.1),
     statusBarIconBrightness:
     statusBarIconBrightness,
     systemNavigationBarColor:
-    AppColors.primary_a50.withOpacity(0.2),
+    AppColors.primary_a50.withOpacity(0.0),
     systemNavigationBarIconBrightness:
     navigationBarIconBrightness,
     systemNavigationBarDividerColor:

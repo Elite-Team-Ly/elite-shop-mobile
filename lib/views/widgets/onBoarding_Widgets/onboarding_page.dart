@@ -1,3 +1,4 @@
+import 'package:elite_team_training_app/core/config/constants.dart';
 import 'package:flutter/material.dart';
 
 class OnboardingPage extends StatelessWidget {
@@ -22,13 +23,13 @@ class OnboardingPage extends StatelessWidget {
           Image.asset(image),
           Text(
             title,
-            style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+            style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: AppColors.dynamicColor(context: context, darkModeColor: AppColors.dark_a30, lightModeColor: AppColors.dark_a20)),
           ),
           SizedBox(height: 12),
           Text(
             description,
             textAlign: TextAlign.center,
-            style: TextStyle(fontSize: 16, color: Colors.grey[700]),
+            style: TextStyle(fontSize: 15, color: AppColors.dynamicColor(context: context, darkModeColor: AppColors.light_color, lightModeColor: AppColors.dark_a30)),
           ),
         ],
       ),
