@@ -11,10 +11,12 @@ class SignupScreen extends StatelessWidget {
     return Scaffold(
       appBar: CustomAppBar(
         title: 'الأشتراك',
+        subtitle: 'أنشئ حسابك الآن واستمتع بكل مزايانا بسهولة وأمان',
         onBack: () {
           Navigator.pop(context);
         },
       ),
+
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.all(15.0),

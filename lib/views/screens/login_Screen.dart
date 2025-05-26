@@ -1,4 +1,3 @@
-import 'package:elite_team_training_app/core/config/constants.dart';
 import 'package:flutter/material.dart';
 import '../widgets/widgets.dart';
 import 'signUp_Screen.dart';
@@ -36,6 +35,8 @@ class LoginScreen extends StatelessWidget {
                   ),
                   Text("ليس لديك حساب ؟", style: TextStyle(fontSize: 16)),
                   MainButton(
+                    width: 130,
+                    height: 40,
                     onPressed: () {
                       Navigator.push(
                         context,
@@ -43,8 +44,7 @@ class LoginScreen extends StatelessWidget {
                       );
                     },
                     child: Text("الأشتراك", style: TextStyle(fontSize: 12)),
-                    width: 130,
-                    height: 40,
+
                   ),
                 ],
               ),

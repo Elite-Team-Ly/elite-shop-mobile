@@ -1,57 +1,80 @@
-import 'package:flutter/material.dart';
 import 'package:elite_team_training_app/core/config/constants.dart';
+import 'package:flutter/material.dart';
 
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   final String title;
+  final String? subtitle;
   final VoidCallback? onBack;
 
-  const CustomAppBar({Key? key, required this.title, this.onBack})
-    : super(key: key);
+  const CustomAppBar({
+    Key? key,
+    required this.title,
+    this.subtitle,
+    this.onBack,
+  }) : super(key: key);
 
   @override
-  Size get preferredSize => const Size.fromHeight(100);
+  Size get preferredSize => const Size.fromHeight(140);
 
   @override
   Widget build(BuildContext context) {
-    final bool canGoBack = Navigator.of(context).canPop();
+    final bool canPop = Navigator.of(context).canPop();
 
     return Container(
       height: preferredSize.height,
       padding: EdgeInsets.only(
-        top: MediaQuery.of(context).padding.top + 16,
+        top: MediaQuery.of(context).padding.top + 8,
         left: 16,
         right: 16,
-        bottom: 16,
+        bottom: 8,
       ),
-      decoration: BoxDecoration(),
-      child: Stack(
-        alignment: Alignment.center,
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          if (canGoBack)
-            Align(
-              alignment: Alignment.centerLeft,
-              child: IconButton(
-                icon: Icon(
-                  Icons.arrow_back,
-                  color: AppColors.dark_a20,
-                  size: 28,
-                ),
-                onPressed: onBack ?? () => Navigator.of(context).pop(),
+          if (canPop)
+            IconButton(
+              icon: Icon(
+                Icons.arrow_back,
+                size: 28,
+                color: Colors.black.withOpacity(0.7),
               ),
-            ),
+              onPressed: onBack ?? () => Navigator.of(context).pop(),
+            )
+          else
+            SizedBox(width: 48),
 
-          Center(
-            child: Text(
-              title,
-              style: TextStyle(
-                color: AppColors.dark_a20,
-                fontSize: 24,
-                fontWeight: FontWeight.bold,
-              ),
-              maxLines: 1,
-              overflow: TextOverflow.ellipsis,
+          Expanded(
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Text(
+                  title,
+                  style: TextStyle(
+                    color: AppColors.dark_a20,
+                    fontSize: 24,
+                    fontWeight: FontWeight.bold,
+                  ),
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                ),
+                if (subtitle != null) SizedBox(height: 4),
+                if (subtitle != null)
+                  Text(
+                    subtitle!,
+                    style: TextStyle(
+                      color: AppColors.dark_a30,
+                      fontSize: 14,
+                    ),
+                    maxLines: 2,
+                    overflow: TextOverflow.ellipsis,
+                    textAlign: TextAlign.center,
+                  ),
+              ],
             ),
           ),
+
+          SizedBox(width: 48),
         ],
       ),
     );
