@@ -29,13 +29,13 @@ class AppColors {
   static const Color lightA50 = Color(0xff575757);
 
   // Handler Color
-  static const Color handlerColorBGSuccess = Color(0xffE8F5E9);
-  static const Color handlerColorBGWarning = Color(0xffFFF8E1);
-  static const Color handlerColorBGError = Color(0xffFFEBEE);
-  static const Color handlerColorBGNetworkError = Color(0xffFFCDD2);
-  static const Color handlerColorBGTimeout = Color(0xffF5F5F5);
-  static const Color handlerColorBGServerError = Color(0xffFFEBEE);
-  static const Color handlerColorBGInfo = Color(0xffE3F2FD);
+  static const Color handlerColorBgSuccess = Color(0xffE8F5E9);
+  static const Color handlerColorBgWarning = Color(0xffFFF8E1);
+  static const Color handlerColorBgError = Color(0xffFFEBEE);
+  static const Color handlerColorBgNetworkError = Color(0xffFFCDD2);
+  static const Color handlerColorBgTimeout = Color(0xffF5F5F5);
+  static const Color handlerColorBgServerError = Color(0xffFFEBEE);
+  static const Color handlerColorBgInfo = Color(0xffE3F2FD);
 
   static const Color handlerColorTxtSuccess = Color(0xff2E7D32);
   static const Color handlerColorTxtWarning = Color(0xffFF8F00);
@@ -59,8 +59,8 @@ class AppColors {
 }
 
 class AppLink {
-  static const server = "http://api.eliteteam.com/api";
-  static const imageServer = "http://studio.eliteteam.com:5000/image/";
+  static const String server = "http://api.eliteteam.com/api";
+  static const String imageServer = "http://studio.eliteteam.com:5000/image/";
 }
 
 class AppAssets {
@@ -69,10 +69,9 @@ class AppAssets {
 
   // logo app
   static const String logoApp = "assets/app/logo.png";
-  static const String logoApp_2 = "assets/app/logo2.png";
+  static const String logoApp2 = "assets/app/logo2.png";
   static const String logoWidget = "assets/app/logoWidget.png";
 
-  static const String customerLogin =
-      "assets/app/loginBundle/customerLogin.png";
+  static const String customerLogin = "assets/app/loginBundle/customerLogin.png";
   static const String sellerLogin = "assets/app/loginBundle/SellerLogin.png";
 }

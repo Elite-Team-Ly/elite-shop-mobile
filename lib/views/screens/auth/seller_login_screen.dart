@@ -1,17 +1,15 @@
 import 'package:elite_team_training_app/core/config/constants.dart';
-import 'package:elite_team_training_app/views/widgets/app/customImageWidget.dart';
 import 'package:flutter/material.dart';
 import '../../widgets/widgets.dart';
-import 'signUp_Screen.dart';
 
-class CustomerLoginScreen extends StatelessWidget {
-  const CustomerLoginScreen({super.key});
+class SellerLoginScreen extends StatelessWidget {
+  const SellerLoginScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: CustomAppBar(
-        title: 'تسجييل الدخول كمشتري',
+        title: 'تسجيل الدخول كبائع',
         onBack: () {
           Navigator.pop(context);
         },
@@ -23,7 +21,7 @@ class CustomerLoginScreen extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               CustomImageWidget(
-                imagePath: AppAssets.customerLogin,
+                imagePath: AppAssets.sellerLogin,
                 width: 280,
                 height: 280,
               ),
@@ -39,31 +37,32 @@ class CustomerLoginScreen extends StatelessWidget {
                     hintText: "كلمة المرور",
                     keyboardType: TextInputType.visiblePassword,
                   ),
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      children: [
-                        Text(
-                          "اعادة تعيين كلمة مرور",
-                          style: TextStyle(
-                            fontSize: 16,
-                            color: AppColors.primaryColor,
-                          ),
-                        ),
-                        Text(
-                          "هل نسيت كلمة المرور ؟",
-                          style: TextStyle(fontSize: 16),
-                        ),
-                      ],
+
+                  RowWithAction(
+                    onActionTap: () {
+                      // أضف هنا منطق إعادة تعيين كلمة المرور عند الحاجة
+                    },
+                    normalWidget: CustomText(
+                      "هل نسيت كلمة المرور ؟",
+                      fontSize: 16,
+                    ),
+                    actionWidget: CustomText(
+                      "اعادة تعيين كلمة مرور",
+                      fontSize: 16,
+                      color: AppColors.primaryColor,
                     ),
                   ),
 
                   MainButton(
-                    onPressed: () {},
-                    child: Text("تسجيل دخول", style: TextStyle(fontSize: 14)),
+                    onPressed: () {
+                      // أضف هنا منطق تسجيل الدخول
+                    },
                     width: 130,
                     height: 45,
+                    child: const Text(
+                      "تسجيل دخول",
+                      style: TextStyle(fontSize: 14),
+                    ),
                   ),
                 ],
               ),
