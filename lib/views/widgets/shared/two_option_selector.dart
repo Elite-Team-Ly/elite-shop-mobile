@@ -35,10 +35,10 @@ class TwoOptionSelector extends StatelessWidget {
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
         decoration: BoxDecoration(
-          color: isSelected ? AppColors.primary_color : AppColors.light_color,
+          color: isSelected ? AppColors.primaryColor : AppColors.lightColor,
           borderRadius: BorderRadius.circular(12),
           border: Border.all(
-            color: isSelected ? AppColors.primary_color : AppColors.light_a20,
+            color: isSelected ? AppColors.primaryColor : AppColors.lightA20,
           ),
         ),
         child: Text(

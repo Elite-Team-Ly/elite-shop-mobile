@@ -19,13 +19,16 @@ class OnboardingDots extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: List.generate(
           length,
-              (index) => AnimatedContainer(
+          (index) => AnimatedContainer(
             duration: Duration(milliseconds: 300),
             margin: EdgeInsets.symmetric(horizontal: 4),
             width: currentPage == index ? 40 : 40,
             height: 14,
             decoration: BoxDecoration(
-              color: currentPage == index ? AppColors.primary_color : AppColors.primary_a40,
+              color:
+                  currentPage == index
+                      ? AppColors.primaryColor
+                      : AppColors.primaryA40,
               borderRadius: BorderRadius.circular(8),
             ),
           ),

@@ -33,14 +33,14 @@ class MultiContentBoxWidget extends StatelessWidget {
               backgroundColor ??
               AppColors.dynamicColor(
                 context: context,
-                darkModeColor: AppColors.dark_a10,
-                lightModeColor: AppColors.light_a10,
+                darkModeColor: AppColors.darkA10,
+                lightModeColor: AppColors.lightA10,
               ),
           borderRadius: BorderRadius.circular(borderRadius),
           boxShadow: [
             boxShadow ??
                 const BoxShadow(
-                  color: AppColors.light_a20,
+                  color: AppColors.lightA20,
                   offset: Offset(0, 8),
                   blurRadius: 10,
                 ),

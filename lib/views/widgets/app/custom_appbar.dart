@@ -7,11 +7,11 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   final VoidCallback? onBack;
 
   const CustomAppBar({
-    Key? key,
+    super.key,
     required this.title,
     this.subtitle,
     this.onBack,
-  }) : super(key: key);
+  });
 
   @override
   Size get preferredSize => const Size.fromHeight(140);
@@ -36,6 +36,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
               icon: Icon(
                 Icons.arrow_back,
                 size: 28,
+                // ignore: deprecated_member_use
                 color: Colors.black.withOpacity(0.7),
               ),
               onPressed: onBack ?? () => Navigator.of(context).pop(),
@@ -51,7 +52,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
                 Text(
                   title,
                   style: TextStyle(
-                    color: AppColors.dark_a20,
+                    color: AppColors.darkA20,
                     fontSize: 24,
                     fontWeight: FontWeight.bold,
                   ),
@@ -62,10 +63,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
                 if (subtitle != null)
                   Text(
                     subtitle!,
-                    style: TextStyle(
-                      color: AppColors.dark_a30,
-                      fontSize: 14,
-                    ),
+                    style: TextStyle(color: AppColors.darkA30, fontSize: 14),
                     maxLines: 2,
                     overflow: TextOverflow.ellipsis,
                     textAlign: TextAlign.center,

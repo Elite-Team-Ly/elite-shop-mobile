@@ -16,20 +16,35 @@ class OnboardingPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 50.0,horizontal: 20),
+      padding: const EdgeInsets.symmetric(vertical: 50.0, horizontal: 20),
 
       child: Column(
         children: [
           Image.asset(image),
           Text(
             title,
-            style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: AppColors.dynamicColor(context: context, darkModeColor: AppColors.dark_a30, lightModeColor: AppColors.dark_a20)),
+            style: TextStyle(
+              fontSize: 24,
+              fontWeight: FontWeight.bold,
+              color: AppColors.dynamicColor(
+                context: context,
+                darkModeColor: AppColors.darkA30,
+                lightModeColor: AppColors.darkA20,
+              ),
+            ),
           ),
           SizedBox(height: 12),
           Text(
             description,
             textAlign: TextAlign.center,
-            style: TextStyle(fontSize: 15, color: AppColors.dynamicColor(context: context, darkModeColor: AppColors.light_color, lightModeColor: AppColors.dark_a30)),
+            style: TextStyle(
+              fontSize: 15,
+              color: AppColors.dynamicColor(
+                context: context,
+                darkModeColor: AppColors.lightColor,
+                lightModeColor: AppColors.darkA30,
+              ),
+            ),
           ),
         ],
       ),

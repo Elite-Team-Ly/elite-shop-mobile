@@ -1,10 +1,10 @@
-import 'package:elite_team_training_app/views/screens/signUp_Screen.dart';
+import 'package:elite_team_training_app/views/screens/signup_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'core/config/theme.dart';
 import 'core/utils/app_notification.dart';
-import 'core/utils/setStatusBarColor.dart';
+import 'core/utils/set_status_bar_color.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

@@ -1,3 +1,5 @@
+// ignore_for_file: deprecated_member_use
+
 import 'package:elite_team_training_app/core/config/constants.dart';
 import 'package:elite_team_training_app/views/widgets/shared/buttons_widgets.dart';
 import 'package:flutter/material.dart';
@@ -11,13 +13,13 @@ class ScrollDatePicker extends StatefulWidget {
   final TextStyle? inactiveTextStyle;
 
   const ScrollDatePicker({
-    Key? key,
+    super.key,
     this.initialDate,
     required this.onDateChanged,
     this.hintText = 'اختر تاريخ الميلاد',
     this.activeTextStyle,
     this.inactiveTextStyle,
-  }) : super(key: key);
+  });
 
   @override
   _ScrollDatePickerState createState() => _ScrollDatePickerState();
@@ -44,7 +46,7 @@ class _ScrollDatePickerState extends State<ScrollDatePicker> {
         widget.activeTextStyle ??
         TextStyle(
           fontSize: 22,
-          color: AppColors.primary_color,
+          color: AppColors.primaryColor,
           fontWeight: FontWeight.bold,
         );
     _inactiveStyle =
@@ -119,7 +121,7 @@ class _ScrollDatePickerState extends State<ScrollDatePicker> {
     final daysInMonth = _daysInMonth(_year, _month);
 
     return Dialog(
-      backgroundColor: AppColors.light_color,
+      backgroundColor: AppColors.lightColor,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(24)),
       elevation: 10,
       child: Padding(
@@ -132,7 +134,7 @@ class _ScrollDatePickerState extends State<ScrollDatePicker> {
               style: TextStyle(
                 fontSize: 24,
                 fontWeight: FontWeight.w600,
-                color: AppColors.primary_color,
+                color: AppColors.primaryColor,
               ),
               textAlign: TextAlign.center,
             ),
@@ -223,12 +225,12 @@ class ScrollDatePickerField extends StatefulWidget {
   final TextEditingController? controller;
 
   const ScrollDatePickerField({
-    Key? key,
+    super.key,
     this.initialDate,
     required this.onDateChanged,
     this.hintText = 'اختر تاريخ الميلاد',
     this.controller,
-  }) : super(key: key);
+  });
 
   @override
   State<ScrollDatePickerField> createState() => _ScrollDatePickerFieldState();
@@ -278,24 +280,24 @@ class _ScrollDatePickerFieldState extends State<ScrollDatePickerField> {
         child: Container(
           margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
           decoration: BoxDecoration(
-            color: AppColors.light_color,
+            color: AppColors.lightColor,
             borderRadius: BorderRadius.circular(12),
           ),
           child: TextFormField(
             controller: _controller,
             textAlign: TextAlign.center,
-            style: TextStyle(color: AppColors.light_a40, fontSize: 14),
+            style: TextStyle(color: AppColors.lightA40, fontSize: 14),
             decoration: InputDecoration(
               contentPadding: const EdgeInsets.symmetric(
                 vertical: 14,
                 horizontal: 16,
               ),
               hintText: widget.hintText,
-              hintStyle: const TextStyle(color: AppColors.light_a40),
+              hintStyle: const TextStyle(color: AppColors.lightA40),
               border: InputBorder.none,
               prefixIcon: const Icon(
                 Icons.calendar_today,
-                color: AppColors.light_a40,
+                color: AppColors.lightA40,
               ),
             ),
           ),
