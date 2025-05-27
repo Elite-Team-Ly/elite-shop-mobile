@@ -40,7 +40,7 @@ class VerifyCodeScreen extends StatelessWidget {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
-                        Text("أعادة الارسال الكود",style: TextStyle(fontSize: 18,color: AppColors.primary_color),),
+                        Text("أعادة الارسال الكود",style: TextStyle(fontSize: 18,color: AppColors.primaryColor),),
                         Text("ألم تتلقى كود التأكيد ؟",style: TextStyle(fontSize: 18),),
                       ],
                     ),

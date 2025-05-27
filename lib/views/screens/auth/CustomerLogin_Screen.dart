@@ -1,4 +1,5 @@
 import 'package:elite_team_training_app/core/config/constants.dart';
+import 'package:elite_team_training_app/views/widgets/app/customImageWidget.dart';
 import 'package:flutter/material.dart';
 import '../../widgets/widgets.dart';
 import 'signUp_Screen.dart';
@@ -47,7 +48,7 @@ class CustomerLoginScreen extends StatelessWidget {
                           "اعادة تعيين كلمة مرور",
                           style: TextStyle(
                             fontSize: 16,
-                            color: AppColors.primary_color,
+                            color: AppColors.primaryColor,
                           ),
                         ),
                         Text(
