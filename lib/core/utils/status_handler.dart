@@ -18,22 +18,21 @@ class AppStatusHandler {
 
     switch (status) {
       case AppStatus.success:
-        return AppColors.handler_color_BG_Success;
+        return AppColors.handlerColorBGSuccess;
       case AppStatus.error:
-        return AppColors.handler_color_BG_Error;
+        return AppColors.handlerColorBGError;
       case AppStatus.warning:
-        return AppColors.handler_color_BG_Warning;
+        return AppColors.handlerColorBGWarning;
       case AppStatus.networkError:
-        return AppColors.handler_color_BG_NetworkError;
+        return AppColors.handlerColorBGNetworkError;
       case AppStatus.timeout:
-        return AppColors.handler_color_BG_Timeout;
+        return AppColors.handlerColorBGTimeout;
       case AppStatus.serverError:
-        return AppColors.handler_color_BG_ServerError;
+        return AppColors.handlerColorBGServerError;
       case AppStatus.info:
-        return AppColors.handler_color_BG_Info;
+        return AppColors.handlerColorBGInfo;
       case AppStatus.normal:
-      default:
-        return AppColors.primary_a10;
+        return AppColors.primaryA10;
     }
   }
 
@@ -42,21 +41,20 @@ class AppStatusHandler {
 
     switch (status) {
       case AppStatus.success:
-        return AppColors.handler_color_Txt_Success;
+        return AppColors.handlerColorTxtSuccess;
       case AppStatus.error:
-        return AppColors.handler_color_Txt_Error;
+        return AppColors.handlerColorTxtError;
       case AppStatus.warning:
-        return AppColors.handler_color_Txt_Warning;
+        return AppColors.handlerColorTxtWarning;
       case AppStatus.networkError:
-        return AppColors.handler_color_Txt_NetworkError;
+        return AppColors.handlerColorTxtNetworkError;
       case AppStatus.timeout:
-        return AppColors.handler_color_Txt_Timeout;
+        return AppColors.handlerColorTxtTimeout;
       case AppStatus.serverError:
-        return AppColors.handler_color_Txt_ServerError;
+        return AppColors.handlerColorTxtServerError;
       case AppStatus.info:
-        return AppColors.handler_color_Txt_Info;
+        return AppColors.handlerColorTxtInfo;
       case AppStatus.normal:
-      default:
         return Colors.white;
     }
   }
@@ -113,33 +111,62 @@ class StatusWidgetHandler extends StatelessWidget {
         return infoWidget ?? _defaultInfoWidget();
 
       case AppStatus.normal:
-      default:
         return normalWidget ?? SizedBox.shrink();
     }
   }
 
   Widget _defaultErrorWidget() {
-    return Center(child: Text('حدث خطأ', style: TextStyle(color: AppColors.handler_color_Txt_Error)));
+    return Center(
+      child: Text(
+        'حدث خطأ',
+        style: TextStyle(color: AppColors.handlerColorTxtError),
+      ),
+    );
   }
 
   Widget _defaultWarningWidget() {
-    return Center(child: Text('تحذير', style: TextStyle(color: AppColors.handler_color_Txt_Warning)));
+    return Center(
+      child: Text(
+        'تحذير',
+        style: TextStyle(color: AppColors.handlerColorTxtWarning),
+      ),
+    );
   }
 
   Widget _defaultNetworkErrorWidget() {
-    return Center(child: Text('خطأ في الشبكة', style: TextStyle(color: AppColors.handler_color_Txt_NetworkError)));
+    return Center(
+      child: Text(
+        'خطأ في الشبكة',
+        style: TextStyle(color: AppColors.handlerColorTxtNetworkError),
+      ),
+    );
   }
 
   Widget _defaultTimeoutWidget() {
-    return Center(child: Text('انتهت المهلة', style: TextStyle(color: AppColors.handler_color_Txt_Timeout)));
+    return Center(
+      child: Text(
+        'انتهت المهلة',
+        style: TextStyle(color: AppColors.handlerColorTxtTimeout),
+      ),
+    );
   }
 
   Widget _defaultServerErrorWidget() {
-    return Center(child: Text('خطأ في الخادم', style: TextStyle(color: AppColors.handler_color_Txt_ServerError)));
+    return Center(
+      child: Text(
+        'خطأ في الخادم',
+        style: TextStyle(color: AppColors.handlerColorTxtServerError),
+      ),
+    );
   }
 
   Widget _defaultInfoWidget() {
-    return Center(child: Text('معلومة', style: TextStyle(color: AppColors.handler_color_Txt_Info)));
+    return Center(
+      child: Text(
+        'معلومة',
+        style: TextStyle(color: AppColors.handlerColorTxtInfo),
+      ),
+    );
   }
 }
 

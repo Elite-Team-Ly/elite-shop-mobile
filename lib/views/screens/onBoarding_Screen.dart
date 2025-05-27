@@ -1,4 +1,4 @@
-import 'package:elite_team_training_app/core/utils/statusHandler.dart';
+import 'package:elite_team_training_app/core/utils/status_handler.dart';
 import 'package:elite_team_training_app/views/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 import '../../core/data/demo/onboarding_data.dart';

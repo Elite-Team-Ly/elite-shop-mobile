@@ -31,13 +31,13 @@ class LoginScreen extends StatelessWidget {
                 children: [
                   MainButton(
                     onPressed: () {},
-                    child: Text("تسجيل دخول كمشتري"),
                     width: 180,
+                    child: Text("تسجيل دخول كمشتري"),
                   ),
                   MainButton(
                     onPressed: () {},
-                    child: Text("تسجيل دخول كبائع"),
                     width: 180,
+                    child: Text("تسجيل دخول كبائع"),
                   ),
                   Text("ليس لديك حساب ؟", style: TextStyle(fontSize: 16)),
                   MainButton(

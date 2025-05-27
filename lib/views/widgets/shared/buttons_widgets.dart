@@ -1,6 +1,6 @@
 import 'package:elite_team_training_app/core/config/constants.dart';
 import 'package:flutter/material.dart';
-import '../../../core/utils/statusHandler.dart';
+import '../../../core/utils/status_handler.dart';
 
 class MainButton extends StatelessWidget {
   final VoidCallback? onPressed;
@@ -35,7 +35,7 @@ class MainButton extends StatelessWidget {
             appStatus,
             isEnabled: isEnabled,
           ),
-          splashColor: isEnabled ? AppColors.primary_a50 : Colors.transparent,
+          splashColor: isEnabled ? AppColors.primaryA50 : Colors.transparent,
           highlightElevation: 0,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(12),
