@@ -5,3 +5,4 @@ export 'shared/customTextField.dart';
 export 'shared/twoOptionSelector.dart';
 export 'shared/scrollDatePicker.dart';
 export 'app/CustomAppBar.dart';
+export 'app/customImageWidget.dart';

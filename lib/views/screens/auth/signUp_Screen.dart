@@ -19,7 +19,7 @@ class SignupScreen extends StatelessWidget {
 
       body: SingleChildScrollView(
         child: Padding(
-          padding: const EdgeInsets.all(15.0),
+          padding: const EdgeInsets.all(8.0),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
@@ -76,7 +76,7 @@ class SignupScreen extends StatelessWidget {
                   CustomTextField(hintText: 'العنوان'),
                 ],
               ),
-              const SizedBox(height: 20),
+              const SizedBox(height: 10),
               MainButton(
                 width: 130,
                 onPressed: () {},

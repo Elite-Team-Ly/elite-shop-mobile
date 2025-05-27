@@ -37,6 +37,7 @@ flutter:
     - assets/splash/
     - assets/app/
     - assets/app/onBoarding/
+    - assets/app/loginBundle/
 
   fonts:
     - family: somar

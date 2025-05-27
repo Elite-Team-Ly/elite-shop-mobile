@@ -46,6 +46,7 @@ class TwoOptionSelector extends StatelessWidget {
           style: TextStyle(
             color: isSelected ? Colors.white : Colors.grey.shade700,
             fontWeight: FontWeight.w600,
+            fontSize: 14
           ),
         ),
       ),

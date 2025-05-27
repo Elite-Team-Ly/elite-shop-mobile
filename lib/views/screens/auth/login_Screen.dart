@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../widgets/widgets.dart';
+import '../../widgets/widgets.dart';
 import 'signUp_Screen.dart';
 
 class LoginScreen extends StatelessWidget {
@@ -8,6 +8,12 @@ class LoginScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: CustomAppBar(
+        title: 'تسجييل الدخول كمشتري',
+        onBack: () {
+          Navigator.pop(context);
+        },
+      ),
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.symmetric(vertical: 100, horizontal: 30),

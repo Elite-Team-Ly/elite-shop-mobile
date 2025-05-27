@@ -1,19 +1,18 @@
-import 'package:elite_team_training_app/views/screens/signUp_Screen.dart';
+import 'package:elite_team_training_app/views/screens/auth/signUp_Screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:intl/date_symbol_data_local.dart';
+import 'core/config/routes.dart';
 import 'core/config/theme.dart';
 import 'core/utils/app_notification.dart';
 import 'core/utils/setStatusBarColor.dart';
+import 'routes.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-
   await initializeDateFormatting('ar_SA', null);
-
   await NotificationUtils.requestNotificationPermission();
   await NotificationUtils.initialize();
-
   await SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp,
     DeviceOrientation.portraitDown,
@@ -31,7 +30,8 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: baseTheme,
       title: 'Elite Shop',
-      home: const SignupScreen(),
+      initialRoute: RouteNames.sellerLogin,
+      onGenerateRoute: RouteGenerator.generateRoute,
       builder: (context, child) {
         setSystemUIStyle(context);
         return child!;

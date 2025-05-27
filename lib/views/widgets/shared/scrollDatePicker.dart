@@ -284,7 +284,7 @@ class _ScrollDatePickerFieldState extends State<ScrollDatePickerField> {
           child: TextFormField(
             controller: _controller,
             textAlign: TextAlign.center,
-            style: TextStyle(color: AppColors.light_a40, fontSize: 14),
+            style: TextStyle(color: AppColors.light_a40, fontSize: 16),
             decoration: InputDecoration(
               contentPadding: const EdgeInsets.symmetric(
                 vertical: 14,

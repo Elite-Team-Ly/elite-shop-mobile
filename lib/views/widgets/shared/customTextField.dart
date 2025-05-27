@@ -41,6 +41,10 @@ class CustomTextField extends StatelessWidget {
           obscureText: obscureText,
           textAlign: showIcon ? TextAlign.right : TextAlign.center,
           cursorColor: AppColors.primary_color,
+          style: TextStyle(
+            color: AppColors.dark_a30,
+            fontSize: 16,
+          ),
           decoration: InputDecoration(
             contentPadding: const EdgeInsets.symmetric(
               vertical: 14,
@@ -49,12 +53,12 @@ class CustomTextField extends StatelessWidget {
             hintText: hintText,
             hintStyle: TextStyle(color: AppColors.light_a40),
             border: InputBorder.none,
-            prefixIcon:
-                showIcon && icon != null
-                    ? Icon(icon, color: Colors.grey)
-                    : null,
+            prefixIcon: showIcon && icon != null
+                ? Icon(icon, color: Colors.grey)
+                : null,
           ),
         ),
+
       ),
     );
   }

@@ -73,4 +73,7 @@ class AppAssets {
   static const String logoApp_2 = "assets/app/logo2.png";
   static const String logoWidget = "assets/app/logoWidget.png";
 
+  static const String customerLogin = "assets/app/loginBundle/customerLogin.png";
+  static const String sellerLogin = "assets/app/loginBundle/SellerLogin.png";
+
 }
