@@ -29,7 +29,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: baseTheme,
       title: 'Elite Shop',
-      initialRoute: RouteNames.sellerLogin,
+      initialRoute: RouteNames.login,
       onGenerateRoute: RouteGenerator.generateRoute,
       builder: (context, child) {
         setSystemUIStyle(context);

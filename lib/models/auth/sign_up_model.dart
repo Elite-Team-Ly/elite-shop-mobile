@@ -2,7 +2,7 @@ class SignUpModel {
   final String fullName;
   final String phoneNumber;
   final String password;
-  final String role;
+  final Role role;
   final DateTime birthDate;
   final String city;
   final String address;
@@ -29,3 +29,8 @@ class SignUpModel {
     };
   }
 }
+enum Role{
+  customer,
+  seller
+}
+
