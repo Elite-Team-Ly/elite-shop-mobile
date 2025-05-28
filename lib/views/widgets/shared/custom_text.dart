@@ -1,5 +1,6 @@
 import 'package:elite_team_training_app/core/config/constants.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class CustomText extends StatelessWidget {
   final String text;
@@ -12,7 +13,7 @@ class CustomText extends StatelessWidget {
   final TextDecoration? decoration;
   final TextOverflow? overflow;
   final double? letterSpacing;
-  final double? height; // line height (line spacing)
+  final double? height;
   final TextBaseline? textBaseline;
 
   const CustomText(
@@ -39,7 +40,7 @@ class CustomText extends StatelessWidget {
       overflow: overflow,
       textAlign: textAlign,
       style: TextStyle(
-        fontSize: fontSize,
+        fontSize: fontSize?.sp,
         color: color ?? AppColors.dynamicColor(context: context, darkModeColor: AppColors.lightColor, lightModeColor: AppColors.darkA30),
         fontWeight: fontWeight ?? FontWeight.w600,
         fontStyle: fontStyle,

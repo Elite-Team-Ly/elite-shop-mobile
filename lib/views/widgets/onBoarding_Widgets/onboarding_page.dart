@@ -1,6 +1,8 @@
 import 'package:elite_team_training_app/core/config/constants.dart';
+import 'package:elite_team_training_app/views/widgets/shared/custom_image_widget.dart';
 import 'package:elite_team_training_app/views/widgets/shared/custom_text.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class OnboardingPage extends StatelessWidget {
   final String image;
@@ -17,13 +19,13 @@ class OnboardingPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 50.0, horizontal: 20),
+      padding: EdgeInsets.symmetric(vertical: 50.h, horizontal: 20.w),
       child: Column(
         children: [
-          Image.asset(image),
+          CustomImageWidget(imagePath: image,width: 380.w,height: 253.h,fit: BoxFit.contain,),
           CustomText(
             title,
-            fontSize: 24,
+            fontSize: 24.sp,
             fontWeight: FontWeight.bold,
             color: AppColors.dynamicColor(
               context: context,
@@ -31,16 +33,13 @@ class OnboardingPage extends StatelessWidget {
               lightModeColor: AppColors.darkA30,
             ),
           ),
-          const SizedBox(height: 12),
+          SizedBox(height: 12.h),
           CustomText(
             description,
-            fontSize: 18,
+            fontSize: 18.sp,
+            fontWeight: FontWeight.w200,
             textAlign: TextAlign.center,
-            color: AppColors.dynamicColor(
-              context: context,
-              darkModeColor: AppColors.lightColor,
-              lightModeColor: AppColors.darkA30,
-            ),
+            color: AppColors.darkA40,
           ),
         ],
       ),

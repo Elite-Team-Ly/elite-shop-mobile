@@ -1,6 +1,7 @@
 import 'package:elite_team_training_app/core/config/constants.dart';
 import 'package:elite_team_training_app/views/widgets/widgets.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class VerifyCodeScreen extends StatelessWidget {
   const VerifyCodeScreen({super.key});
@@ -17,7 +18,7 @@ class VerifyCodeScreen extends StatelessWidget {
       ),
       body: SingleChildScrollView(
         child: Padding(
-          padding: const EdgeInsets.symmetric(vertical: 100.0,horizontal: 33),
+          padding: EdgeInsets.symmetric(vertical: 100.0.h, horizontal: 33.w),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
@@ -28,31 +29,42 @@ class VerifyCodeScreen extends StatelessWidget {
                 children: [
                   Text(
                     "تم ارسال كود التأكيد الى رقم هاتفك  الرجاء التأكيد",
-                    style: TextStyle(fontSize: 18),
+                    style: TextStyle(fontSize: 18.sp),
                     textAlign: TextAlign.center,
                   ),
                   Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: CustomTextField(hintText: "5346346",keyboardType: TextInputType.number,),
+                    padding: EdgeInsets.all(8.0.w),
+                    child: CustomTextField(
+                      textAlign: TextAlign.center,
+                      hintText: "5346346",
+                      keyboardType: TextInputType.number,
+                    ),
                   ),
                   Padding(
-                    padding: const EdgeInsets.all(8.0),
+                    padding: EdgeInsets.all(8.0.w),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
-                        Text("أعادة الارسال الكود",style: TextStyle(fontSize: 18,color: AppColors.primaryColor),),
-                        Text("ألم تتلقى كود التأكيد ؟",style: TextStyle(fontSize: 18),),
+                        Text(
+                          "أعادة الارسال الكود",
+                          style: TextStyle(
+                            fontSize: 18.sp,
+                            color: AppColors.primaryColor,
+                          ),
+                        ),
+                        Text(
+                          "ألم تتلقى كود التأكيد ؟",
+                          style: TextStyle(fontSize: 18.sp),
+                        ),
                       ],
                     ),
                   ),
                   Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: MainButton(
-                      onPressed: () {
-                      },
-                      width: 130,
-                      height: 40,
-                      child: Text("تحقق", style: TextStyle(fontSize: 12)),
+                      onPressed: () {},
+                      width: 130.w,
+                      child: Text("تحقق", style: TextStyle(fontSize: 12.sp)),
                     ),
                   ),
                 ],

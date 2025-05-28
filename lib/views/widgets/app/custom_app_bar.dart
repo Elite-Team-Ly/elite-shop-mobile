@@ -1,5 +1,6 @@
 import 'package:elite_team_training_app/core/config/constants.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../widgets.dart';
 
@@ -16,7 +17,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   });
 
   @override
-  Size get preferredSize => const Size.fromHeight(140);
+  Size get preferredSize => Size.fromHeight(140.h);
 
   @override
   Widget build(BuildContext context) {
@@ -25,10 +26,10 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
     return Container(
       height: preferredSize.height,
       padding: EdgeInsets.only(
-        top: MediaQuery.of(context).padding.top + 8,
-        left: 16,
-        right: 16,
-        bottom: 8,
+        top: MediaQuery.of(context).padding.top + 8.w,
+        left: 16.w,
+        right: 16.w,
+        bottom: 8.w,
       ),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.center,
@@ -37,14 +38,13 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
             IconButton(
               icon: Icon(
                 Icons.arrow_back,
-                size: 28,
+                size: 28.sp,
                 color: Colors.black.withAlpha((0.7 * 255).round()),
               ),
               onPressed: onBack ?? () => Navigator.of(context).pop(),
             )
           else
-            const SizedBox(width: 48),
-
+            SizedBox(width: 48.w),
           Expanded(
             child: Column(
               mainAxisSize: MainAxisSize.min,
@@ -52,17 +52,17 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
               children: [
                 CustomText(
                   title,
-                  fontSize: 24,
+                  fontSize: 24.sp,
                   fontWeight: FontWeight.bold,
                   color: AppColors.darkA20,
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
                 ),
-                if (subtitle != null) const SizedBox(height: 4),
+                if (subtitle != null) SizedBox(height: 4.h),
                 if (subtitle != null)
                   CustomText(
                     subtitle!,
-                    fontSize: 16,
+                    fontSize: 18.sp,
                     color: AppColors.darkA30,
                     maxLines: 2,
                     overflow: TextOverflow.ellipsis,
@@ -71,8 +71,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
               ],
             ),
           ),
-
-          const SizedBox(width: 48),
+          SizedBox(width: 48.w),
         ],
       ),
     );

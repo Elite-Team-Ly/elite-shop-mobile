@@ -1,12 +1,13 @@
 import 'package:elite_team_training_app/core/config/constants.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class MultiContentBoxWidget extends StatelessWidget {
   final List<Widget> children;
   final double? width;
-  final EdgeInsetsGeometry padding;
-  final EdgeInsetsGeometry margin;
-  final double borderRadius;
+  final EdgeInsetsGeometry? padding;
+  final EdgeInsetsGeometry? margin;
+  final double? borderRadius;
   final Color? backgroundColor;
   final BoxShadow? boxShadow;
 
@@ -14,8 +15,8 @@ class MultiContentBoxWidget extends StatelessWidget {
     super.key,
     required this.children,
     this.width = 240,
-    this.padding = const EdgeInsets.all(20),
-    this.margin = const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+    this.padding,
+    this.margin,
     this.borderRadius = 20,
     this.backgroundColor,
     this.boxShadow,
@@ -25,28 +26,30 @@ class MultiContentBoxWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Center(
       child: Container(
-        width: width,
-        margin: margin,
-        padding: padding,
+        width: width?.w,
+        margin: margin ?? EdgeInsets.symmetric(horizontal: 16.w, vertical: 8.h),
+        padding: padding ?? EdgeInsets.all(20.w),
         decoration: BoxDecoration(
-          color:
-              backgroundColor ??
+          color: backgroundColor ??
               AppColors.dynamicColor(
                 context: context,
                 darkModeColor: AppColors.darkA10,
                 lightModeColor: AppColors.lightA10,
               ),
-          borderRadius: BorderRadius.circular(borderRadius),
+          borderRadius: BorderRadius.circular(borderRadius!.r),
           boxShadow: [
             boxShadow ??
-                const BoxShadow(
+                BoxShadow(
                   color: AppColors.lightA20,
-                  offset: Offset(0, 8),
-                  blurRadius: 10,
+                  offset: Offset(0, 8.h),
+                  blurRadius: 10.r,
                 ),
           ],
         ),
-        child: Column(mainAxisSize: MainAxisSize.min, children: children),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: children,
+        ),
       ),
     );
   }

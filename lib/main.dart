@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/date_symbol_data_local.dart';
 
 import 'core/config/routes.dart';
@@ -20,7 +21,16 @@ void main() async {
     DeviceOrientation.portraitDown,
   ]);
 
-  runApp(const MyApp());
+  runApp(
+    ScreenUtilInit(
+      designSize: Size(430, 932),
+      minTextAdapt: true,
+      splitScreenMode: true,
+      builder: (context, child) {
+        return MyApp();
+      },
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -32,8 +42,8 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: baseTheme,
       title: 'Elite Shop',
-      initialRoute: RouteNames.sellerLogin,
       onGenerateRoute: RouteGenerator.generateRoute,
+      initialRoute: RouteNames.signin,
       builder: (context, child) {
         setSystemUIStyle(context);
         return child!;

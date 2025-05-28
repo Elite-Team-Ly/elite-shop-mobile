@@ -1,7 +1,8 @@
-import 'package:elite_team_training_app/core/config/constants.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class AppLogo extends StatelessWidget {
+class CustomImageWidget extends StatelessWidget {
+  final String imagePath;
   final double? width;
   final double? height;
   final BoxFit fit;
@@ -11,9 +12,11 @@ class AppLogo extends StatelessWidget {
   final BorderRadiusGeometry? borderRadius;
   final Color? backgroundColor;
   final bool withShadow;
+  final bool isNetwork;
 
-  const AppLogo({
+  const CustomImageWidget({
     super.key,
+    required this.imagePath,
     this.width = 200.0,
     this.height = 200.0,
     this.fit = BoxFit.contain,
@@ -23,33 +26,35 @@ class AppLogo extends StatelessWidget {
     this.borderRadius,
     this.backgroundColor,
     this.withShadow = false,
+    this.isNetwork = false,
   });
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: width,
-      height: height,
+      width: width?.w,
+      height: height?.h,
       margin: margin,
       padding: padding,
       alignment: alignment,
       decoration: BoxDecoration(
         color: backgroundColor,
         borderRadius: borderRadius,
-        boxShadow: withShadow
-            ? [
-          BoxShadow(
-            color: Colors.black26,
-            blurRadius: 6,
-            offset: Offset(0, 2),
-          ),
-        ]
-            : [],
+        boxShadow:
+            withShadow
+                ? [
+                  BoxShadow(
+                    color: Colors.black26,
+                    blurRadius: 6,
+                    offset: Offset(0, 2),
+                  ),
+                ]
+                : [],
       ),
-      child: Image.asset(
-        AppAssets.logoWidget,
-        fit: fit,
-      ),
+      child:
+          isNetwork
+              ? Image.network(imagePath, fit: fit)
+              : Image.asset(imagePath, fit: fit),
     );
   }
 }

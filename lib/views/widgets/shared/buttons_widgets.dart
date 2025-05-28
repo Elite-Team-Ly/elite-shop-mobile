@@ -1,5 +1,6 @@
 import 'package:elite_team_training_app/core/config/constants.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../core/utils/status_handler.dart';
 
 class MainButton extends StatelessWidget {
@@ -25,10 +26,10 @@ class MainButton extends StatelessWidget {
     final AppStatus appStatus = parseAppStatus(status);
 
     return Container(
-      margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+      margin:  EdgeInsets.symmetric(horizontal: 16.w, vertical: 8.h),
       child: SizedBox(
-        width: width ?? 220,
-        height: height ?? 50,
+        width: (width ?? 130).w,
+        height: (height ?? 40).h,
         child: RawMaterialButton(
           onPressed: isEnabled ? onPressed : null,
           fillColor: AppStatusHandler.backgroundColor(
@@ -40,7 +41,6 @@ class MainButton extends StatelessWidget {
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(12),
           ),
-          padding: EdgeInsets.symmetric(horizontal: 24, vertical: 12),
           elevation: 0,
           disabledElevation: 0,
           child: DefaultTextStyle(
@@ -49,7 +49,7 @@ class MainButton extends StatelessWidget {
                 appStatus,
                 isEnabled: isEnabled,
               ),
-              fontSize: 14,
+              fontSize: 14.sp,
               fontWeight: FontWeight.w600,
             ),
             child: child,

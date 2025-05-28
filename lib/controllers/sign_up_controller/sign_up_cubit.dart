@@ -8,6 +8,7 @@ class SignupCubit extends Cubit<SignupStates> {
 
   static SignupCubit get(context) => BlocProvider.of(context);
 
+  ValueNotifier<String> roleNotifier = ValueNotifier('مشتري');
   IconData suffixIcon = Icons.visibility_outlined;
   bool isPassword = true;
 

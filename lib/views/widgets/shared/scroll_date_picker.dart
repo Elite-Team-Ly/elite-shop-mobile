@@ -1,5 +1,3 @@
-// ignore_for_file: deprecated_member_use
-
 import 'package:elite_team_training_app/core/config/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
@@ -218,6 +216,8 @@ class ScrollDatePickerField extends StatefulWidget {
   final ValueChanged<DateTime> onDateChanged;
   final String hintText;
   final TextEditingController? controller;
+  final String? Function(String?)? validator;
+
 
   const ScrollDatePickerField({
     super.key,
@@ -225,6 +225,7 @@ class ScrollDatePickerField extends StatefulWidget {
     required this.onDateChanged,
     this.hintText = 'اختر تاريخ الميلاد',
     this.controller,
+    this.validator,
   });
 
   @override
@@ -269,30 +270,34 @@ class _ScrollDatePickerFieldState extends State<ScrollDatePickerField> {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: _openDatePickerDialog,
-      child: AbsorbPointer(
-        child: Container(
-          margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-          decoration: BoxDecoration(
-            color: AppColors.lightColor,
-            borderRadius: BorderRadius.circular(12),
-          ),
-          child: TextFormField(
-            controller: _controller,
-            textAlign: TextAlign.center,
-            style: TextStyle(color: AppColors.lightA40, fontSize: 14),
-            decoration: InputDecoration(
-              contentPadding: const EdgeInsets.symmetric(
-                vertical: 14,
-                horizontal: 16,
-              ),
-              hintText: widget.hintText,
-              hintStyle: const TextStyle(color: AppColors.lightA40),
-              border: InputBorder.none,
-              prefixIcon: const Icon(
-                Icons.calendar_today,
-                color: AppColors.lightA40,
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 16),
+      child: GestureDetector(
+        onTap: _openDatePickerDialog,
+        child: AbsorbPointer(
+          child: Container(
+            margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+            decoration: BoxDecoration(
+              color: AppColors.lightColor,
+              borderRadius: BorderRadius.circular(12),
+            ),
+            child: TextFormField(
+              controller: _controller,
+              validator: widget.validator,
+              textAlign: TextAlign.center,
+              style: TextStyle(color: AppColors.lightA40, fontSize: 14),
+              decoration: InputDecoration(
+                contentPadding: const EdgeInsets.symmetric(
+                  vertical: 14,
+                  horizontal: 16,
+                ),
+                hintText: widget.hintText,
+                hintStyle: const TextStyle(color: AppColors.lightA40),
+                border: InputBorder.none,
+                prefixIcon: const Icon(
+                  Icons.calendar_today,
+                  color: AppColors.lightA40,
+                ),
               ),
             ),
           ),

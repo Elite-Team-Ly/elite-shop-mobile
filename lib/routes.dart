@@ -1,4 +1,8 @@
+import 'package:elite_team_training_app/core/utils/navigation_transitions.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'controllers/sign_in_controller.dart/sign_in_cubit.dart';
+import 'package:elite_team_training_app/controllers/sign_up_controller/sign_up_cubit.dart';
 import 'core/config/routes.dart';
 import 'views/screens/screens.dart';
 
@@ -9,29 +13,46 @@ class RouteGenerator {
       //   return MaterialPageRoute(builder: (_) => const HomeScreen());
 
       case RouteNames.onboarding:
-        return MaterialPageRoute(builder: (_) => const OnboardingScreen());
+        return slideRoute(const OnboardingScreen());
 
-      case RouteNames.login:
-        return MaterialPageRoute(builder: (_) => const LoginScreen());
+      case RouteNames.signin:
+        return slideRoute(SignInScreen());
 
       case RouteNames.signup:
-        return MaterialPageRoute(builder: (_) => const SignupScreen());
+        return slideRoute(
+          BlocProvider(
+            create: (_) => SignupCubit(),
+            child: const SignUpScreen(),
+          ),
+        );
 
       case RouteNames.verifyCode:
-        return MaterialPageRoute(builder: (_) => const VerifyCodeScreen());
+        return slideRoute(const VerifyCodeScreen());
 
-       case RouteNames.customerlogin:
-        return MaterialPageRoute(builder: (_) => const CustomerLoginScreen());
+      case RouteNames.resetPassword:
+        return slideRoute(const ResetPassword());
 
-        case RouteNames.sellerLogin:
-        return MaterialPageRoute(builder: (_) => const SellerLoginScreen());
+      case RouteNames.customerLogin:
+        return slideRoute(
+          BlocProvider(
+            create: (_) => SignInCubit(),
+            child: const CustomerLoginScreen(),
+          ),
+        );
+
+      case RouteNames.sellerLogin:
+        return slideRoute(
+          BlocProvider(
+            create: (_) => SignInCubit(),
+            child: const SellerLoginScreen(),
+          ),
+        );
 
       default:
-        return MaterialPageRoute(
-          builder:
-              (_) => const Scaffold(
-                body: Center(child: Text('404 - الصفحة غير موجودة')),
-              ),
+        return slideRoute(
+          const Scaffold(
+            body: Center(child: Text('404 - الصفحة غير موجودة')),
+          ),
         );
     }
   }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class RowWithAction extends StatelessWidget {
   final Widget normalWidget;
@@ -20,7 +21,7 @@ class RowWithAction extends StatelessWidget {
   Widget build(BuildContext context) {
     final children = [
       normalWidget,
-      const SizedBox(width: 4),
+      SizedBox(width: 4.w),
       GestureDetector(onTap: onActionTap, child: actionWidget),
     ];
 
