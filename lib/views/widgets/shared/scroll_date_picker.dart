@@ -1,9 +1,9 @@
 // ignore_for_file: deprecated_member_use
 
 import 'package:elite_team_training_app/core/config/constants.dart';
-import 'package:elite_team_training_app/views/widgets/shared/buttons_widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import '../widgets.dart';
 
 class ScrollDatePicker extends StatefulWidget {
   final DateTime? initialDate;
@@ -22,10 +22,10 @@ class ScrollDatePicker extends StatefulWidget {
   });
 
   @override
-  _ScrollDatePickerState createState() => _ScrollDatePickerState();
+  ScrollDatePickerState createState() => ScrollDatePickerState();
 }
 
-class _ScrollDatePickerState extends State<ScrollDatePicker> {
+class ScrollDatePickerState extends State<ScrollDatePicker> {
   late int _day, _month, _year;
   late TextStyle _activeStyle, _inactiveStyle;
 
@@ -51,7 +51,10 @@ class _ScrollDatePickerState extends State<ScrollDatePicker> {
         );
     _inactiveStyle =
         widget.inactiveTextStyle ??
-        TextStyle(fontSize: 18, color: Colors.grey.withOpacity(0.6));
+        TextStyle(
+          fontSize: 18,
+          color: Colors.grey.withAlpha((0.6 * 255).round()),
+        );
 
     _dayController = FixedExtentScrollController(initialItem: _day - 1);
     _monthController = FixedExtentScrollController(initialItem: _month - 1);
@@ -89,7 +92,7 @@ class _ScrollDatePickerState extends State<ScrollDatePicker> {
       width: width,
       height: 120,
       decoration: BoxDecoration(
-        color: Colors.white.withOpacity(0.1),
+        color: Colors.white.withAlpha((0.1 * 255).round()),
         borderRadius: BorderRadius.circular(12),
       ),
       child: ListWheelScrollView.useDelegate(
@@ -129,15 +132,7 @@ class _ScrollDatePickerState extends State<ScrollDatePicker> {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Text(
-              widget.hintText,
-              style: TextStyle(
-                fontSize: 24,
-                fontWeight: FontWeight.w600,
-                color: AppColors.primaryColor,
-              ),
-              textAlign: TextAlign.center,
-            ),
+            CustomText(widget.hintText,fontSize: 24,color: AppColors.primaryColor,textAlign: TextAlign.center,),
             const SizedBox(height: 20),
 
             Row(
@@ -198,7 +193,7 @@ class _ScrollDatePickerState extends State<ScrollDatePicker> {
                 MainButton(
                   width: 70,
                   onPressed: () => Navigator.pop(context),
-                  child: Text("الغاء", style: TextStyle(fontSize: 12)),
+                  child: CustomText("الفاء",fontSize: 12,),
                 ),
                 MainButton(
                   width: 70,
@@ -207,7 +202,7 @@ class _ScrollDatePickerState extends State<ScrollDatePicker> {
                     widget.onDateChanged(DateTime(_year, _month, _day));
                     Navigator.pop(context);
                   },
-                  child: Text("تم", style: TextStyle(fontSize: 12)),
+                  child: CustomText("تم",),
                 ),
               ],
             ),

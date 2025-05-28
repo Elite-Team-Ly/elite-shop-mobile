@@ -50,8 +50,7 @@ class CustomTextField extends StatelessWidget {
             hintText: hintText,
             hintStyle: TextStyle(color: AppColors.lightA40),
             border: InputBorder.none,
-            prefixIcon:
-            showIcon && icon != null
+            prefixIcon: showIcon && icon != null
                 ? Icon(icon, color: Colors.grey)
                 : null,
           ),

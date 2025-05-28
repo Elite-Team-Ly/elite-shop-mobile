@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import '../../core/data/demo/onboarding_data.dart';
 import '../widgets/onBoarding_Widgets/onboarding_dots.dart';
 import '../widgets/onBoarding_Widgets/onboarding_page.dart';
-
 class OnboardingScreen extends StatefulWidget {
   const OnboardingScreen({super.key});
 
@@ -61,7 +60,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                 successWidget: MainButton(
                   onPressed: _nextPage,
                   isEnabled: true,
-                  child: Text("التالي"),
+                  child: CustomText("التالي"),
                 ),
               ),
             ],

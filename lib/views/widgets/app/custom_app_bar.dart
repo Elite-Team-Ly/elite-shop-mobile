@@ -1,6 +1,8 @@
 import 'package:elite_team_training_app/core/config/constants.dart';
 import 'package:flutter/material.dart';
 
+import '../widgets.dart';
+
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   final String title;
   final String? subtitle;
@@ -36,34 +38,32 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
               icon: Icon(
                 Icons.arrow_back,
                 size: 28,
-                // ignore: deprecated_member_use
-                color: Colors.black.withOpacity(0.7),
+                color: Colors.black.withAlpha((0.7 * 255).round()),
               ),
               onPressed: onBack ?? () => Navigator.of(context).pop(),
             )
           else
-            SizedBox(width: 48),
+            const SizedBox(width: 48),
 
           Expanded(
             child: Column(
               mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                Text(
+                CustomText(
                   title,
-                  style: TextStyle(
-                    color: AppColors.darkA20,
-                    fontSize: 24,
-                    fontWeight: FontWeight.bold,
-                  ),
+                  fontSize: 24,
+                  fontWeight: FontWeight.bold,
+                  color: AppColors.darkA20,
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
                 ),
-                if (subtitle != null) SizedBox(height: 4),
+                if (subtitle != null) const SizedBox(height: 4),
                 if (subtitle != null)
-                  Text(
+                  CustomText(
                     subtitle!,
-                    style: TextStyle(color: AppColors.darkA30, fontSize: 14),
+                    fontSize: 16,
+                    color: AppColors.darkA30,
                     maxLines: 2,
                     overflow: TextOverflow.ellipsis,
                     textAlign: TextAlign.center,
@@ -72,7 +72,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
             ),
           ),
 
-          SizedBox(width: 48),
+          const SizedBox(width: 48),
         ],
       ),
     );

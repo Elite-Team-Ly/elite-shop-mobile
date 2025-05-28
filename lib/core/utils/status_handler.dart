@@ -18,21 +18,21 @@ class AppStatusHandler {
 
     switch (status) {
       case AppStatus.success:
-        return AppColors.handlerColorBGSuccess;
+        return AppColors.handlerColorBgSuccess;
       case AppStatus.error:
-        return AppColors.handlerColorBGError;
+        return AppColors.handlerColorBgError;
       case AppStatus.warning:
-        return AppColors.handlerColorBGWarning;
+        return AppColors.handlerColorBgWarning;
       case AppStatus.networkError:
-        return AppColors.handlerColorBGNetworkError;
+        return AppColors.handlerColorBgNetworkError;
       case AppStatus.timeout:
-        return AppColors.handlerColorBGTimeout;
+        return AppColors.handlerColorBgTimeout;
       case AppStatus.serverError:
-        return AppColors.handlerColorBGServerError;
+        return AppColors.handlerColorBgServerError;
       case AppStatus.info:
-        return AppColors.handlerColorBGInfo;
+        return AppColors.handlerColorBgInfo;
       case AppStatus.normal:
-        return AppColors.primaryA10;
+      return AppColors.primaryA10;
     }
   }
 
@@ -55,7 +55,7 @@ class AppStatusHandler {
       case AppStatus.info:
         return AppColors.handlerColorTxtInfo;
       case AppStatus.normal:
-        return Colors.white;
+      return Colors.white;
     }
   }
 }
@@ -91,27 +91,20 @@ class StatusWidgetHandler extends StatelessWidget {
     switch (status) {
       case AppStatus.success:
         return successWidget;
-
       case AppStatus.error:
         return errorWidget ?? _defaultErrorWidget();
-
       case AppStatus.warning:
         return warningWidget ?? _defaultWarningWidget();
-
       case AppStatus.networkError:
         return networkErrorWidget ?? _defaultNetworkErrorWidget();
-
       case AppStatus.timeout:
         return timeoutWidget ?? _defaultTimeoutWidget();
-
       case AppStatus.serverError:
         return serverErrorWidget ?? _defaultServerErrorWidget();
-
       case AppStatus.info:
         return infoWidget ?? _defaultInfoWidget();
-
       case AppStatus.normal:
-        return normalWidget ?? SizedBox.shrink();
+      return normalWidget ?? SizedBox.shrink();
     }
   }
 
