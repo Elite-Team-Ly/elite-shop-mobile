@@ -1,24 +1,16 @@
+import 'package:dio/dio.dart';
+
 class Failure {
   final String message;
-  final int? code; // اختياري: كود الخطأ مثل 400 أو 500
-  final FailureType type; // نوع الخطأ: شبكة، سيرفر، ...إلخ
+  final int? code;
 
-  Failure({
-    required this.message,
-    this.code,
-    this.type = FailureType.general,
-  });
+  Failure({required this.message, this.code});
 
-  @override
-  String toString() => 'Failure(message: $message, code: $code, type: $type)';
-}
 
-enum FailureType {
-  network,
-  server,
-  unauthorized,
-  validation,
-  notFound,
-  timeout,
-  general,
+  factory Failure.fromResponse(Response response) {
+    return Failure(
+      message: response.data?['message'] ?? 'Unknown error',
+      code: response.statusCode,
+    );
+  }
 }

@@ -6,11 +6,8 @@ import 'package:elite_team_training_app/core/services/app_services.dart';
 import 'package:elite_team_training_app/models/auth/forgetpassword.dart';
 import 'package:elite_team_training_app/models/auth/otp/OtpModel.dart';
 import 'package:elite_team_training_app/models/auth/sign_in_model.dart';
-import 'package:flutter/cupertino.dart';
 import '../../core/services/local_storage_service.dart';
 import '../../models/auth/sign_up_model.dart';
-
-
 
 class AuthService {
   final ApiService apiService;
@@ -20,12 +17,13 @@ class AuthService {
 
   Future<Either<Failure, User>> signIn(SignInModel model) async {
     final response = await apiService.postRequest(
-      '$baseurl${AuthEndpoints.signIn}',
+      '$baseurl${AppEndpoints.signIn}',
       model.toJson(),
     );
     if (response.statusCode == 200 && response.data['status'] == 'success') {
       final signInResponse = SignInResponse.fromJson(response.data);
       final token = signInResponse.token;
+      print('token from signin $token');
       await LocalStorageService.saveToken(token);
       final user = signInResponse.user;
 
@@ -38,7 +36,6 @@ class AuthService {
 
   Future<Either<Failure, String>> signUp(SignUpModel model) async {
     final response = await apiService.postRequest('$baseurl/signup', model.toJson());
-    debugPrint(" ${response.data}${AuthEndpoints.signUp}");
     if (response.statusCode == 201) {
       return Right(response.data['message']);
     } else {
@@ -48,7 +45,7 @@ class AuthService {
   }
 
   Future<Either<Failure, String>> sendOtp(SendOtpModel model) async {
-    final response = await apiService.postRequest('$baseurl${AuthEndpoints.sendOtp}',
+    final response = await apiService.postRequest('$baseurl${AppEndpoints.sendOtp}',
      model.toJson());
 
     if (response.statusCode == 200) {
@@ -59,7 +56,7 @@ class AuthService {
   }
 
   Future<Either<Failure, String>> verifyOtp(VerifyOtpModel model) async {
-    final response = await apiService.postRequest('$baseurl${AuthEndpoints.verifyOtp}', model.toJson());
+    final response = await apiService.postRequest('$baseurl${AppEndpoints.verifyOtp}', model.toJson());
     if (response.statusCode == 200) {
       return Right(response.data['message']);
     } else {
@@ -68,7 +65,7 @@ class AuthService {
   }
 
   Future<Either<Failure, String>> resetPassword(ResetPasswordModel model) async {
-    final response = await apiService.postRequest('$baseurl${AuthEndpoints.resetPassword}', model.toJson());
+    final response = await apiService.postRequest('$baseurl${AppEndpoints.resetPassword}', model.toJson());
     if (response.statusCode == 200) {
 return Right(response.data['message']);
     } else {
