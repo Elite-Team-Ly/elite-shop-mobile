@@ -15,14 +15,19 @@ class User {
     required this.address,
   });
 
-  factory User.fromJson(Map<String, dynamic> json){
-    return User(fullName: json['fullName'],
-        phoneNumber: json['phoneNumber'],
-        role: json['role'],
-        birthDate: DateTime.fromMillisecondsSinceEpoch(int.parse(json['birthDate'])),
-        city: json['city'],
-        address: json['address']);
+  factory User.fromJson(Map<String, dynamic> json) {
+    return User(
+      fullName: json['data']['user']['name'],
+      phoneNumber: json['data']['user']['phone'],
+      role: json['role'],
+      birthDate: DateTime.fromMillisecondsSinceEpoch(
+        int.parse(json['birthDate']),
+      ),
+      city: json['city'],
+      address: json['address'],
+    );
   }
+
   Map<String, dynamic> toJson() {
     return {
       'fullName': fullName,

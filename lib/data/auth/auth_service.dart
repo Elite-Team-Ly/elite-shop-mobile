@@ -1,48 +1,85 @@
 import 'package:dartz/dartz.dart';
+import 'package:dio/dio.dart';
+import 'package:elite_team_training_app/core/config/constants.dart';
+import 'package:elite_team_training_app/core/errors/failure.dart';
 import 'package:elite_team_training_app/core/services/app_services.dart';
+import 'package:elite_team_training_app/models/auth/forgetpassword.dart';
+import 'package:elite_team_training_app/models/auth/otp/OtpModel.dart';
 import 'package:elite_team_training_app/models/auth/sign_in_model.dart';
-
+import 'package:flutter/cupertino.dart';
+import '../../core/services/local_storage_service.dart';
 import '../../models/auth/sign_up_model.dart';
-import '../../models/auth/user_model.dart';
 
-class AuthService{
+
+
+class AuthService {
   final ApiService apiService;
+  final baseurl = AppLink.server;
+
   AuthService(this.apiService);
 
-  // Future<Either<User?, String>> login(SignInModel model) async {
-  // }
+  Future<Either<Failure, User>> signIn(SignInModel model) async {
+    final response = await apiService.postRequest(
+      '$baseurl${AuthEndpoints.signIn}',
+      model.toJson(),
+    );
+    if (response.statusCode == 200 && response.data['status'] == 'success') {
+      final signInResponse = SignInResponse.fromJson(response.data);
+      final token = signInResponse.token;
+      await LocalStorageService.saveToken(token);
+      final user = signInResponse.user;
 
-  Future<Either<String, User?>> login(SignInModel model) async {
-    final response = await apiService.postRequest('/login', {
-      'phoneNumber': model.phoneNumber,
-      'password': model.password,
-    });
-
-    if (response.statusCode == 200 && response.data['token'] != null) {
-      final token = response.data['token'];
-      apiService.setJwtToken(token);
-      final user = User.fromJson(response.data);
       return Right(user);
     } else {
-      final errorMessage = response.data['error'] ?? 'Unknown error';
-      return Left(errorMessage);
+
+      return Left(_handleFailure(response));
+    }
+  }
+
+  Future<Either<Failure, String>> signUp(SignUpModel model) async {
+    final response = await apiService.postRequest('$baseurl/signup', model.toJson());
+    debugPrint(" ${response.data}${AuthEndpoints.signUp}");
+    if (response.statusCode == 201) {
+      return Right(response.data['message']);
+    } else {
+      return Left(_handleFailure(response));
+
+    }
+  }
+
+  Future<Either<Failure, String>> sendOtp(SendOtpModel model) async {
+    final response = await apiService.postRequest('$baseurl${AuthEndpoints.sendOtp}',
+     model.toJson());
+
+    if (response.statusCode == 200) {
+      return Right(response.data['message']);
+    } else {
+      return Left(_handleFailure(response));
+    }
+  }
+
+  Future<Either<Failure, String>> verifyOtp(VerifyOtpModel model) async {
+    final response = await apiService.postRequest('$baseurl${AuthEndpoints.verifyOtp}', model.toJson());
+    if (response.statusCode == 200) {
+      return Right(response.data['message']);
+    } else {
+      return Left(_handleFailure(response));
+    }
+  }
+
+  Future<Either<Failure, String>> resetPassword(ResetPasswordModel model) async {
+    final response = await apiService.postRequest('$baseurl${AuthEndpoints.resetPassword}', model.toJson());
+    if (response.statusCode == 200) {
+return Right(response.data['message']);
+    } else {
+      return Left(_handleFailure(response));
     }
   }
 
 
-  Future<String>signUp(SignUpModel model) async{
-    final response = await apiService.postRequest('/signUp', {
-      'fullName':model.fullName,
-      'phoneNumber':model.phoneNumber,
-      'role':model.role,
-      'birthDate':model.birthDate,
-      'city':model.city,
-      'address':model.address
-    });
-if(response.statusCode==200){
-  return response.data['message'];
-}else{
-  return response.data['error'];
-}
-}
+  Failure _handleFailure(Response response) => Failure(
+    message: response.data?['message'] ?? 'Unknown error',
+    code: response.statusCode,
+  );
+
 }

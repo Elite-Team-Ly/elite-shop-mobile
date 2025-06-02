@@ -1,36 +1,56 @@
 class SignUpModel {
-  final String fullName;
-  final String phoneNumber;
+  final String name;
+  final String phone;
   final String password;
   final Role role;
-  final DateTime birthDate;
-  final String city;
-  final String address;
+  final String gender;
+  final String birthDate;
+  Addresses address;
 
   SignUpModel({
-    required this.fullName,
-    required this.phoneNumber,
+    required this.name,
+    required this.phone,
     required this.password,
     required this.role,
+    required this.gender,
     required this.birthDate,
-    required this.city,
     required this.address,
   });
 
   Map<String, dynamic> toJson() {
     return {
-      'fullName': fullName,
-      'phoneNumber': phoneNumber,
+      'name': name,
+      'phone': phone,
       'password': password,
-      'role': role,
-      'birthDate': birthDate.millisecondsSinceEpoch,
-      'city': city,
-      'address': address,
+      // 'role': role.name,
+      'dateOfBirth': birthDate.toString(),
+      'addresses': address,
     };
   }
 }
-enum Role{
-  customer,
-  seller
+
+
+
+class Addresses {
+  final String city;
+  final String street;
+  final double latitude;
+  final double longitude;
+
+  Addresses({
+    required this.city,
+    required this.street,
+    required this.latitude,
+    required this.longitude,
+  });
+ Map<String,dynamic>toJson(){
+   return{
+     "city":city,
+     "street": street,
+     "latitude": latitude,
+     "longitude": longitude
+   };
+}
 }
 
+enum Role { customer, seller }

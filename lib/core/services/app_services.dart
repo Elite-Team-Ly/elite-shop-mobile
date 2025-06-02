@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:flutter/cupertino.dart';
 import '../config/constants.dart';
 
 class ApiService {
@@ -53,13 +54,16 @@ class ApiService {
     Map<String, dynamic> data, {
     Map<String, String>? headers,
   }) async {
+    debugPrint('data from service post $data');
     try {
+
       final finalHeaders = _prepareHeaders(headers);
       return await _dio.post(
         endpoint,
         data: data,
         options: Options(headers: finalHeaders),
       );
+
     } catch (e) {
       return _handleError(endpoint, e);
     }

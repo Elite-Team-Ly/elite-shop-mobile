@@ -57,9 +57,17 @@ class AppColors {
     return isDarkMode ? darkModeColor : lightModeColor;
   }
 }
+class AuthEndpoints {
+  static const signIn = "/signin";
+  static const signUp = "/signup";
+  static const sendOtp = "/sendVerifycode";
+  static const verifyOtp = "/verifycode";
+  static const resetPassword = "/resetpassword";
+}
 
 class AppLink {
-  static const String server = "http://api.eliteteam.com/api";
+ // static const String server = "http://api.eliteteam.com/api";
+  static const String server = "http://5feh.l.time4vps.cloud:8080/api/auth";
   static const String imageServer = "http://studio.eliteteam.com:5000/image/";
 }
 
