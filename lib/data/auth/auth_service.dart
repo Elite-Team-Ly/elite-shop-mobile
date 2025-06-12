@@ -35,7 +35,7 @@ class AuthService {
   }
 
   Future<Either<Failure, String>> signUp(SignUpModel model) async {
-    final response = await apiService.postRequest('$baseurl/signup', model.toJson());
+    final response = await apiService.postRequest('$baseurl${AppEndpoints.signUp}', model.toJson());
     if (response.statusCode == 201) {
       return Right(response.data['message']);
     } else {

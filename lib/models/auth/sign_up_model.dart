@@ -22,14 +22,13 @@ class SignUpModel {
       'name': name,
       'phone': phone,
       'password': password,
+      'gender': gender,
       // 'role': role.name,
       'dateOfBirth': birthDate.toString(),
       'addresses': address,
     };
   }
 }
-
-
 
 class Addresses {
   final String city;
@@ -43,14 +42,14 @@ class Addresses {
     required this.latitude,
     required this.longitude,
   });
- Map<String,dynamic>toJson(){
-   return{
-     "city":city,
-     "street": street,
-     "latitude": latitude,
-     "longitude": longitude
-   };
-}
+  Map<String, dynamic> toJson() {
+    return {
+      "city": city,
+      "street": street,
+      "latitude": latitude,
+      "longitude": longitude,
+    };
+  }
 }
 
 enum Role { customer, seller }

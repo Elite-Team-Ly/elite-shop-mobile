@@ -1,11 +1,14 @@
 import 'package:elite_team_training_app/controllers/sign_in_controller.dart/sign_in_states.dart';
+import 'package:elite_team_training_app/data/auth/auth_service.dart';
+import 'package:elite_team_training_app/models/auth/sign_in_model.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../models/auth/user_model.dart';
 
 class SignInCubit extends Cubit<SignInStates> {
-  SignInCubit() : super(SignInInitialState());
+  AuthService authService;
+
+  SignInCubit(this.authService) : super(SignInInitialState());
 
   static SignInCubit get(context) => BlocProvider.of(context);
 
@@ -14,31 +17,42 @@ class SignInCubit extends Cubit<SignInStates> {
 
   GlobalKey<FormState> signInFormKey = GlobalKey<FormState>();
 
-//methods
-  void login() async {
+  //methods
+  Future login() async {
     emit(SignInLoadingState());
-    // simulate login flow
-    await Future.delayed(const Duration(seconds: 2));
-
-    if (phoneController.text == "12345678" &&
-        passController.text == "12345678gg") {
-      emit(
-        SignInSuccessState(
-          User(
-            fullName: phoneController.text,
-            phoneNumber: passController.text,
-            city: 'null',
-            role: 'null',
-            birthDate: DateTime.now(),
-            address: 'null',
-          ),
-        ),
+    final SignInModel signInModel = SignInModel(
+      phoneNumber: phoneController.text,
+      password: passController.text,
+    );
+    authService.signIn(signInModel).then((result) {
+      result.fold(
+        (failure) {
+          emit(SignInErrorState(failure.message));
+        },
+        (user) {
+          emit(SignInSuccessState(user));
+        },
       );
-    } else if (phoneController.text != "12345678") {
-      emit(UserNotFoundState());
-    } else {
-      emit(SignInErrorState("كلمة المرور غير صحيحة"));
-    }
+    });
+    // if (phoneController.text == "12345678" &&
+    //     passController.text == "12345678gg") {
+      // emit(
+      //   SignInSuccessState(
+      //     User(
+      //       fullName: phoneController.text,
+      //       phoneNumber: passController.text,
+      //       city: 'null',
+      //       role: 'null',
+      //       birthDate: DateTime.now(),
+      //       address: 'null',
+      //     ),
+      //   ),
+      // );
+    // } else if (phoneController.text != "12345678") {
+    //   emit(UserNotFoundState("لم يتم العثور على المستخدم"));
+    // } else {
+    //   emit(SignInErrorState("كلمة المرور غير صحيحة"));
+    // }
   }
 
   //show-hide password

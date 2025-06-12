@@ -1,4 +1,7 @@
+import 'package:elite_team_training_app/controllers/otp_controller/otp_cubit.dart';
 import 'package:elite_team_training_app/controllers/sign_up_controller/sign_up_states.dart';
+import 'package:elite_team_training_app/core/config/routes.dart';
+import 'package:elite_team_training_app/models/auth/otp/OtpModel.dart';
 import 'package:elite_team_training_app/views/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -11,10 +14,11 @@ class SignUpScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final cubit = SignupCubit.get(context);
+    final otpCubit = OtpCubit.get(context);
 
     return Scaffold(
       appBar: CustomAppBar(
-        title: 'الأشتراك',
+        title: 'الاشتراك',
         subtitle: 'أنشئ حسابك الآن واستمتع بكل مزايانا بسهولة وأمان',
         onBack: () {
           Navigator.pop(context);
@@ -22,8 +26,52 @@ class SignUpScreen extends StatelessWidget {
       ),
       body: BlocConsumer<SignupCubit, SignupStates>(
         listener: (context, state) {
+          if (state is SignupLoadingState) {
+            showDialog(
+              context: context,
+              barrierDismissible: false,
+              builder: (context) => const LoadingIndicator(),
+            );
+          }
+
           if (state is SignupSuccessState) {
-          } else if (state is SignupErrorState) {}
+            // if (Navigator.canPop(context)) {
+            //   Navigator.pop(context);
+            // }
+            Navigator.pushNamed(
+              context,
+              RouteNames.verifyCode,
+              arguments: {
+                'otpCubit': otpCubit,
+                'phoneNumber': cubit.phoneController.text,
+                'purpose': OtpPurpose.account_creation,
+              },
+            );
+          }
+
+          if (state is SignupErrorState) {
+            if (Navigator.canPop(context)) {
+              Navigator.pop(context);
+            }
+            showDialog(
+              context: context,
+              barrierDismissible: true,
+              builder: (context) {
+                return AlertDialog(
+                  title: const Text('حدث خطأ ما!'),
+                  content: Text(state.message),
+                  actions: <Widget>[
+                    TextButton(
+                      onPressed: () {
+                        Navigator.of(context).pop();
+                      },
+                      child: const Text('حسناً'),
+                    ),
+                  ],
+                );
+              },
+            );
+          }
         },
         builder: (context, state) {
           return SingleChildScrollView(
@@ -44,6 +92,7 @@ class SignUpScreen extends StatelessWidget {
                         ),
                         CustomTextField(
                           controller: cubit.phoneController,
+                          isPhoneNumber: true,
                           hintText: 'رقم الهاتف',
                           keyboardType: TextInputType.phone,
                           validator: Validators.phone,
@@ -104,10 +153,16 @@ class SignUpScreen extends StatelessWidget {
                           keyboardType: TextInputType.visiblePassword,
                           obscureText: cubit.isPassword,
                           showIcon: true,
+                          icon: cubit.suffixIcon,
+
                           iconOnPressed: () {
                             cubit.changePassVisibilty();
                           },
-                          validator: Validators.password,
+                          validator:
+                              (value) => Validators.confirmPassword(
+                                value,
+                                cubit.passController.text,
+                              ),
                         ),
                         CustomTextField(
                           controller: cubit.cityController,
@@ -134,7 +189,9 @@ class SignUpScreen extends StatelessWidget {
                     MainButton(
                       width: 130,
                       onPressed: () async {
-                        if (cubit.signupFormKey.currentState!.validate()) {}
+                        if (cubit.signupFormKey.currentState!.validate()) {
+                          cubit.signup();
+                        }
                       },
                       child: const Text("أشتراك"),
                     ),

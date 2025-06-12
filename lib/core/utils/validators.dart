@@ -27,6 +27,20 @@ class Validators {
     return null;
   }
 
+    static String? confirmPassword(String? value, String passwordValue) {
+
+    if (value!.length < 6) {
+      return 'كلمة المرور يجب أن تكون على الأقل 6 أحرف';
+    }
+    if (value.isEmpty) {
+      return 'الرجاء تأكيد كلمة المرور';
+    }
+    if (value != passwordValue) {
+      return 'كلمة المرور وتأكيدها غير متطابقين';
+    }
+    return null;
+  }
+
   static String? required(String? value, {String? message}) {
     if (value == null || value.trim().isEmpty) {
       return message ?? 'هذا الحقل مطلوب';

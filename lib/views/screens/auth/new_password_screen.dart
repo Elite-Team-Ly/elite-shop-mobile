@@ -1,30 +1,43 @@
-import 'package:elite_team_training_app/controllers/sign_in_controller.dart/sign_in_cubit.dart';
-import 'package:elite_team_training_app/controllers/sign_in_controller.dart/sign_in_states.dart';
+//this will appear after verifying the otp is true.
+//need 2 text fields, and it will use the reset pass cubit
+//++ need to complete the sign up verify otp
+//++ tell them that i just worked for the customer login, does the seller need?
+
+import 'package:elite_team_training_app/controllers/reset_password_controller/reset_password_cubit.dart';
+import 'package:elite_team_training_app/controllers/reset_password_controller/reset_password_states.dart';
 import 'package:elite_team_training_app/core/config/constants.dart';
 import 'package:elite_team_training_app/core/config/routes.dart';
+import 'package:elite_team_training_app/models/auth/otp/OtpModel.dart';
+import 'package:elite_team_training_app/views/widgets/shared/success_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../core/utils/validators.dart';
 import '../../widgets/widgets.dart';
 
-class CustomerLoginScreen extends StatelessWidget {
-  const CustomerLoginScreen({super.key});
+class NewPasswordScreen extends StatelessWidget {
+  final String phoneNumber;
+  final OtpPurpose purpose;
+  const NewPasswordScreen({
+    super.key,
+    required this.phoneNumber,
+    required this.purpose,
+  });
 
   @override
   Widget build(BuildContext context) {
-    final cubit = SignInCubit.get(context);
+    final cubit = ResetPasswordCubit.get(context);
 
     return Scaffold(
       appBar: CustomAppBar(
-        title: 'تسجيل الدخول كمشتري',
+        title: 'إعادة تعيين كلمة المرور',
         onBack: () {
           Navigator.pop(context);
         },
       ),
-      body: BlocConsumer<SignInCubit, SignInStates>(
+      body: BlocConsumer<ResetPasswordCubit, ResetPasswordStates>(
         listener: (context, state) {
-          if (state is SignInLoadingState) {
+          if (state is ResetPasswordLoadingState) {
             showDialog(
               context: context,
               barrierDismissible: false,
@@ -32,42 +45,25 @@ class CustomerLoginScreen extends StatelessWidget {
             );
           }
 
-          if (state is SignInSuccessState) {
-            if (Navigator.canPop(context)) {
-              Navigator.pop(context);
-            }
-            Navigator.pushNamedAndRemoveUntil(
-              context,
-              RouteNames.home,
-              (route) => false,
-            );
-          }
-
-          if (state is SignInErrorState) {
-            if (Navigator.canPop(context)) {
-              Navigator.pop(context);
-            }
+          if (state is ResetPasswordSuccessState) {
             showDialog(
               context: context,
-              barrierDismissible: true,
+              barrierDismissible: false, // Prevents closing by tapping outside
               builder: (context) {
-                return AlertDialog(
-                  title: const Text('حدث خطأ ما!'),
-                  content: Text(state.message),
-                  actions: <Widget>[
-                    TextButton(
-                      onPressed: () {
-                        Navigator.of(context).pop();
-                      },
-                      child: const Text('حسناً'),
-                    ),
-                  ],
+                return SuccessDialog(
+                  message: "مرحباً بك! تم حفظ كلمة المرور الجديدة",
+                  onOkPressed:
+                      () => Navigator.pushNamedAndRemoveUntil(
+                        context,
+                        RouteNames.home,
+                        (route) => false,
+                      ),
                 );
               },
             );
           }
 
-          if (state is UserNotFoundState) {
+          if (state is ResetPasswordErrorState) {
             if (Navigator.canPop(context)) {
               Navigator.pop(context);
             }
@@ -95,7 +91,7 @@ class CustomerLoginScreen extends StatelessWidget {
           return SafeArea(
             child: SingleChildScrollView(
               child: Form(
-                key: cubit.signInFormKey,
+                key: cubit.resetPasswordFormKey,
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.center,
@@ -110,51 +106,41 @@ class CustomerLoginScreen extends StatelessWidget {
                       width: 300.w,
                       children: [
                         CustomTextField(
-                          hintText: "رقم الهاتف",
-                          keyboardType: TextInputType.phone,
-                          controller: cubit.phoneController,
-                          validator: Validators.phone,
-                        ),
-                        CustomTextField(
                           hintText: "كلمة المرور",
                           keyboardType: TextInputType.visiblePassword,
-                          controller: cubit.passController,
+                          controller: cubit.newPasswordController,
                           obscureText: cubit.isPassword,
                           icon: cubit.suffixIcon,
                           showIcon: true,
                           iconOnPressed: cubit.changePassVisibilty,
                           validator: Validators.password,
                         ),
-
-                        RowWithAction(
-                          onActionTap: () {
-                            Navigator.pushNamed(
-                              context,
-                              RouteNames.resetPassword,
-                            );
-                          },
-                          normalWidget: CustomText(
-                            "هل نسيت كلمة المرور ؟",
-                            fontSize: 16.sp,
-                          ),
-                          actionWidget: CustomText(
-                            "إعادة تعيين كلمة مرور",
-                            fontSize: 16.sp,
-                            color: AppColors.primaryColor,
-                          ),
+                        CustomTextField(
+                          hintText: "تأكيد كلمة المرور",
+                          keyboardType: TextInputType.visiblePassword,
+                          controller: cubit.confirmNewPasswordController,
+                          obscureText: cubit.isPassword,
+                          icon: cubit.suffixIcon,
+                          showIcon: true,
+                          iconOnPressed: cubit.changePassVisibilty,
+                          validator:
+                              (value) => Validators.confirmPassword(
+                                value,
+                                cubit.newPasswordController.text,
+                              ),
                         ),
+
+                        SizedBox(height: 20.h),
                         MainButton(
                           onPressed: () {
-                            if (cubit.signInFormKey.currentState!.validate()) {
-                              cubit.login();
+                            if (cubit.resetPasswordFormKey.currentState!
+                                .validate()) {
+                              cubit.resetPassword(phoneNumber);
                             }
                           },
                           width: 130.w,
                           height: 33.h,
-                          child: Text(
-                            "تسجيل الدخول",
-                            style: TextStyle(fontSize: 14.sp),
-                          ),
+                          child: Text("حفظ", style: TextStyle(fontSize: 14.sp)),
                         ),
                       ],
                     ),

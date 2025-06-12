@@ -7,8 +7,9 @@ class SignupInitialState extends SignupStates {}
 class SignupLoadingState extends SignupStates {}
 
 class SignupSuccessState extends SignupStates {
-  final User userModel;
-  SignupSuccessState(this.userModel);
+  // final User userModel;
+  final String message;
+  SignupSuccessState(this.message);
 }
 
 class OtpSentState extends SignupStates {}
