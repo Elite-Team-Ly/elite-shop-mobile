@@ -1,7 +1,6 @@
 import 'package:elite_team_training_app/controllers/reset_password_controller/reset_password_states.dart';
 import 'package:elite_team_training_app/data/auth/auth_service.dart';
 import 'package:elite_team_training_app/models/auth/forgetpassword.dart';
-import 'package:elite_team_training_app/models/auth/otp/OtpModel.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

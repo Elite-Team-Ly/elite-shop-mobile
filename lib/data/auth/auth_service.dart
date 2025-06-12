@@ -1,10 +1,12 @@
+// ignore_for_file: avoid_print
+
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:elite_team_training_app/core/config/constants.dart';
 import 'package:elite_team_training_app/core/errors/failure.dart';
 import 'package:elite_team_training_app/core/services/app_services.dart';
 import 'package:elite_team_training_app/models/auth/forgetpassword.dart';
-import 'package:elite_team_training_app/models/auth/otp/OtpModel.dart';
+import 'package:elite_team_training_app/models/auth/otp/otp_model.dart';
 import 'package:elite_team_training_app/models/auth/sign_in_model.dart';
 import '../../core/services/local_storage_service.dart';
 import '../../models/auth/sign_up_model.dart';

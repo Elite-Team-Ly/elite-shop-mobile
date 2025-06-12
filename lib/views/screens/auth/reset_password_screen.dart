@@ -2,7 +2,7 @@ import 'package:elite_team_training_app/controllers/otp_controller/otp_cubit.dar
 import 'package:elite_team_training_app/controllers/otp_controller/otp_states.dart';
 import 'package:elite_team_training_app/core/config/constants.dart';
 import 'package:elite_team_training_app/core/config/routes.dart';
-import 'package:elite_team_training_app/models/auth/otp/OtpModel.dart';
+import 'package:elite_team_training_app/models/auth/otp/otp_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -42,7 +42,7 @@ class ResetPassword extends StatelessWidget {
               arguments: {
                 'otpCubit': cubit,
                 'phoneNumber': cubit.phoneController.text,
-                'purpose': OtpPurpose.password_reset,
+                'purpose': OtpPurpose.passwordReset,
               },
             );
           }

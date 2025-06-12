@@ -2,7 +2,7 @@ import 'package:elite_team_training_app/controllers/otp_controller/otp_cubit.dar
 import 'package:elite_team_training_app/controllers/otp_controller/otp_states.dart';
 import 'package:elite_team_training_app/core/config/constants.dart';
 import 'package:elite_team_training_app/core/config/routes.dart';
-import 'package:elite_team_training_app/models/auth/otp/OtpModel.dart';
+import 'package:elite_team_training_app/models/auth/otp/otp_model.dart';
 import 'package:elite_team_training_app/views/widgets/shared/success_dialog.dart';
 import 'package:elite_team_training_app/views/widgets/widgets.dart';
 import 'package:flutter/material.dart';
@@ -30,7 +30,7 @@ class VerifyCodeScreen extends StatelessWidget {
         appBar: CustomAppBar(
           title: 'التحقق و المصادقة',
           subtitle:
-              purpose == OtpPurpose.account_creation
+              purpose == OtpPurpose.accountCreation
                   ? 'أنشئ حسابك بسهولة وابدأ في الاستفادة من خدماتنا'
                   : "إعادة تعيين كلمة المرور",
           onBack: () {
@@ -56,7 +56,7 @@ class VerifyCodeScreen extends StatelessWidget {
                 barrierDismissible:
                     false, // Prevents closing by tapping outside
                 builder: (context) {
-                  if (purpose == OtpPurpose.account_creation) {
+                  if (purpose == OtpPurpose.accountCreation) {
                     return SuccessDialog(
                       message:
                           "مرحبًا بك! لقد تم تفعيل اشتراكك في التطبيق بنجاح. استمتع بتجربتك",

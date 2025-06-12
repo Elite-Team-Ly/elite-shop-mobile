@@ -1,7 +1,6 @@
 import 'package:elite_team_training_app/controllers/sign_up_controller/sign_up_states.dart';
 import 'package:elite_team_training_app/data/auth/auth_service.dart';
 import 'package:elite_team_training_app/models/auth/sign_up_model.dart';
-import 'package:elite_team_training_app/models/auth/user_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

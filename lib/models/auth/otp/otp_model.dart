@@ -25,4 +25,4 @@ class VerifyOtpModel {
   }
 }
 
-enum OtpPurpose { account_creation, password_reset }
+enum OtpPurpose { accountCreation, passwordReset }

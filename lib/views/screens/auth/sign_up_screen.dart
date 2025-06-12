@@ -1,7 +1,7 @@
 import 'package:elite_team_training_app/controllers/otp_controller/otp_cubit.dart';
 import 'package:elite_team_training_app/controllers/sign_up_controller/sign_up_states.dart';
 import 'package:elite_team_training_app/core/config/routes.dart';
-import 'package:elite_team_training_app/models/auth/otp/OtpModel.dart';
+import 'package:elite_team_training_app/models/auth/otp/otp_model.dart';
 import 'package:elite_team_training_app/views/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -44,7 +44,7 @@ class SignUpScreen extends StatelessWidget {
               arguments: {
                 'otpCubit': otpCubit,
                 'phoneNumber': cubit.phoneController.text,
-                'purpose': OtpPurpose.account_creation,
+                'purpose': OtpPurpose.accountCreation,
               },
             );
           }

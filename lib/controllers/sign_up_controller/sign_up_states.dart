@@ -1,5 +1,3 @@
-import 'package:elite_team_training_app/models/auth/user_model.dart';
-
 abstract class SignupStates {}
 
 class SignupInitialState extends SignupStates {}

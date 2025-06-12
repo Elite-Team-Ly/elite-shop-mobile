@@ -7,7 +7,7 @@ import 'package:elite_team_training_app/controllers/reset_password_controller/re
 import 'package:elite_team_training_app/controllers/reset_password_controller/reset_password_states.dart';
 import 'package:elite_team_training_app/core/config/constants.dart';
 import 'package:elite_team_training_app/core/config/routes.dart';
-import 'package:elite_team_training_app/models/auth/otp/OtpModel.dart';
+import 'package:elite_team_training_app/models/auth/otp/otp_model.dart';
 import 'package:elite_team_training_app/views/widgets/shared/success_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

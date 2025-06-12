@@ -1,6 +1,6 @@
 import 'package:elite_team_training_app/controllers/otp_controller/otp_states.dart';
 import 'package:elite_team_training_app/data/auth/auth_service.dart';
-import 'package:elite_team_training_app/models/auth/otp/OtpModel.dart';
+import 'package:elite_team_training_app/models/auth/otp/otp_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -20,16 +20,14 @@ class OtpCubit extends Cubit<OtpStates> {
   String phoneNumber = '';
   Future<void> sendOtp() async {
     emit(SendingOtpLoadingState());
-    print(phoneNumber);
     phoneNumber = phoneController.text;
-    print(phoneNumber);
 
     //send otp to the phone number
     authService
         .sendOtp(
           SendOtpModel(
             phoneNumber: phoneNumber,
-            purpose: OtpPurpose.password_reset,
+            purpose: OtpPurpose.passwordReset,
           ),
         )
         .then((result) {
