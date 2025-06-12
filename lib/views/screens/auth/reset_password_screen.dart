@@ -42,7 +42,7 @@ class ResetPassword extends StatelessWidget {
               arguments: {
                 'otpCubit': cubit,
                 'phoneNumber': cubit.phoneController.text,
-                'purpose': OtpPurpose.passwordReset,
+                'purpose': OtpPurpose.password_reset,
               },
             );
           }
@@ -93,6 +93,7 @@ class ResetPassword extends StatelessWidget {
                         SizedBox(height: 16.h),
                         CustomTextField(
                           hintText: "رقم الهاتف",
+                          isPhoneNumber: true,
                           controller: cubit.phoneController,
                           validator: (value) {
                             if (value == null || value.isEmpty) {

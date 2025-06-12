@@ -1,3 +1,5 @@
+// ignore_for_file: constant_identifier_names
+
 class SendOtpModel {
   final String phoneNumber;
   final OtpPurpose purpose;
@@ -25,4 +27,4 @@ class VerifyOtpModel {
   }
 }
 
-enum OtpPurpose { accountCreation, passwordReset }
+enum OtpPurpose { account_creation, password_reset }

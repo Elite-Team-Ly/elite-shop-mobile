@@ -44,7 +44,7 @@ class SignUpScreen extends StatelessWidget {
               arguments: {
                 'otpCubit': otpCubit,
                 'phoneNumber': cubit.phoneController.text,
-                'purpose': OtpPurpose.accountCreation,
+                'purpose': OtpPurpose.account_creation,
               },
             );
           }

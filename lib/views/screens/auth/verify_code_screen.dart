@@ -30,7 +30,7 @@ class VerifyCodeScreen extends StatelessWidget {
         appBar: CustomAppBar(
           title: 'التحقق و المصادقة',
           subtitle:
-              purpose == OtpPurpose.accountCreation
+              purpose == OtpPurpose.account_creation
                   ? 'أنشئ حسابك بسهولة وابدأ في الاستفادة من خدماتنا'
                   : "إعادة تعيين كلمة المرور",
           onBack: () {
@@ -56,7 +56,7 @@ class VerifyCodeScreen extends StatelessWidget {
                 barrierDismissible:
                     false, // Prevents closing by tapping outside
                 builder: (context) {
-                  if (purpose == OtpPurpose.accountCreation) {
+                  if (purpose == OtpPurpose.account_creation) {
                     return SuccessDialog(
                       message:
                           "مرحبًا بك! لقد تم تفعيل اشتراكك في التطبيق بنجاح. استمتع بتجربتك",

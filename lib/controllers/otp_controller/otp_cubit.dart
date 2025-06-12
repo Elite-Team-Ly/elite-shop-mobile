@@ -27,7 +27,7 @@ class OtpCubit extends Cubit<OtpStates> {
         .sendOtp(
           SendOtpModel(
             phoneNumber: phoneNumber,
-            purpose: OtpPurpose.passwordReset,
+            purpose: OtpPurpose.password_reset,
           ),
         )
         .then((result) {
