@@ -14,7 +14,6 @@ class ResetPassword extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final cubit = OtpCubit.get(context);
-
     return Scaffold(
       appBar: CustomAppBar(
         title: "إعادة تعيين كلمة المرور",
