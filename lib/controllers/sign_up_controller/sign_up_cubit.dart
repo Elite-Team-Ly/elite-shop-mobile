@@ -4,6 +4,8 @@ import 'package:elite_team_training_app/models/auth/sign_up_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../models/auth/sign_in_model.dart';
+
 class SignupCubit extends Cubit<SignupStates> {
   SignupCubit(this.authService) : super(SignupInitialState());
 
@@ -30,9 +32,9 @@ class SignupCubit extends Cubit<SignupStates> {
   Future<SignUpModel> signup() async {
     emit(SignupLoadingState());
 
-    Role selectedRole = Role.customer; // Default role
+    Role selectedRole = Role.buyer; // Default role
     if (roleNotifier.value == 'مشتري') {
-      selectedRole = Role.customer;
+      selectedRole = Role.buyer;
     } else if (roleNotifier.value == 'بائع') {
       selectedRole = Role.seller;
     }

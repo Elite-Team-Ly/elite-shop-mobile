@@ -24,7 +24,7 @@ class OtpCubit extends Cubit<OtpStates> {
 
     //send otp to the phone number
     authService
-        .sendOtp(
+        .sendVerifyCode(
           SendOtpModel(
             phoneNumber: phoneNumber,
             purpose: OtpPurpose.password_reset,
@@ -47,7 +47,7 @@ class OtpCubit extends Cubit<OtpStates> {
     emit(VerifyOtpLoadingState());
 
     authService
-        .verifyOtp(
+        .verifyCode(
           VerifyOtpModel(
             phoneNumber: phoneNumber,
             code: otpCodeController.text,

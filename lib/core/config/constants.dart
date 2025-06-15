@@ -64,11 +64,15 @@ class AppEndpoints {
   static const verifyOtp = "auth/verifycode";
   static const resetPassword = "auth/resetpassword";
   static const getCategories = "category";
+  static const getSubCategories = "sub_category";
+  static const getBrands = "brand";
+  static const getProducts = "product";
+  static const getStores = "store";
 
 }
 
 class AppLink {
-  static const String server = "http://5feh.l.time4vps.cloud:8080/api/";
+  static const String server = "http://5feh.l.time4vps.cloud:8081/api/";
   static const String imageServer = "http://studio.eliteteam.com:5000/image/";
 }
 

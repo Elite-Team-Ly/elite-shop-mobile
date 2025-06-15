@@ -1,3 +1,5 @@
+import 'package:elite_team_training_app/models/auth/sign_in_model.dart';
+
 class SignUpModel {
   final String name;
   final String phone;
@@ -23,7 +25,7 @@ class SignUpModel {
       'phone': phone,
       'password': password,
       'gender': gender,
-      // 'role': role.name,
+      //'role': role.name,
       'dateOfBirth': birthDate.toString(),
       'addresses': address,
     };
@@ -42,6 +44,7 @@ class Addresses {
     required this.latitude,
     required this.longitude,
   });
+
   Map<String, dynamic> toJson() {
     return {
       "city": city,
@@ -51,5 +54,3 @@ class Addresses {
     };
   }
 }
-
-enum Role { customer, seller }

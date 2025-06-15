@@ -7,6 +7,8 @@ import 'package:elite_team_training_app/models/auth/user_model.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../../models/auth/sign_in_model.dart';
+
 class AuthCubit extends Cubit<AuthStates> {
   AuthCubit() : super(AuthInitialState());
 

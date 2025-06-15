@@ -9,7 +9,7 @@ class SignInLoadingState extends SignInStates {}
 
 
 class SignInSuccessState extends SignInStates {
-  final User user;
+  final SignInResponse user;
   SignInSuccessState(this.user);
 }
 

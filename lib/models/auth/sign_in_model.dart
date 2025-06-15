@@ -32,7 +32,7 @@ class SignInResponse {
     return SignInResponse(
       status: json['status'],
       message: json['message'],
-      token: data['token'],
+      token: json['token'],
       user: User.fromJson(data['user']),
     );
   }
@@ -63,3 +63,4 @@ class User {
     );
   }
 }
+enum Role { buyer, seller}
