@@ -1,9 +1,7 @@
 // ignore_for_file: avoid_print
 
 import 'dart:convert';
-
 import 'package:elite_team_training_app/controllers/auth_controller/auth_states.dart';
-import 'package:elite_team_training_app/models/auth/user_model.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 

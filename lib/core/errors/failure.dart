@@ -13,6 +13,7 @@ class Failure {
       code: response.statusCode,
     );
   }
+  // ignore: unused_element
   Failure _handleFailure(Response response) => Failure(
     message: response.data?['message'] ?? 'Unknown error',
     code: response.statusCode,

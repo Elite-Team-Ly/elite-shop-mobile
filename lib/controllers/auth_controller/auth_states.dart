@@ -1,4 +1,3 @@
-import 'package:elite_team_training_app/models/auth/user_model.dart';
 import 'package:equatable/equatable.dart';
 
 import '../../models/auth/sign_in_model.dart';

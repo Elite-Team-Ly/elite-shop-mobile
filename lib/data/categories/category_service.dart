@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_print
+
 import 'package:dartz/dartz.dart';
 import 'package:elite_team_training_app/core/errors/failure.dart';
 import 'package:elite_team_training_app/models/categories/category_model.dart';
@@ -22,7 +24,7 @@ class CategoriesService {
     if (response.statusCode == 200) {
       final data = response.data;
       final categories = CategoryModel.fromJson(data);
-print(categories);
+      print(categories);
       return Right(categories);
     } else {
       return Left(Failure.fromResponse(response));

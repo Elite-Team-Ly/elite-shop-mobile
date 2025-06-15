@@ -14,7 +14,7 @@ class StoreService {
 
   Future<Either<Failure, List<StoreModel>>> getAllStores() async {
     final response = await apiService.getRequest(
-      '${baseurl}${AppEndpoints.getStores}',
+      '$baseurl${AppEndpoints.getStores}',
       headers: {'Authorization': "Bearer ${LocalStorageService.getToken()}"},
     );
     if (response.statusCode == 200) {
@@ -32,7 +32,7 @@ class StoreService {
 
   Future<Either<Failure, StoreModel>> getStoreById(String storeId) async {
     final response = await apiService.getRequest(
-      '${baseurl}${AppEndpoints.getStores}/$storeId',
+      '$baseurl${AppEndpoints.getStores}/$storeId',
       headers: {'Authorization': "Bearer ${LocalStorageService.getToken()}"},
     );
     if (response.statusCode == 200) {
