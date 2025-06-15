@@ -7,4 +7,5 @@ class RouteNames {
   static const String resetPassword = '/resetPassword';
   static const String customerLogin = '/customerLogin';
   static const String sellerLogin = '/sellerLogin';
+  static const String newPassword = '/newPassword';
 }

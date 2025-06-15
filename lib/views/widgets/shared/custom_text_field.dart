@@ -12,6 +12,7 @@ class CustomTextField extends StatefulWidget {
   final TextAlign textAlign;
   final bool obscureText;
   final bool showIcon;
+  final bool? isPhoneNumber;
   final double? width;
   final double? height;
   final String? Function(String?)? validator;
@@ -28,6 +29,7 @@ class CustomTextField extends StatefulWidget {
     this.width,
     this.height,
     this.validator,
+    this.isPhoneNumber = false,
     this.textAlign = TextAlign.right,
   });
 
@@ -59,6 +61,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
                 keyboardType: widget.keyboardType,
                 obscureText: widget.obscureText,
                 textAlign: widget.textAlign,
+                maxLength: widget.isPhoneNumber == true ? 10 : null,
                 cursorColor: AppColors.primaryColor,
                 style: TextStyle(color: AppColors.darkA30, fontSize: 16.sp),
                 validator: (value) {
@@ -70,6 +73,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
                 },
                 decoration: InputDecoration(
                   fillColor: AppColors.lightColor,
+                  counterText: '',
                   filled: true,
                   contentPadding: EdgeInsets.symmetric(horizontal: 16.w),
                   hintText: widget.hintText,

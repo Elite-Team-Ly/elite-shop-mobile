@@ -1,4 +1,5 @@
-import 'package:elite_team_training_app/models/auth/user_model.dart';
+
+import 'package:elite_team_training_app/models/auth/sign_in_model.dart';
 
 abstract class SignInStates {}
 
@@ -8,11 +9,14 @@ class SignInLoadingState extends SignInStates {}
 
 
 class SignInSuccessState extends SignInStates {
-  final User user;
+  final SignInResponse user;
   SignInSuccessState(this.user);
 }
 
-class UserNotFoundState extends SignInStates {}
+class UserNotFoundState extends SignInStates {
+  final String message;
+  UserNotFoundState(this.message);
+}
 
 class SignInErrorState implements SignInStates {
   final String message;

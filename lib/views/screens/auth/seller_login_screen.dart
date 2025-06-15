@@ -1,6 +1,7 @@
 import 'package:elite_team_training_app/controllers/sign_in_controller.dart/sign_in_cubit.dart';
 import 'package:elite_team_training_app/controllers/sign_in_controller.dart/sign_in_states.dart';
 import 'package:elite_team_training_app/core/config/constants.dart';
+import 'package:elite_team_training_app/core/config/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -12,7 +13,7 @@ class SellerLoginScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final cubit = SignInCubit.get(context);
+    final SignInCubit cubit = SignInCubit.get(context);
 
     return Scaffold(
       appBar: CustomAppBar(
@@ -29,14 +30,63 @@ class SellerLoginScreen extends StatelessWidget {
             );
           }
 
-          if (state is SignInSuccessState) {}
+          if (state is SignInSuccessState) {
+            if (Navigator.canPop(context)) {
+              Navigator.pop(context);
+            }
+            Navigator.pushNamedAndRemoveUntil(
+              context,
+              RouteNames.home,
+              (route) => false,
+            );
+          }
 
           if (state is SignInErrorState) {
-            Navigator.pop(context);
+            if (Navigator.canPop(context)) {
+              Navigator.pop(context);
+            }
+            showDialog(
+              context: context,
+              barrierDismissible: true,
+              builder: (context) {
+                return AlertDialog(
+                  title: const Text('حدث خطأ ما!'),
+                  content: Text(state.message),
+                  actions: <Widget>[
+                    TextButton(
+                      onPressed: () {
+                        Navigator.of(context).pop();
+                      },
+                      child: const Text('حسناً'),
+                    ),
+                  ],
+                );
+              },
+            );
           }
 
           if (state is UserNotFoundState) {
-            Navigator.pop(context);
+            if (Navigator.canPop(context)) {
+              Navigator.pop(context);
+            }
+            showDialog(
+              context: context,
+              barrierDismissible: true,
+              builder: (context) {
+                return AlertDialog(
+                  title: const Text('حدث خطأ ما!'),
+                  content: Text(state.message),
+                  actions: <Widget>[
+                    TextButton(
+                      onPressed: () {
+                        Navigator.of(context).pop();
+                      },
+                      child: const Text('حسناً'),
+                    ),
+                  ],
+                );
+              },
+            );
           }
         },
         builder: (context, state) {
@@ -57,6 +107,7 @@ class SellerLoginScreen extends StatelessWidget {
                         CustomTextField(
                           hintText: "رقم الهاتف",
                           keyboardType: TextInputType.phone,
+                          isPhoneNumber: true,
                           controller: cubit.phoneController,
                           validator: Validators.phone,
                         ),
@@ -71,7 +122,12 @@ class SellerLoginScreen extends StatelessWidget {
                           validator: Validators.password,
                         ),
                         RowWithAction(
-                          onActionTap: () {},
+                          onActionTap: () {
+                            Navigator.pushNamed(
+                              context,
+                              RouteNames.resetPassword,
+                            );
+                          },
                           normalWidget: CustomText(
                             "هل نسيت كلمة المرور ؟",
                             fontSize: 16.sp,
@@ -85,12 +141,21 @@ class SellerLoginScreen extends StatelessWidget {
                         MainButton(
                           onPressed: () {
                             if (cubit.signInFormKey.currentState!.validate()) {
-                              cubit.login();
+                              cubit.login().then((context) {
+                                if (state is SignInSuccessState) {
+                                  // Navigate to the onboarding screen after successful login
+                                  Navigator.pushNamedAndRemoveUntil(
+                                    context,
+                                    RouteNames.home,
+                                    (route) => false,
+                                  );
+                                }
+                              });
                             }
                           },
                           width: 130.w,
                           height: 33.h,
-                          child:  Text(
+                          child: Text(
                             "تسجيل دخول",
                             style: TextStyle(fontSize: 14.sp),
                           ),
