@@ -61,7 +61,7 @@ class MyApp extends StatelessWidget {
       theme: baseTheme,
       title: 'Elite Shop',
       onGenerateRoute: RouteGenerator.generateRoute,
-      initialRoute: RouteNames.home,
+      initialRoute: RouteNames.customerLogin,
       builder: (context, child) {
         setSystemUIStyle(context);
         return child!;

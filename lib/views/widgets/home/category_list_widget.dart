@@ -2,10 +2,11 @@ import 'package:elite_team_training_app/core/config/constants.dart';
 import 'package:elite_team_training_app/views/widgets/shared/buttons_widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import '../../../core/data/fakeModel/category_model.dart';
+
+import '../../../models/categories/category_model.dart';
 
 class CategoryListWidget extends StatelessWidget {
-  final List<CategoryModel> categories;
+  final List<Category> categories;
 
   const CategoryListWidget({super.key, required this.categories});
 
@@ -22,17 +23,23 @@ class CategoryListWidget extends StatelessWidget {
           final item = categories[index];
           return Column(
             children: [
-              MainIconButton(
-                icon: item.icon,
-                onPressed: () {},
+              MainSvgIconButton(
+                onPressed: () {
+
+                },
                 width: 66,
                 height: 66,
-                backgroundColor: AppColors.primaryA50.withAlpha((0.2 * 255).toInt()),
+                backgroundColor:
+                AppColors.primaryA50.withAlpha((0.2 * 255).toInt()),
+                svgPath: '${AppLink.imageServer}${item.icon}',
               ),
               SizedBox(height: 6.h),
               Text(
-                item.title,
-                style: TextStyle(fontSize: 13.sp, fontWeight: FontWeight.w500),
+                item.name,
+                style: TextStyle(
+                  fontSize: 13.sp,
+                  fontWeight: FontWeight.w500,
+                ),
               ),
             ],
           );

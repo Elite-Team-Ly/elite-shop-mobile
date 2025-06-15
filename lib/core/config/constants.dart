@@ -72,7 +72,7 @@ class AppEndpoints {
 }
 
 class AppLink {
-  static const String server = "http://5feh.l.time4vps.cloud:8081/api/";
+  static const String server = "http://5feh.l.time4vps.cloud:8082/api/";
   static const String imageServer = "http://studio.eliteteam.com:5000/image/";
 }
 

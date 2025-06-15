@@ -41,7 +41,7 @@ class CustomText extends StatelessWidget {
       textAlign: textAlign,
       style: TextStyle(
         fontSize: fontSize?.sp,
-        color: color ?? AppColors.dynamicColor(context: context, darkModeColor: AppColors.lightColor, lightModeColor: AppColors.darkA30),
+        color: color ?? AppColors.lightColor,
         fontWeight: fontWeight ?? FontWeight.w600,
         fontStyle: fontStyle,
         decoration: decoration ,
