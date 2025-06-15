@@ -1,4 +1,5 @@
 import 'package:elite_team_training_app/core/utils/navigation_transitions.dart';
+import 'package:elite_team_training_app/views/screens/home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'controllers/sign_in_controller.dart/sign_in_cubit.dart';
@@ -48,11 +49,12 @@ class RouteGenerator {
           ),
         );
 
+      case RouteNames.home:
+        return slideRoute(const HomeScreen());
+
       default:
         return slideRoute(
-          const Scaffold(
-            body: Center(child: Text('404 - الصفحة غير موجودة')),
-          ),
+          const Scaffold(body: Center(child: Text('404 - الصفحة غير موجودة'))),
         );
     }
   }

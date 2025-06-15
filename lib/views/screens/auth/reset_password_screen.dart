@@ -25,7 +25,7 @@ class ResetPassword extends StatelessWidget {
                 children: [
                   CustomText(
                     "الرجاء ادخل رقم الهاتف",
-                    fontSize: 16.sp,
+                    fontSize: 22.sp,
                     textAlign: TextAlign.center,
                   ),
                   SizedBox(height: 16.h),
@@ -34,11 +34,9 @@ class ResetPassword extends StatelessWidget {
                     keyboardType: TextInputType.phone,
                     textAlign: TextAlign.center,
                   ),
-                  SizedBox(height: 16.h),
                   MainButton(
                     onPressed: () {},
                     width: 130.w,
-                    height: 33.h,
                     child: CustomText(
                       "ارسال",
                       fontSize: 14.sp,

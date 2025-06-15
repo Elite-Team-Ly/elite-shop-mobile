@@ -1,4 +1,5 @@
 import 'package:elite_team_training_app/core/config/constants.dart';
+import 'package:elite_team_training_app/views/widgets/shared/buttons_widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -98,9 +99,13 @@ class _CustomTextFieldState extends State<CustomTextField> {
 
                   suffixIcon:
                       widget.showIcon && widget.icon != null
-                          ? IconButton(
-                            icon: Icon(widget.icon, color: Colors.grey),
-                            onPressed: widget.iconOnPressed,
+                          ? Padding(
+                            padding:  EdgeInsets.all(5.w),
+                            child: MainIconButton(
+                              icon: widget.icon!,
+                              onPressed: widget.iconOnPressed,
+                              showBackgroundColor: false,
+                            ),
                           )
                           : null,
                   errorStyle: const TextStyle(

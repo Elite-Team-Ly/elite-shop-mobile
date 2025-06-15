@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/date_symbol_data_local.dart';
-
 import 'core/config/routes.dart';
 import 'core/config/theme.dart';
 import 'core/utils/app_notification.dart';
@@ -43,7 +42,7 @@ class MyApp extends StatelessWidget {
       theme: baseTheme,
       title: 'Elite Shop',
       onGenerateRoute: RouteGenerator.generateRoute,
-      initialRoute: RouteNames.signin,
+      initialRoute: RouteNames.home,
       builder: (context, child) {
         setSystemUIStyle(context);
         return child!;
