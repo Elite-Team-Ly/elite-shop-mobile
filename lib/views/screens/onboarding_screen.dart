@@ -1,4 +1,5 @@
 import 'package:elite_team_training_app/core/config/constants.dart';
+import 'package:elite_team_training_app/core/config/routes.dart';
 import 'package:elite_team_training_app/core/utils/status_handler.dart';
 import 'package:elite_team_training_app/views/widgets/widgets.dart';
 import 'package:flutter/material.dart';
@@ -28,7 +29,21 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
         duration: Duration(milliseconds: 500),
         curve: Curves.easeIn,
       );
-    } else {}
+    } else {
+      Navigator.pushNamedAndRemoveUntil(
+        context,
+        RouteNames.signin,
+        (route) => false,
+      );
+    }
+  }
+
+  void _skipOnboarding() {
+    Navigator.pushNamedAndRemoveUntil(
+      context,
+      RouteNames.signin,
+      (route) => false,
+    );
   }
 
   @override
@@ -40,6 +55,19 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
+              Align(
+                alignment: Alignment.topRight,
+                child:
+                    _currentPage < onboardingData.length - 1
+                        ? TextButton(
+                          onPressed: _skipOnboarding,
+                          child: CustomText(
+                            "تخطي",
+                            color: AppColors.primaryColor,
+                          ), 
+                        )
+                        : const SizedBox.shrink(),
+              ),
               Expanded(
                 child: PageView.builder(
                   controller: _controller,

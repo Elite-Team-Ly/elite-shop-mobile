@@ -1,4 +1,6 @@
+import 'package:elite_team_training_app/controllers/auth_controller/auth_cubit.dart';
 import 'package:elite_team_training_app/controllers/sign_in_controller.dart/sign_in_states.dart';
+import 'package:elite_team_training_app/core/services/local_storage_service.dart';
 import 'package:elite_team_training_app/data/auth/auth_service.dart';
 import 'package:elite_team_training_app/models/auth/sign_in_model.dart';
 
@@ -7,8 +9,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 class SignInCubit extends Cubit<SignInStates> {
   AuthService authService;
+  AuthCubit authCubit;
 
-  SignInCubit(this.authService) : super(SignInInitialState());
+  SignInCubit(this.authService, this.authCubit) : super(SignInInitialState());
 
   static SignInCubit get(context) => BlocProvider.of(context);
 
@@ -30,29 +33,13 @@ class SignInCubit extends Cubit<SignInStates> {
           emit(SignInErrorState(failure.message));
         },
         (user) {
+          LocalStorageService.saveToken(user.token);
+          LocalStorageService.saveUserData(user.user.toJson());
+          authCubit.onSuccessfulSignIn(user.user, user.token);
           emit(SignInSuccessState(user));
         },
       );
     });
-    // if (phoneController.text == "12345678" &&
-    //     passController.text == "12345678gg") {
-      // emit(
-      //   SignInSuccessState(
-      //     User(
-      //       fullName: phoneController.text,
-      //       phoneNumber: passController.text,
-      //       city: 'null',
-      //       role: 'null',
-      //       birthDate: DateTime.now(),
-      //       address: 'null',
-      //     ),
-      //   ),
-      // );
-    // } else if (phoneController.text != "12345678") {
-    //   emit(UserNotFoundState("لم يتم العثور على المستخدم"));
-    // } else {
-    //   emit(SignInErrorState("كلمة المرور غير صحيحة"));
-    // }
   }
 
   //show-hide password

@@ -1,4 +1,5 @@
 import 'package:elite_team_training_app/bloc_obs.dart';
+import 'package:elite_team_training_app/controllers/auth_controller/auth_cubit.dart';
 import 'package:elite_team_training_app/core/services/locator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -13,8 +14,6 @@ import 'core/utils/set_status_bar_color.dart';
 import 'routes.dart';
 
 void main() async {
-
-  WidgetsFlutterBinding.ensureInitialized();
 
   WidgetsFlutterBinding.ensureInitialized();
   Bloc.observer = MyBlocObserver();
@@ -56,16 +55,20 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      theme: baseTheme,
-      title: 'Elite Shop',
-      onGenerateRoute: RouteGenerator.generateRoute,
-      initialRoute: RouteNames.home,
-      builder: (context, child) {
-        setSystemUIStyle(context);
-        return child!;
-      },
+    return BlocProvider<AuthCubit>(
+       create: (context) => locator<AuthCubit>()..checkAuthStatus(),
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        theme: baseTheme,
+        title: 'Elite Shop',
+        onGenerateRoute: RouteGenerator.generateRoute,
+        initialRoute: RouteNames.splash,
+        builder: (context, child) {
+          setSystemUIStyle(context);
+          return child!;
+        },
+      ),
+
     );
   }
 }

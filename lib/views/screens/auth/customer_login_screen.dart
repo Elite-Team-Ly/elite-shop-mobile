@@ -111,6 +111,7 @@ class CustomerLoginScreen extends StatelessWidget {
                       children: [
                         CustomTextField(
                           hintText: "رقم الهاتف",
+                          isPhoneNumber: true,
                           keyboardType: TextInputType.phone,
                           controller: cubit.phoneController,
                           validator: Validators.phone,
