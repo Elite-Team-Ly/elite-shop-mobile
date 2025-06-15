@@ -57,6 +57,7 @@ class AppColors {
     return isDarkMode ? darkModeColor : lightModeColor;
   }
 }
+
 class AppEndpoints {
   static const signIn = "auth/signin";
   static const signUp = "auth/signup";
@@ -68,11 +69,10 @@ class AppEndpoints {
   static const getBrands = "brand";
   static const getProducts = "product";
   static const getStores = "store";
-
 }
 
 class AppLink {
-  static const String server = "http://5feh.l.time4vps.cloud:8081/api/";
+  static const String server = "http://5feh.l.time4vps.cloud:8082/api/";
   static const String imageServer = "http://studio.eliteteam.com:5000/image/";
 }
 
@@ -85,6 +85,7 @@ class AppAssets {
   static const String logoApp2 = "assets/app/logo2.png";
   static const String logoWidget = "assets/app/logoWidget.png";
 
-  static const String customerLogin = "assets/app/loginBundle/customerLogin.png";
+  static const String customerLogin =
+      "assets/app/loginBundle/customerLogin.png";
   static const String sellerLogin = "assets/app/loginBundle/SellerLogin.png";
 }

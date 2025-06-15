@@ -1,3 +1,4 @@
+import 'package:elite_team_training_app/controllers/auth_controller/auth_cubit.dart';
 import 'package:elite_team_training_app/core/services/app_services.dart';
 import 'package:elite_team_training_app/core/services/local_storage_service.dart';
 import 'package:elite_team_training_app/data/auth/auth_service.dart';
@@ -11,4 +12,8 @@ void setupLocator() {
   locator.registerLazySingleton<AuthService>(() => AuthService(locator<ApiService>()));
 
   locator.registerLazySingleton<LocalStorageService>(() => LocalStorageService());
+    locator.registerLazySingleton(() => AuthCubit(
+    locator<AuthService>(),
+    locator<LocalStorageService>(),
+  ));
 }

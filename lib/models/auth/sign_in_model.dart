@@ -62,5 +62,14 @@ class User {
       approved: json['approved'],
     );
   }
+  Map<String, dynamic> toJson() {
+    return {
+      'id': id,
+      'name': name,
+      'phone': phone,
+      'roles': roles,
+      'approved': approved,
+    };
+  }
 }
 enum Role { buyer, seller}

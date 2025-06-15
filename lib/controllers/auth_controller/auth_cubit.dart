@@ -1,51 +1,74 @@
 // ignore_for_file: avoid_print
 
-import 'dart:convert';
 import 'package:elite_team_training_app/controllers/auth_controller/auth_states.dart';
+import 'package:elite_team_training_app/core/services/local_storage_service.dart';
+import 'package:elite_team_training_app/data/auth/auth_service.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-
 import '../../models/auth/sign_in_model.dart';
 
 class AuthCubit extends Cubit<AuthStates> {
-  AuthCubit() : super(AuthInitialState());
+  final AuthService authService; // Inject AuthService
+  final LocalStorageService localStorageService; // Inject LocalStorageService
+
+  User? _currentUser; // Keep track of the current user in memory
+
+  AuthCubit(this.authService, this.localStorageService)
+    : super(AuthInitialState());
 
   static AuthCubit get(context) => BlocProvider.of(context);
-  bool isSignedin = false;
-  User? userModel;
+  User? get currentUser => _currentUser;
 
-  void checkSign() async {
+    Future<void> checkAuthStatus() async {
+    emit(AuthLoadingState());
     try {
-      emit(AuthLoadingState());
+      final token = LocalStorageService.getToken();
+      final userDataMap = LocalStorageService.getUserData();
 
-      final SharedPreferences sharedPreferences =
-          await SharedPreferences.getInstance();
-      isSignedin = sharedPreferences.getBool("is_signed_in") ?? false;
-      if (isSignedin == true) {
-        User user = await getDataFromSharedPref();
-        print('Go To Home');
-        emit(AuthAuthenticatedState(user));
+      if (token != null && userDataMap != null) {
+        // We have a token and user data locally.
+        // Convert the stored map back to your User model.
+        _currentUser = User.fromJson(userDataMap);
+        emit(AuthSuccessState(_currentUser!));
       } else {
-        print('Go To Login');
-        emit(AuthUnauthenticatedState());
+        // No token or user data, user is not authenticated
+        emit(AuthFailState());
       }
     } catch (e) {
-      print('Error: $e');
-      emit(AuthErrorState(e.toString()));
+      print('AuthCubit Error checking auth status: $e');
+      emit(AuthErrorState("Failed to check authentication status."));
     }
   }
 
-  //get data from sharedPreferences, if the user is Authenticated "signed in".
-  Future<User> getDataFromSharedPref() async {
-    final SharedPreferences sharedPreferences =
-        await SharedPreferences.getInstance();
-    String data = sharedPreferences.getString("user") ?? '';
-    final user = User.fromJson(jsonDecode(data));
-    emit(AuthGetUserState(user));
-    return user;
+  // Method called when a user successfully signs in (from SignInCubit)
+  Future<void> onSuccessfulSignIn(User user, String token) async {
+    try {
+      _currentUser = user;
+      emit(AuthSuccessState(user));
+    } catch (e) {
+      print('AuthCubit Error onSuccessfulSignIn: $e');
+      emit(AuthErrorState('Failed to establish user session.'));
+    }
   }
 
-  void logout() {
-    emit(AuthUnauthenticatedState());
+ 
+  Future<void> onSuccessfulSignUp(User user, String token) async {
+    await onSuccessfulSignIn(user, token); // Reuse sign-in logic
+  }
+
+
+  // Logout logic
+  Future<void> logout() async {
+    emit(AuthLoadingState());
+    try {
+      await LocalStorageService.clearToken();
+      await LocalStorageService.clearUserData();
+      _currentUser = null;
+      emit(AuthFailState());
+    } catch (e) {
+      print('AuthCubit Error during logout: $e');
+      emit(AuthErrorState('Failed to log out. Please try again.'));
+    }
   }
 }
+
+
