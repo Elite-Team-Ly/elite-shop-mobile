@@ -28,7 +28,9 @@ dependencies:
   dartz: ^0.10.1
   cached_network_image: ^3.4.1
   get_it: ^8.0.3
-
+  flutter_localizations:
+    sdk: flutter
+  top_snackbar_flutter: ^3.3.0
 
 dev_dependencies:
   flutter_test:
@@ -46,6 +48,8 @@ flutter:
     - assets/app/
     - assets/app/onBoarding/
     - assets/app/loginBundle/
+    - assets/icons/
+    - assets/icons/social_media/
 
   fonts:
     - family: somar

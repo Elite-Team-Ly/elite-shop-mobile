@@ -3,6 +3,7 @@ import 'package:elite_team_training_app/core/services/locator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'core/config/routes.dart';
@@ -13,7 +14,6 @@ import 'core/utils/set_status_bar_color.dart';
 import 'routes.dart';
 
 void main() async {
-
   WidgetsFlutterBinding.ensureInitialized();
 
   WidgetsFlutterBinding.ensureInitialized();
@@ -49,7 +49,7 @@ void main() async {
   // }, (ifRight){
   //   print(ifRight);
   // });
- }
+}
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -61,7 +61,14 @@ class MyApp extends StatelessWidget {
       theme: baseTheme,
       title: 'Elite Shop',
       onGenerateRoute: RouteGenerator.generateRoute,
-      initialRoute: RouteNames.customerLogin,
+      initialRoute: RouteNames.signup,
+      locale: const Locale('ar', 'SA'),
+      supportedLocales: const [Locale('ar', 'SA')],
+      localizationsDelegates: const [
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
+      ],
       builder: (context, child) {
         setSystemUIStyle(context);
         return child!;

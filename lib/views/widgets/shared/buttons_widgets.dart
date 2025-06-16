@@ -13,6 +13,9 @@ class MainButton extends StatelessWidget {
   final String status;
   final BorderRadius? borderRadius;
   final EdgeInsets? margin;
+  final Color? color;
+  final Color? borderColor;
+  final double? borderWidth;
 
   const MainButton({
     super.key,
@@ -24,6 +27,9 @@ class MainButton extends StatelessWidget {
     this.height,
     this.borderRadius,
     this.margin,
+    this.color,
+    this.borderColor,
+    this.borderWidth,
   });
 
   @override
@@ -37,15 +43,20 @@ class MainButton extends StatelessWidget {
         height: (height ?? 40).h,
         child: RawMaterialButton(
           onPressed: isEnabled ? onPressed : null,
-          fillColor: AppStatusHandler.backgroundColor(
-            appStatus,
-            isEnabled: isEnabled,
-          ),
+          fillColor:
+              color ??
+              AppStatusHandler.backgroundColor(appStatus, isEnabled: isEnabled),
           splashColor: isEnabled ? AppColors.primaryA50 : Colors.transparent,
           highlightElevation: 0,
           shape: RoundedRectangleBorder(
             borderRadius: borderRadius ?? BorderRadius.circular(12),
+
+            side:
+                borderColor != null
+                    ? BorderSide(color: borderColor!, width: borderWidth ?? 0.5)
+                    : BorderSide.none,
           ),
+
           elevation: 0,
           disabledElevation: 0,
           child: DefaultTextStyle(
@@ -70,25 +81,31 @@ class MainIconButton extends StatelessWidget {
   final IconData icon;
   final double? width;
   final double? height;
+  final String status;
   final double iconSize;
   final bool isEnabled;
   final bool showBackgroundColor;
   final Color? backgroundColor;
+  final Color? iconColor;
 
   const MainIconButton({
     super.key,
     required this.icon,
     required this.onPressed,
     this.isEnabled = true,
+    this.status = 'normal',
     this.width,
     this.height,
     this.iconSize = 20,
     this.showBackgroundColor = true,
     this.backgroundColor,
+    this.iconColor,
   });
 
   @override
   Widget build(BuildContext context) {
+    final AppStatus appStatus = parseAppStatus(status);
+
     return SizedBox(
       width: (width ?? 48).w,
       height: (height ?? 48).h,
@@ -96,13 +113,13 @@ class MainIconButton extends StatelessWidget {
         onPressed: isEnabled ? onPressed : null,
         fillColor:
             showBackgroundColor
-                ? (backgroundColor ?? AppColors.lightColor)
+                ? (backgroundColor ?? AppStatusHandler.backgroundColor(appStatus, isEnabled: isEnabled))
                 : Colors.transparent,
         splashColor: isEnabled ? AppColors.primaryA50 : Colors.transparent,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
         elevation: 0,
         disabledElevation: 0,
-        child: Icon(icon, size: iconSize, color: AppColors.primaryColor),
+        child: Icon(icon, size: iconSize, color: iconColor ?? AppColors.primaryColor),
       ),
     );
   }

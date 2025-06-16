@@ -16,6 +16,14 @@ class OtpVerifiedState extends SignupStates {}
 
 class SignupChangePassVisibiltyState extends SignupStates {}
 
+class SignupChangePartState extends SignupStates {}
+
+class SignupAgreeTermsChangedState extends SignupStates {}
+
+class CityChangedState extends SignupStates {}
+
+class DistrictChangedState extends SignupStates {}
+
 class EmailVerifiedState extends SignupStates {}
 
 class SignupErrorState implements SignupStates {

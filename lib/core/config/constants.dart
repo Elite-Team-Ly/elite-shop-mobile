@@ -57,6 +57,7 @@ class AppColors {
     return isDarkMode ? darkModeColor : lightModeColor;
   }
 }
+
 class AppEndpoints {
   static const signIn = "auth/signin";
   static const signUp = "auth/signup";
@@ -68,7 +69,6 @@ class AppEndpoints {
   static const getBrands = "brand";
   static const getProducts = "product";
   static const getStores = "store";
-
 }
 
 class AppLink {
@@ -85,6 +85,17 @@ class AppAssets {
   static const String logoApp2 = "assets/app/logo2.png";
   static const String logoWidget = "assets/app/logoWidget.png";
 
-  static const String customerLogin = "assets/app/loginBundle/customerLogin.png";
+  static const String customerLogin =
+      "assets/app/loginBundle/customerLogin.png";
   static const String sellerLogin = "assets/app/loginBundle/SellerLogin.png";
+
+  // icons
+  static const String icons = "assets/icons";
+
+  // social media icons
+  static const String socialMediaIcons = "$icons/social_media"; // root folder for social media icons files
+
+  static const String facebook = "$socialMediaIcons/facebook.svg";
+  static const String whatsapp = "$socialMediaIcons/whatsapp.svg";
+  static const String instagram = "$socialMediaIcons/instagram.svg";
 }

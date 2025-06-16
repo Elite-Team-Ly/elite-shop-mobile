@@ -2,6 +2,7 @@ import 'package:elite_team_training_app/controllers/otp_controller/otp_cubit.dar
 import 'package:elite_team_training_app/controllers/reset_password_controller/reset_password_cubit.dart';
 import 'package:elite_team_training_app/core/services/locator.dart';
 import 'package:elite_team_training_app/core/utils/navigation_transitions.dart';
+import 'package:elite_team_training_app/views/screens/auth/new_auth/signup/sign_up_screen.dart';
 import 'package:elite_team_training_app/views/screens/auth/new_password_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -15,7 +16,6 @@ import 'views/screens/screens.dart';
 class RouteGenerator {
   static Route<dynamic> generateRoute(RouteSettings settings) {
     switch (settings.name) {
-
       case RouteNames.onboarding:
         return slideRoute(const OnboardingScreen());
 
@@ -27,7 +27,9 @@ class RouteGenerator {
           MultiBlocProvider(
             providers: [
               BlocProvider(create: (_) => SignupCubit(locator<AuthService>())),
-              BlocProvider(create: (context) => OtpCubit(locator<AuthService>())),
+              BlocProvider(
+                create: (context) => OtpCubit(locator<AuthService>()),
+              ),
             ],
             child: const SignUpScreen(),
           ),

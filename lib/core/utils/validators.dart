@@ -27,8 +27,7 @@ class Validators {
     return null;
   }
 
-    static String? confirmPassword(String? value, String passwordValue) {
-
+  static String? confirmPassword(String? value, String passwordValue) {
     if (value!.length < 6) {
       return 'كلمة المرور يجب أن تكون على الأقل 6 أحرف';
     }
@@ -48,7 +47,6 @@ class Validators {
     return null;
   }
 
-  // مثال لتاريخ الميلاد (يمكنك تعديله حسب الحاجة)
   static String? birthDate(String? value) {
     if (value == null || value.isEmpty) {
       return 'الرجاء إدخال تاريخ الميلاد';
@@ -59,5 +57,19 @@ class Validators {
     } catch (e) {
       return 'تاريخ الميلاد غير صالح';
     }
+  }
+
+  static String? city(String? value) {
+    if (value == null || value.trim().isEmpty) {
+      return 'الرجاء اختيار المدينة';
+    }
+    return null;
+  }
+
+  static String? district(String? value) {
+    if (value == null || value.trim().isEmpty) {
+      return 'الرجاء إدخال المنطقة';
+    }
+    return null;
   }
 }

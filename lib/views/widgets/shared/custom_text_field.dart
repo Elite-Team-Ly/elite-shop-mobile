@@ -4,7 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class CustomTextField extends StatefulWidget {
-  final String hintText;
+  final String? title;
+  final String? hintText;
   final IconData? icon;
   final VoidCallback? iconOnPressed;
   final TextEditingController? controller;
@@ -16,10 +17,14 @@ class CustomTextField extends StatefulWidget {
   final double? width;
   final double? height;
   final String? Function(String?)? validator;
+  final bool? readOnly;
+  final VoidCallback? onTap;
+  final Function(String)?  onChanged;
 
   const CustomTextField({
     super.key,
-    required this.hintText,
+    this.title,
+    this.hintText,
     this.icon,
     this.iconOnPressed,
     this.controller,
@@ -31,6 +36,8 @@ class CustomTextField extends StatefulWidget {
     this.validator,
     this.isPhoneNumber = false,
     this.textAlign = TextAlign.right,
+    this.readOnly,
+    this.onTap, this.onChanged,
   });
 
   @override
@@ -43,20 +50,32 @@ class _CustomTextFieldState extends State<CustomTextField> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.only(bottom: 16.w),
+      padding: EdgeInsets.only(bottom: 16.h),
       child: Directionality(
         textDirection: TextDirection.rtl,
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            Padding(
+              padding: EdgeInsets.only(right: 8.w, bottom: 6.h),
+              child: Text(
+                widget.title ?? '',
+                style: TextStyle(
+                  fontSize: 20.sp,
+                  color: AppColors.darkA10,
+                ),
+              ),
+            ),
+
             Container(
               width: widget.width?.w,
               height: widget.height?.h,
-              margin: EdgeInsets.symmetric(horizontal: 16.w, vertical: 4.h),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(12),
               ),
               child: TextFormField(
+                readOnly: widget.readOnly ?? false,
+                onTap: widget.onTap,
                 controller: widget.controller,
                 keyboardType: widget.keyboardType,
                 obscureText: widget.obscureText,
@@ -64,11 +83,10 @@ class _CustomTextFieldState extends State<CustomTextField> {
                 maxLength: widget.isPhoneNumber == true ? 10 : null,
                 cursorColor: AppColors.primaryColor,
                 style: TextStyle(color: AppColors.darkA30, fontSize: 16.sp),
+                onChanged: widget.onChanged,
                 validator: (value) {
                   final result = widget.validator?.call(value);
-                  setState(() {
-                    errorText = result;
-                  });
+                  setState(() => errorText = result);
                   return result;
                 },
                 decoration: InputDecoration(
@@ -80,7 +98,10 @@ class _CustomTextFieldState extends State<CustomTextField> {
                   hintStyle: TextStyle(color: AppColors.lightA40),
                   enabledBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(12),
-                    borderSide: BorderSide(color: Colors.transparent, width: 0),
+                    borderSide: BorderSide(
+                      color: AppColors.darkA50,
+                      width: 0.5,
+                    ),
                   ),
                   focusedBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(12),
@@ -100,18 +121,17 @@ class _CustomTextFieldState extends State<CustomTextField> {
                       width: 2,
                     ),
                   ),
-
                   suffixIcon:
-                      widget.showIcon && widget.icon != null
-                          ? Padding(
-                            padding:  EdgeInsets.all(5.w),
-                            child: MainIconButton(
-                              icon: widget.icon!,
-                              onPressed: widget.iconOnPressed,
-                              showBackgroundColor: false,
-                            ),
-                          )
-                          : null,
+                  widget.showIcon && widget.icon != null
+                      ? Padding(
+                    padding: EdgeInsets.all(5.w),
+                    child: MainIconButton(
+                      icon: widget.icon!,
+                      onPressed: widget.iconOnPressed,
+                      showBackgroundColor: false,
+                    ),
+                  )
+                      : null,
                   errorStyle: const TextStyle(
                     height: 0,
                     fontSize: 0,
@@ -120,6 +140,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
                 ),
               ),
             ),
+
             if (errorText != null)
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: 32.w, vertical: 4.h),

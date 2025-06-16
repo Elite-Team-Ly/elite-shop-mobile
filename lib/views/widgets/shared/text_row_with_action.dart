@@ -4,7 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 class RowWithAction extends StatelessWidget {
   final Widget normalWidget;
   final Widget actionWidget;
-  final VoidCallback onActionTap;
+  final VoidCallback? onActionTap;
   final MainAxisAlignment alignment;
   final bool rtl;
 
@@ -12,7 +12,7 @@ class RowWithAction extends StatelessWidget {
     super.key,
     required this.normalWidget,
     required this.actionWidget,
-    required this.onActionTap,
+    this.onActionTap,
     this.alignment = MainAxisAlignment.center,
     this.rtl = true,
   });
@@ -21,8 +21,8 @@ class RowWithAction extends StatelessWidget {
   Widget build(BuildContext context) {
     final children = [
       normalWidget,
-      SizedBox(width: 4.w),
-      GestureDetector(onTap: onActionTap, child: actionWidget),
+      SizedBox(width: 10.w),
+      GestureDetector(onTap: onActionTap ?? () {}, child: actionWidget),
     ];
 
     return Padding(

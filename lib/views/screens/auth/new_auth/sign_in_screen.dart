@@ -1,8 +1,7 @@
+import 'package:elite_team_training_app/core/config/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-
 import '../../../../core/config/routes.dart';
-import '../../../widgets/app/app_logo_widget.dart';
 import '../../../widgets/widgets.dart';
 
 class SignInScreen extends StatelessWidget {
@@ -13,45 +12,69 @@ class SignInScreen extends StatelessWidget {
     return Scaffold(
       body: SafeArea(
         child: Padding(
-          padding: EdgeInsets.symmetric(vertical: 100.h, horizontal: 75.w),
+          padding: EdgeInsets.only(top: 100.h,bottom: 40.h, right: 75.w, left: 75.w),
           child: Center(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                AppLogo(
-                  width: 210.w,
-                  height: 216.h,
-                ),
-                AppNameText(fontSize: 48,),
+                AppLogo(width: 200.w, height: 200.h),
+                AppNameText(fontSize: 38),
                 SizedBox(height: 32.h),
                 MainButton(
                   onPressed: () {
                     Navigator.pushNamed(context, RouteNames.customerLogin);
                   },
                   borderRadius: BorderRadius.circular(18),
-                  margin: EdgeInsets.symmetric(vertical: 10.h,horizontal: 0.w),
+                  margin: EdgeInsets.symmetric(vertical: 10.h, horizontal: 0.w),
                   width: 280.w,
                   height: 55.h,
-                  child: CustomText("تسجيل دخول كمشتري",fontSize: 16,fontWeight: FontWeight.bold,),
+                  child: CustomText(
+                    "تسجيل دخول كمشتري",
+                    fontSize: 16,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
                 MainButton(
                   onPressed: () {
-                    Navigator.pushNamed(context, RouteNames.customerLogin);
+                    Navigator.pushNamed(context, RouteNames.sellerLogin);
                   },
                   borderRadius: BorderRadius.circular(18),
-                  margin: EdgeInsets.symmetric(vertical: 10.h,horizontal: 0.w),
+                  margin: EdgeInsets.symmetric(vertical: 10.h, horizontal: 0.w),
                   width: 280.w,
                   height: 55.h,
-                  child: CustomText("تسجيل دخول كبائع",fontSize: 16,fontWeight: FontWeight.bold,),
+                  color: AppColors.lightColor,
+                  borderColor: AppColors.darkA50,
+                  child: CustomText(
+                    "تسجيل دخول كبائع",
+                    fontSize: 16,
+                    fontWeight: FontWeight.bold,
+                    color: AppColors.darkColor,
+                  ),
                 ),
-                Text("ليس لديك حساب ؟", style: TextStyle(fontSize: 16.sp)),
-                MainButton(
-                  width: 130.w,
-                  onPressed: () {
-                    Navigator.pushNamed(context, RouteNames.signup);
-                  },
-                  child: Text("الأشتراك", style: TextStyle(fontSize: 12.sp)),
+                RowWithAction(
+                  normalWidget: CustomText(
+                    "ليس لديك حساب",
+                    fontSize: 20.sp,
+                    color: AppColors.darkA30,
+                  ),
+                  actionWidget: CustomText(
+                    "انشاء حساب",
+                    fontSize: 20.sp,
+                    fontWeight: FontWeight.bold,
+                    color: AppColors.primaryColor,
+                  ),
+                  onActionTap: () {},
+                ),
+                Spacer(),
+                CenteredSvgIconRow(
+                  svgPaths: [
+                    AppAssets.facebook,
+                    AppAssets.whatsapp,
+                    AppAssets.instagram,
+                  ],
+                  iconSize: 28.sp,
+                  onTap: (index) {},
                 ),
               ],
             ),
