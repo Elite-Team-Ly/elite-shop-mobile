@@ -5,33 +5,16 @@ import '../../core/services/app_services.dart';
 import '../../core/services/local_storage_service.dart';
 import '../../models/brands/brand_model.dart';
 
-class BrandService {
+ class BrandService {
   final ApiService apiService;
   final baseurl = AppLink.server;
 
   BrandService(this.apiService);
 
-  Future<Either<Failure, BrandModel>> getAllBrands({
-    int page = 0,
-    int limit = 0,
-  }) async {
-    final response = await apiService.getRequest(
-      '$baseurl${AppEndpoints.getBrands}?page=$page&limit=$limit',
-    );
-    if (response.statusCode == 200) {
-      final data = response.data;
-      BrandModel brands;
-      brands = BrandModel.fromJson(data);
-
-      return Right(brands);
-    } else {
-      return Left(Failure.fromResponse(response));
-    }
-  }
 
   Future<Either<Failure, BrandModel>> getAllBrandById(String brandId) async {
     final response = await apiService.getRequest(
-      '$baseurl${AppEndpoints.getBrands}/$brandId',
+      '${baseurl}${AppEndpoints.getBrands}/$brandId',
       headers: {'Authorization': "Bearer ${LocalStorageService.getToken()}"},
     );
     if (response.statusCode == 200) {
@@ -44,11 +27,28 @@ class BrandService {
     }
   }
 
-  Future<Either<Failure, BrandModel>> searchBrands(
-    String keyword, {
-    int page = 0,
-    int limit = 0,
-  }) async {
+
+  Future<Either<Failure, BrandModel>> getAllBrands({int page = 0, int limit = 0})
+  async {
+    final response = await apiService.getRequest(
+      '${baseurl}buyer/${AppEndpoints.getBrands}?page=$page&limit=$limit',
+    );
+    if (response.statusCode == 200) {
+      final data = response.data;
+      BrandModel brands;
+      brands = BrandModel.fromJson(data);
+
+      return Right(brands);
+    } else {
+      return Left(Failure.fromResponse(response));
+    }
+
+  }
+
+
+
+
+  Future<Either<Failure, BrandModel>> searchBrands(String keyword, {int page = 0, int limit = 0}) async {
     final response = await apiService.getRequest(
       '$baseurl${AppEndpoints.getBrands}?page=$page&limit=$limit&name=$keyword',
     );
@@ -62,4 +62,5 @@ class BrandService {
       return Left(Failure.fromResponse(response));
     }
   }
+
 }

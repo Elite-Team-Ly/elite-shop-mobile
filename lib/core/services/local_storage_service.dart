@@ -1,6 +1,8 @@
 import 'package:shared_preferences/shared_preferences.dart';
 import 'dart:convert';
 
+import '../../models/address/city.dart';
+
 class LocalStorageService {
   static SharedPreferences? _prefs;
 
@@ -48,5 +50,25 @@ class LocalStorageService {
 
   static Future<void> clearAll() async {
     await _prefs?.clear();
+  }
+
+  static Future<void> saveCitiesToLocal(List<City> cities) async {
+
+    final List<String> citiesJsonList =
+    cities.map((city) => json.encode(city.toJson())).toList();
+      await _prefs?.setStringList('cities', citiesJsonList);
+  }
+
+  static Future<List<City>> getCitiesFromLocal() async {
+
+    final List<String>? citiesJsonList =  await _prefs?.getStringList('cities');
+
+    if (citiesJsonList != null) {
+      return citiesJsonList
+          .map((cityJson) => City.fromJson(json.decode(cityJson)))
+          .toList();
+    } else {
+      return [];
+    }
   }
 }

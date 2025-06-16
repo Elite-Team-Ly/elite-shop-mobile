@@ -1,25 +1,23 @@
-import 'package:elite_team_training_app/bloc_obs.dart';
-import 'package:elite_team_training_app/controllers/auth_controller/auth_cubit.dart';
-import 'package:elite_team_training_app/core/services/locator.dart';
+import 'package:elite_team_training_app/core/enum/enum.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'core/config/routes.dart';
 import 'core/config/theme.dart';
+import 'core/services/app_services.dart';
 import 'core/services/local_storage_service.dart';
 import 'core/utils/app_notification.dart';
 import 'core/utils/set_status_bar_color.dart';
+import 'data/address/adress_service.dart';
+import 'data/categories/buyer_service.dart';
+import 'data/categories/seller_service.dart';
 import 'routes.dart';
 
 void main() async {
 
   WidgetsFlutterBinding.ensureInitialized();
-  Bloc.observer = MyBlocObserver();
 
-  await LocalStorageService.init();
-  setupLocator();
   await initializeDateFormatting('ar_SA', null);
   await NotificationUtils.requestNotificationPermission();
   await NotificationUtils.initialize();
@@ -41,13 +39,16 @@ void main() async {
   );
   await LocalStorageService.init();
 
-  // final result = await AuthService(ApiService()).signIn(SignInModel(phoneNumber: '0912030402', password: 'password'));
-  //
-  // result.fold((ifLeft){
-  //   print(ifLeft.message);
-  // }, (ifRight){
-  //   print(ifRight);
-  // });
+  final result = await AddressService(ApiService()).getAllCities();
+
+  result.fold((ifLeft){
+    print(ifLeft.message);
+  }, (ifRight) async {
+    await LocalStorageService.saveCitiesToLocal(ifRight.data);
+
+  });
+ // final ci =await LocalStorageService.getCitiesFromLocal();
+
  }
 
 class MyApp extends StatelessWidget {
@@ -55,19 +56,16 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider<AuthCubit>(
-       create: (context) => locator<AuthCubit>()..checkAuthStatus(),
-      child: MaterialApp(
-        debugShowCheckedModeBanner: false,
-        theme: baseTheme,
-        title: 'Elite Shop',
-        onGenerateRoute: RouteGenerator.generateRoute,
-        initialRoute: RouteNames.splash,
-        builder: (context, child) {
-          setSystemUIStyle(context);
-          return child!;
-        },
-      ),
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      theme: baseTheme,
+      title: 'Elite Shop',
+      onGenerateRoute: RouteGenerator.generateRoute,
+      initialRoute: RouteNames.signin,
+      builder: (context, child) {
+        setSystemUIStyle(context);
+        return child!;
+      },
     );
   }
 }
