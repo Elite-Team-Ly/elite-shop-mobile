@@ -38,16 +38,17 @@ void main() async {
     ),
   );
   await LocalStorageService.init();
-
-  final result = await AddressService(ApiService()).getAllCities();
-
-  result.fold((ifLeft){
-    print(ifLeft.message);
-  }, (ifRight) async {
-    await LocalStorageService.saveCitiesToLocal(ifRight.data);
-
-  });
- // final ci =await LocalStorageService.getCitiesFromLocal();
+ //
+ //  final result = await AddressService(ApiService()).getAllDistricts();
+ //
+ //  result.fold((ifLeft){
+ //    print(ifLeft.message);
+ //  }, (ifRight) async {
+ //    await LocalStorageService.saveDistrictToLocal(ifRight.data);
+ //
+ //  });
+ // final ci =await LocalStorageService.getDistrictFromLocal();
+ // print(ci[0].name);
 
  }
 

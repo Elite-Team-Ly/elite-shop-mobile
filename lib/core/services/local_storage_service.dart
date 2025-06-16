@@ -1,3 +1,5 @@
+
+import 'package:elite_team_training_app/models/address/district.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'dart:convert';
 
@@ -66,6 +68,26 @@ class LocalStorageService {
     if (citiesJsonList != null) {
       return citiesJsonList
           .map((cityJson) => City.fromJson(json.decode(cityJson)))
+          .toList();
+    } else {
+      return [];
+    }
+  }
+
+  static Future<void> saveDistrictToLocal(List<District> cities) async {
+
+    final List<String> districtdsJsonList =
+    cities.map((district) => json.encode(district.toJson())).toList();
+    await _prefs?.setStringList('District', districtdsJsonList);
+  }
+
+  static Future<List<District>> getDistrictFromLocal() async {
+
+    final List<String>? districtdsJsonList =  _prefs?.getStringList('District');
+
+    if (districtdsJsonList != null) {
+      return districtdsJsonList
+          .map((cityJson) => District.fromJson(json.decode(cityJson)))
           .toList();
     } else {
       return [];

@@ -23,7 +23,7 @@ class DistrictModel{
 class District {
   final String id;
   final String name;
-  final City city;
+  final DistrictCity city;
   final String status;
 
   District({
@@ -37,25 +37,39 @@ class District {
     return District(
       id: json['_id'] ?? '',
       name: json['name'] ?? '',
-      city: City.fromJson(json['city'] ?? {}),
+      city: DistrictCity.fromJson(json['city'] ?? {}),
       status: json['status'] ?? '',
     );
   }
+  Map<String, dynamic> toJson() {
+    return {
+      '_id': id,
+      'name': name,
+'city':city.toJson(),
+      'status': status,
+    };
+  }
 }
 
-class City {
+class DistrictCity {
   final String id;
   final String name;
 
-  City({
+  DistrictCity({
     required this.id,
     required this.name,
   });
 
-  factory City.fromJson(Map<String, dynamic> json) {
-    return City(
+  factory DistrictCity.fromJson(Map<String, dynamic> json) {
+    return DistrictCity(
       id: json['_id'] ?? '',
       name: json['name'] ?? '',
     );
+  }
+  Map<String, dynamic> toJson() {
+    return {
+      '_id':id,
+      'name':name
+    };
   }
 }
