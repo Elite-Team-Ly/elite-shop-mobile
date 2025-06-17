@@ -11,16 +11,16 @@ class AuthInitialState extends AuthStates {}
 
 class AuthLoadingState extends AuthStates {}
 
-class AuthAuthenticatedState extends AuthStates {
+class AuthSuccessState extends AuthStates {
   final User user;
 
-  AuthAuthenticatedState(this.user);
+  AuthSuccessState(this.user);
 
   @override
   List<Object?> get props => [user];
 }
 
-class AuthUnauthenticatedState extends AuthStates {}
+class AuthFailState extends AuthStates {}
 
 class AuthGetUserState extends AuthStates {
   final User user;

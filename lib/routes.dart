@@ -1,9 +1,11 @@
+import 'package:elite_team_training_app/controllers/auth_controller/auth_cubit.dart';
 import 'package:elite_team_training_app/controllers/otp_controller/otp_cubit.dart';
 import 'package:elite_team_training_app/controllers/reset_password_controller/reset_password_cubit.dart';
 import 'package:elite_team_training_app/core/services/locator.dart';
 import 'package:elite_team_training_app/core/utils/navigation_transitions.dart';
 import 'package:elite_team_training_app/views/screens/auth/new_auth/signup/sign_up_screen.dart';
 import 'package:elite_team_training_app/views/screens/auth/new_password_screen.dart';
+import 'package:elite_team_training_app/views/screens/splash_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'controllers/sign_in_controller.dart/sign_in_cubit.dart';
@@ -16,6 +18,10 @@ import 'views/screens/screens.dart';
 class RouteGenerator {
   static Route<dynamic> generateRoute(RouteSettings settings) {
     switch (settings.name) {
+
+      case RouteNames.splash:
+        return slideRoute(const SplashScreen());
+
       case RouteNames.onboarding:
         return slideRoute(const OnboardingScreen());
 
@@ -106,7 +112,9 @@ class RouteGenerator {
       case RouteNames.customerLogin:
         return slideRoute(
           BlocProvider(
-            create: (_) => SignInCubit(locator<AuthService>()),
+            create:
+                (_) =>
+                    SignInCubit(locator<AuthService>(), locator<AuthCubit>()),
             child: const CustomerLoginScreen(),
           ),
         );
@@ -114,7 +122,9 @@ class RouteGenerator {
       case RouteNames.sellerLogin:
         return slideRoute(
           BlocProvider(
-            create: (_) => SignInCubit(locator<AuthService>()),
+            create:
+                (_) =>
+                    SignInCubit(locator<AuthService>(), locator<AuthCubit>()),
             child: const SellerLoginScreen(),
           ),
         );

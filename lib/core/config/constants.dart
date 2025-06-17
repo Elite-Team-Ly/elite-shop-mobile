@@ -69,6 +69,9 @@ class AppEndpoints {
   static const getBrands = "brand";
   static const getProducts = "product";
   static const getStores = "store";
+  static const getCities = "allusers/city";
+  static const getDistricts = "allusers/district";
+
 }
 
 class AppLink {

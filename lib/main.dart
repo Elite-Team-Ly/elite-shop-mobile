@@ -1,26 +1,22 @@
-import 'package:elite_team_training_app/bloc_obs.dart';
-import 'package:elite_team_training_app/core/services/locator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/date_symbol_data_local.dart';
+import 'controllers/auth_controller/auth_cubit.dart';
 import 'core/config/routes.dart';
 import 'core/config/theme.dart';
 import 'core/services/local_storage_service.dart';
+import 'core/services/locator.dart';
 import 'core/utils/app_notification.dart';
 import 'core/utils/set_status_bar_color.dart';
 import 'routes.dart';
+import 'bloc_obs.dart';
 
 void main() async {
-  WidgetsFlutterBinding.ensureInitialized();
 
   WidgetsFlutterBinding.ensureInitialized();
   Bloc.observer = MyBlocObserver();
-
-  await LocalStorageService.init();
-  setupLocator();
   await initializeDateFormatting('ar_SA', null);
   await NotificationUtils.requestNotificationPermission();
   await NotificationUtils.initialize();
@@ -29,6 +25,8 @@ void main() async {
     DeviceOrientation.portraitUp,
     DeviceOrientation.portraitDown,
   ]);
+
+  setupLocator();
 
   runApp(
     ScreenUtilInit(
@@ -41,14 +39,17 @@ void main() async {
     ),
   );
   await LocalStorageService.init();
-
-  // final result = await AuthService(ApiService()).signIn(SignInModel(phoneNumber: '0912030402', password: 'password'));
   //
-  // result.fold((ifLeft){
-  //   print(ifLeft.message);
-  // }, (ifRight){
-  //   print(ifRight);
-  // });
+  //  final result = await AddressService(ApiService()).getAllDistricts();
+  //
+  //  result.fold((ifLeft){
+  //    print(ifLeft.message);
+  //  }, (ifRight) async {
+  //    await LocalStorageService.saveDistrictToLocal(ifRight.data);
+  //
+  //  });
+  // final ci =await LocalStorageService.getDistrictFromLocal();
+  // print(ci[0].name);
 }
 
 class MyApp extends StatelessWidget {
@@ -56,23 +57,19 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      theme: baseTheme,
-      title: 'Elite Shop',
-      onGenerateRoute: RouteGenerator.generateRoute,
-      initialRoute: RouteNames.signup,
-      locale: const Locale('ar', 'SA'),
-      supportedLocales: const [Locale('ar', 'SA')],
-      localizationsDelegates: const [
-        GlobalMaterialLocalizations.delegate,
-        GlobalWidgetsLocalizations.delegate,
-        GlobalCupertinoLocalizations.delegate,
-      ],
-      builder: (context, child) {
-        setSystemUIStyle(context);
-        return child!;
-      },
+    return BlocProvider<AuthCubit>(
+      create: (context) => locator<AuthCubit>()..checkAuthStatus(),
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        theme: baseTheme,
+        title: 'Elite Shop',
+        onGenerateRoute: RouteGenerator.generateRoute,
+        initialRoute: RouteNames.splash,
+        builder: (context, child) {
+          setSystemUIStyle(context);
+          return child!;
+        },
+      ),
     );
   }
 }

@@ -1,4 +1,3 @@
-
 import '../pagination/pagination.dart';
 
 class ProductModel {
@@ -18,14 +17,15 @@ class ProductModel {
     return ProductModel(
       status: json['status'] ?? '',
       data: List<Product>.from(
-          (json['data'] ?? []).map((item) => Category.fromJson(item))),
+        (json['data'] ?? []).map((item) => Category.fromJson(item)),
+      ),
       pagination: Pagination.fromJson(json['pagination'] ?? {}),
       message: json['message'] ?? '',
     );
   }
 }
 
-  class Product {
+class Product {
   final String id;
   final String name;
   final List<String> images;
@@ -36,6 +36,7 @@ class ProductModel {
   final Store store;
   final Category category;
   final Category subCategory;
+  final Brand brand;
   final double? rating;
   final int visitCount;
   final int cartAddedCount;
@@ -55,6 +56,7 @@ class ProductModel {
     required this.store,
     required this.category,
     required this.subCategory,
+    required this.brand,
     this.rating,
     required this.visitCount,
     required this.cartAddedCount,
@@ -66,7 +68,7 @@ class ProductModel {
 
   factory Product.fromJson(Map<String, dynamic> json) {
     return Product(
-      id: json['_id'],
+      id: json['id'],
       name: json['name'],
       images: List<String>.from(json['images']),
       description: json['description'],
@@ -76,7 +78,9 @@ class ProductModel {
       store: Store.fromJson(json['store']),
       category: Category.fromJson(json['category']),
       subCategory: Category.fromJson(json['subCategory']),
-      rating: json['rating'] != null ? (json['rating'] as num).toDouble() : null,
+      brand: Brand.fromJson(json),
+      rating:
+          json['rating'] != null ? (json['rating'] as num).toDouble() : null,
       visitCount: json['visitCount'],
       cartAddedCount: json['cartAddedCount'],
       quantityAvailable: json['quantityAvailable'],
@@ -94,10 +98,7 @@ class Store {
   Store({required this.id, required this.name});
 
   factory Store.fromJson(Map<String, dynamic> json) {
-    return Store(
-      id: json['_id'],
-      name: json['name'],
-    );
+    return Store(id: json['id'], name: json['name']);
   }
 }
 
@@ -108,9 +109,17 @@ class Category {
   Category({required this.id, required this.name});
 
   factory Category.fromJson(Map<String, dynamic> json) {
-    return Category(
-      id: json['_id'],
-      name: json['name'],
-    );
+    return Category(id: json['id'], name: json['name']);
+  }
+}
+
+class Brand {
+  final String id;
+  final String name;
+
+  Brand({required this.id, required this.name});
+
+  factory Brand.fromJson(Map<String, dynamic> json) {
+    return Brand(id: json['_id'], name: json['name']);
   }
 }
