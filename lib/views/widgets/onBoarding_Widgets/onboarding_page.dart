@@ -19,7 +19,7 @@ class OnboardingPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.symmetric(vertical: 50.h, horizontal: 20.w),
+      padding: EdgeInsets.symmetric(vertical:120.h, horizontal: 20.w),
       child: Column(
         children: [
           CustomImageWidget(imagePath: image,width: 380.w,height: 253.h,fit: BoxFit.contain,),

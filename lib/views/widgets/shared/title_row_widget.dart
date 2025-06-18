@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class TitleRowWidget extends StatelessWidget {
-  final Widget rightWidget;
-  final Widget leftWidget;
+  final Widget? rightWidget;
+  final Widget? leftWidget;
   final EdgeInsetsGeometry? padding;
 
   const TitleRowWidget({
     super.key,
-    required this.rightWidget,
-    required this.leftWidget,
+    this.rightWidget,
+    this.leftWidget,
     this.padding,
   });
 
@@ -20,9 +20,11 @@ class TitleRowWidget extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Align(alignment: Alignment.centerLeft, child: leftWidget),
-          Align(alignment: Alignment.centerRight, child: rightWidget),
-
+          if (rightWidget != null)
+            Align(alignment: Alignment.centerRight, child: rightWidget!),
+          if (leftWidget != null)
+            Align(alignment: Alignment.centerLeft, child: leftWidget!),
+          if (rightWidget == null && leftWidget == null) SizedBox.shrink(),
         ],
       ),
     );

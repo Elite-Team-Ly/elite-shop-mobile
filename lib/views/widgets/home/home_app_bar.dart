@@ -38,21 +38,23 @@ class CustomHeaderWidget extends StatelessWidget {
                     ? MainAxisAlignment.spaceBetween
                     : MainAxisAlignment.end,
             children: [
+              _locationBox(),
               if (showIcons)
                 Row(
                   children: [
                     MainIconButton(
                       icon: Icons.favorite_border,
+                      iconColor: AppColors.lightColor,
                       onPressed: onFavoriteTap,
                     ),
                     SizedBox(width: 10.w),
                     MainIconButton(
                       icon: Icons.notifications_none,
+                      iconColor: AppColors.lightColor,
                       onPressed: onNotificationTap,
                     ),
                   ],
                 ),
-              _locationBox(),
             ],
           ),
           if (showSearch) ...[

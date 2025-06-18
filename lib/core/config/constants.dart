@@ -87,6 +87,7 @@ class AppAssets {
   static const String logoApp = "assets/app/logo.png";
   static const String logoApp2 = "assets/app/logo2.png";
   static const String logoWidget = "assets/app/logoWidget.png";
+  static const String pattern = "assets/app/elite_shop_pattern.png";
 
   static const String customerLogin =
       "assets/app/loginBundle/customerLogin.png";

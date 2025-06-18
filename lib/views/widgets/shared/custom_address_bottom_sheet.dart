@@ -118,7 +118,6 @@ class CustomDropdownField extends StatelessWidget {
     BuildContext context,
     FormFieldState<String> formState,
   ) async {
-    // تصفية العناصر لإزالة العناصر غير النشطة
     List<Map<String, dynamic>> activeItems =
         items.where((item) {
           return item['status'] != 'inactive';
@@ -199,8 +198,6 @@ class CustomDropdownField extends StatelessWidget {
                     ),
 
                     Divider(height: 1, thickness: 1, color: Colors.grey[200]),
-
-                    // Items List
                     Expanded(
                       child:
                           filteredItems.isEmpty

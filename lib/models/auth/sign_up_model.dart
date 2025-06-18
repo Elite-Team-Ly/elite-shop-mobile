@@ -1,5 +1,3 @@
-import 'package:elite_team_training_app/models/auth/sign_in_model.dart';
-
 class SignUpModel {
   final String name;
   final String phone;

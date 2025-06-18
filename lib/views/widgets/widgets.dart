@@ -1,10 +1,10 @@
 export 'shared/buttons_widgets.dart';
 export 'app/app_logo_widget.dart';
-export 'app/app_naem_widget.dart';
+export 'app/app_name_widget.dart';
 export 'shared/multi_content_box.dart';
 export 'shared/custom_text_field.dart';
 export 'shared/two_option_selector.dart';
-export 'shared/birth_date_picker.dart';
+export 'shared/custom_birth_date_picker.dart';
 export 'shared/text_row_with_action.dart';
 export 'shared/custom_text.dart';
 export 'shared/loading_indicator.dart';

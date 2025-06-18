@@ -32,7 +32,7 @@ class Category {
   final String name;
   final List<String> images;
   final String icon;
-  final bool isActive;
+  // final bool isActive;
   final int productCount;
   final List<dynamic> subCategories;
 
@@ -41,7 +41,7 @@ class Category {
     required this.name,
     required this.images,
     required this.icon,
-    required this.isActive,
+    // required this.isActive,
     required this.productCount,
     required this.subCategories,
   });
@@ -52,7 +52,7 @@ class Category {
       name: json['name'] ?? '',
       images: List<String>.from(json['images'] ?? []),
       icon: json['icon'] ?? '',
-      isActive: json['isActive'] ?? false,
+      // isActive: json['isActive'] ?? false,
       productCount: json['productCount'] ?? 0,
       subCategories: List<dynamic>.from(json['subCategories'] ?? []),
     );
@@ -63,7 +63,7 @@ class Category {
     'name': name,
     'images': images,
     'icon': icon,
-    'isActive': isActive,
+    // 'isActive': isActive,
     'productCount': productCount,
     'subCategories': subCategories,
   };

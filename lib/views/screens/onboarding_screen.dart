@@ -52,50 +52,54 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
       body: SafeArea(
         child: Padding(
           padding: EdgeInsets.symmetric(vertical: 20.w),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          child: Stack(
             children: [
-              Align(
-                alignment: Alignment.topRight,
-                child:
-                    _currentPage < onboardingData.length - 1
-                        ? TextButton(
-                          onPressed: _skipOnboarding,
-                          child: CustomText(
-                            "تخطي",
-                            color: AppColors.primaryColor,
-                          ), 
-                        )
-                        : const SizedBox.shrink(),
+              Column(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Expanded(
+                    child: PageView.builder(
+                      controller: _controller,
+                      itemCount: onboardingData.length,
+                      onPageChanged: (index) => setState(() => _currentPage = index),
+                      itemBuilder: (_, index) {
+                        final item = onboardingData[index];
+                        return OnboardingPage(
+                          image: item.image,
+                          title: item.title,
+                          description: item.description,
+                        );
+                      },
+                    ),
+                  ),
+                  OnboardingDots(
+                    currentPage: _currentPage,
+                    length: onboardingData.length,
+                  ),
+                  StatusWidgetHandler(
+                    statusString: "success",
+                    successWidget: MainButton(
+                      onPressed: _nextPage,
+                      isEnabled: true,
+                      child: CustomText("التالي", color: AppColors.lightColor),
+                    ),
+                  ),
+                ],
               ),
-              Expanded(
-                child: PageView.builder(
-                  controller: _controller,
-                  itemCount: onboardingData.length,
-                  onPageChanged:
-                      (index) => setState(() => _currentPage = index),
-                  itemBuilder: (_, index) {
-                    final item = onboardingData[index];
-                    return OnboardingPage(
-                      image: item.image,
-                      title: item.title,
-                      description: item.description,
-                    );
-                  },
+              if (_currentPage < onboardingData.length - 1)
+                Positioned(
+                  top: 8,
+                  left: 8,
+                  child: MainButton(
+                    width: 70.w,
+                    borderRadius: BorderRadius.circular(30),
+                    onPressed: _skipOnboarding,
+                    child: CustomText(
+                      'تخطي',
+                      color: AppColors.lightColor,
+                    ),
+                  ),
                 ),
-              ),
-              OnboardingDots(
-                currentPage: _currentPage,
-                length: onboardingData.length,
-              ),
-              StatusWidgetHandler(
-                statusString: "success",
-                successWidget: MainButton(
-                  onPressed: _nextPage,
-                  isEnabled: true,
-                  child: CustomText("التالي", color: AppColors.lightColor),
-                ),
-              ),
             ],
           ),
         ),

@@ -1,9 +1,11 @@
 import 'package:elite_team_training_app/core/config/constants.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 import '../../../../../controllers/sign_up_controller/sign_up_cubit.dart';
+import '../../../../../controllers/sign_up_controller/sign_up_states.dart';
 import '../../../../../core/utils/validators.dart';
-import '../../../../widgets/widgets.dart';
+import '../../../widgets/widgets.dart';
 
 class PartOneWidget extends StatelessWidget {
   final GlobalKey<FormState> formKey;
@@ -13,12 +15,11 @@ class PartOneWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final cubit = SignupCubit.get(context);
-    return Form(
-      key: formKey,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          MultiContentBoxWidget(
+    return Center(
+      child: Form(
+        key: formKey,
+        child: Center(
+          child: MultiContentBoxWidget(
             width: double.infinity,
             children: [
               CustomTextField(
@@ -78,7 +79,7 @@ class PartOneWidget extends StatelessWidget {
               ),
             ],
           ),
-        ],
+        ),
       ),
     );
   }
@@ -92,76 +93,61 @@ class PartTwoWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final cubit = SignupCubit.get(context);
+
     return Form(
       key: formKey,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          MultiContentBoxWidget(
-            width: double.infinity,
-            children: [
-              TwoOptionSelector(
-                label: 'الجنس',
-                firstOption: 'ذكر',
-                secondOption: 'أنثى',
-                firstValue: 'male',
-                secondValue: 'female',
-                selectedOptionNotifier: cubit.genderNotifier,
-                onChanged: (val) {
-                  cubit.genderController.text = val;
-                },
-              ),
-              BirthDatePicker(
-                label: 'تاريخ الميلاد',
-                onDateSelected: (DateTime selectedDate) {
-                  cubit.birthDateController.text = DateFormat(
-                    'yyyy-MM-dd',
-                  ).format(selectedDate);
-                },
-              ),
-              CustomDropdownField(
-                title: 'المدينة',
-                hintText: 'الرجاء ادخل المنطقة ( طرابلس - بنغازي -  الخ )',
-                value: cubit.cityController.text,
-                // Experimental until local storage services are created and address data is saved
-                items: [
-                  {
-                    '_id': '684c7986873f3a2e968bd62b',
-                    'name': 'طرابلس',
-                    'status': 'active',
-                  },
-                  {'_id': '2', 'name': 'بنغازي', 'status': 'soon'},
-                  {'_id': '3', 'name': 'زليتن', 'status': 'inactive'},
-                ],
-                validator: Validators.city,
-                onChanged: (selectedId) {
-                  cubit.onCityChanged(selectedId);
-                },
-              ),
-              cubit.cityController.text.isNotEmpty
-                  ? CustomDropdownField(
+      child: Center(
+        child: MultiContentBoxWidget(
+          width: double.infinity,
+          children: [
+            TwoOptionSelector(
+              label: 'الجنس',
+              firstOption: 'ذكر',
+              secondOption: 'أنثى',
+              firstValue: 'male',
+              secondValue: 'female',
+              selectedOptionNotifier: cubit.genderNotifier,
+              onChanged: (val) {
+                cubit.genderController.text = val;
+              },
+            ),
+            BirthDatePicker(
+              label: 'تاريخ الميلاد',
+              validator: Validators.birthDate,
+              onDateSelected: (DateTime selectedDate) {
+                cubit.birthDateController.text = DateFormat('yyyy-MM-dd').format(selectedDate);
+              },
+            ),
+            CustomDropdownField(
+              title: 'المدينة',
+              hintText: 'الرجاء ادخل المنطقة ( طرابلس - بنغازي - الخ )',
+              value: cubit.cityController.text,
+              items: cubit.cities,
+              validator: Validators.city,
+              onChanged: (selectedId) {
+                cubit.onCityChanged(selectedId);
+              },
+            ),
+            BlocBuilder<SignupCubit, SignupStates>(
+              builder: (context, state) {
+                if (cubit.cityController.text.isNotEmpty && cubit.districts.isNotEmpty) {
+                  return CustomDropdownField(
                     title: 'المنطقة',
                     hintText: 'حي الانتصار , أبو سليم , الخ',
                     value: cubit.districtController.text,
-                    // Experimental until local storage services are created and address data is saved
-                    items: [
-                      {
-                        '_id': '684c7992873f3a2e968bd632',
-                        'name': 'ابو سليم',
-                        'status': 'active',
-                      },
-                      {'_id': '2', 'name': 'فينيسا', 'status': 'soon'},
-                      {'_id': '3', 'name': 'زليتن', 'status': 'inactive'},
-                    ],
+                    items: cubit.districts,
                     validator: Validators.district,
                     onChanged: (selectedId) {
                       cubit.ondDistrictChanged(selectedId);
                     },
-                  )
-                  : SizedBox.shrink(),
-            ],
-          ),
-        ],
+                  );
+                }
+                return const SizedBox.shrink();
+              },
+            ),
+
+          ],
+        ),
       ),
     );
   }

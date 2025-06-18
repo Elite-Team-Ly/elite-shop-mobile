@@ -24,27 +24,19 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
     final bool canPop = Navigator.of(context).canPop();
 
     return Container(
+      width: double.infinity,
       height: preferredSize.height,
       padding: EdgeInsets.only(
-        top: MediaQuery.of(context).padding.top + 8.w,
+        top: MediaQuery.of(context).padding.top + 8.h,
         left: 16.w,
         right: 16.w,
-        bottom: 8.w,
+        bottom: 8.h,
       ),
+      color: Colors.transparent,
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          if (canPop)
-            IconButton(
-              icon: Icon(
-                Icons.arrow_back,
-                size: 28.sp,
-                color: Colors.black.withAlpha((0.7 * 255).round()),
-              ),
-              onPressed: onBack ?? () => Navigator.of(context).pop(),
-            )
-          else
-            SizedBox(width: 48.w),
+          SizedBox(width: 48.w),
           Expanded(
             child: Column(
               mainAxisSize: MainAxisSize.min,
@@ -71,9 +63,20 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
               ],
             ),
           ),
-          SizedBox(width: 48.w),
+          if (canPop)
+            IconButton(
+              icon: Icon(
+                Icons.arrow_forward,
+                size: 28.sp,
+                color: Colors.black.withOpacity(0.7),
+              ),
+              onPressed: onBack ?? () => Navigator.of(context).pop(),
+            )
+          else
+            SizedBox(width: 48.w),
         ],
       ),
     );
   }
 }
+

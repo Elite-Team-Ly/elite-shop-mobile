@@ -19,7 +19,7 @@ class CustomTextField extends StatefulWidget {
   final String? Function(String?)? validator;
   final bool? readOnly;
   final VoidCallback? onTap;
-  final Function(String)?  onChanged;
+  final Function(String)? onChanged;
 
   const CustomTextField({
     super.key,
@@ -37,7 +37,8 @@ class CustomTextField extends StatefulWidget {
     this.isPhoneNumber = false,
     this.textAlign = TextAlign.right,
     this.readOnly,
-    this.onTap, this.onChanged,
+    this.onTap,
+    this.onChanged,
   });
 
   @override
@@ -46,6 +47,7 @@ class CustomTextField extends StatefulWidget {
 
 class _CustomTextFieldState extends State<CustomTextField> {
   String? errorText;
+  bool hasError = false;
 
   @override
   Widget build(BuildContext context) {
@@ -56,17 +58,17 @@ class _CustomTextFieldState extends State<CustomTextField> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Padding(
-              padding: EdgeInsets.only(right: 8.w, bottom: 6.h),
-              child: Text(
-                widget.title ?? '',
-                style: TextStyle(
-                  fontSize: 20.sp,
-                  color: AppColors.darkA10,
+            if (widget.title != null)
+              Padding(
+                padding: EdgeInsets.only(right: 8.w, bottom: 6.h),
+                child: Text(
+                  widget.title!,
+                  style: TextStyle(
+                    fontSize: 20.sp,
+                    color: hasError ? AppColors.handlerColorTxtError : AppColors.darkA10,
+                  ),
                 ),
               ),
-            ),
-
             Container(
               width: widget.width?.w,
               height: widget.height?.h,
@@ -81,12 +83,23 @@ class _CustomTextFieldState extends State<CustomTextField> {
                 obscureText: widget.obscureText,
                 textAlign: widget.textAlign,
                 maxLength: widget.isPhoneNumber == true ? 10 : null,
-                cursorColor: AppColors.primaryColor,
-                style: TextStyle(color: AppColors.darkA30, fontSize: 16.sp),
-                onChanged: widget.onChanged,
+                cursorColor: hasError ? AppColors.handlerColorTxtError : AppColors.primaryColor,
+                style: TextStyle(
+                  color: hasError ? AppColors.handlerColorTxtError : AppColors.darkA30,
+                  fontSize: 16.sp,
+                ),
+                onChanged: (value) {
+                  if (hasError) {
+                    setState(() => hasError = false);
+                  }
+                  widget.onChanged?.call(value);
+                },
                 validator: (value) {
                   final result = widget.validator?.call(value);
-                  setState(() => errorText = result);
+                  setState(() {
+                    errorText = result;
+                    hasError = result != null;
+                  });
                   return result;
                 },
                 decoration: InputDecoration(
@@ -95,74 +108,61 @@ class _CustomTextFieldState extends State<CustomTextField> {
                   filled: true,
                   contentPadding: EdgeInsets.symmetric(horizontal: 16.w),
                   hintText: widget.hintText,
-                  hintStyle: TextStyle(color: AppColors.lightA40),
+                  hintStyle: TextStyle(
+                    color: hasError ? AppColors.handlerColorTxtError.withAlpha((0.4 * 255).round()) : AppColors.lightA40,
+                  ),
                   enabledBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(12),
                     borderSide: BorderSide(
-                      color: AppColors.darkA50,
+                      color: hasError ? AppColors.handlerColorTxtError : AppColors.darkA50,
                       width: 0.5,
                     ),
                   ),
                   focusedBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(12),
                     borderSide: BorderSide(
-                      color: AppColors.primaryColor,
+                      color: hasError ? AppColors.handlerColorTxtError : AppColors.primaryColor,
                       width: 2,
                     ),
                   ),
                   errorBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(12),
-                    borderSide: BorderSide(color: Colors.transparent, width: 0),
+                    borderSide: BorderSide(
+                      color: AppColors.handlerColorTxtError,
+                      width: 2,
+                    ),
                   ),
                   focusedErrorBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(12),
                     borderSide: BorderSide(
-                      color: AppColors.primaryColor,
+                      color: AppColors.handlerColorTxtError,
                       width: 2,
                     ),
                   ),
-                  suffixIcon:
-                  widget.showIcon && widget.icon != null
+                  suffixIcon: widget.showIcon && widget.icon != null
                       ? Padding(
                     padding: EdgeInsets.all(5.w),
                     child: MainIconButton(
                       icon: widget.icon!,
                       onPressed: widget.iconOnPressed,
                       showBackgroundColor: false,
+                      iconColor: hasError ? AppColors.handlerColorTxtError : null,
                     ),
                   )
                       : null,
-                  errorStyle: const TextStyle(
-                    height: 0,
-                    fontSize: 0,
-                    color: Colors.transparent,
-                  ),
+                  errorStyle: const TextStyle(height: 0, fontSize: 0),
                 ),
               ),
             ),
-
-            if (errorText != null)
+            if (errorText != null && hasError)
               Padding(
-                padding: EdgeInsets.symmetric(horizontal: 32.w, vertical: 4.h),
-                child: Row(
-                  children: [
-                    Icon(
-                      Icons.error_outline,
-                      color: Colors.red.shade700,
-                      size: 18.sp,
-                    ),
-                    SizedBox(width: 6.w),
-                    Expanded(
-                      child: Text(
-                        errorText!,
-                        style: TextStyle(
-                          color: Colors.red.shade700,
-                          fontWeight: FontWeight.bold,
-                          fontSize: 14.sp,
-                        ),
-                      ),
-                    ),
-                  ],
+                padding: EdgeInsets.only(top: 4.h, right: 8.w),
+                child: Text(
+                  errorText!,
+                  style: TextStyle(
+                    color: AppColors.handlerColorTxtError,
+                    fontSize: 14.sp,
+                  ),
                 ),
               ),
           ],

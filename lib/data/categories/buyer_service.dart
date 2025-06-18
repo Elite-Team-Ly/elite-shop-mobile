@@ -1,6 +1,5 @@
 import 'package:dartz/dartz.dart';
 import 'package:elite_team_training_app/core/errors/failure.dart';
-import 'package:elite_team_training_app/core/services/app_services.dart';
 import 'package:elite_team_training_app/data/categories/category_service.dart';
 import 'package:elite_team_training_app/models/categories/category_model.dart';
 
@@ -39,7 +38,6 @@ class BuyerCategoryService extends CategoriesService{
     if (response.statusCode == 200) {
       final data = response.data['data'];
       Category categories = Category.fromJson(data);
-      print(categories.name);
       return Right(categories);
     } else {
       return Left(Failure.fromResponse(response));

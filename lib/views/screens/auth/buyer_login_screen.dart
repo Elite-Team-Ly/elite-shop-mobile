@@ -2,19 +2,19 @@ import 'package:elite_team_training_app/controllers/sign_in_controller.dart/sign
 import 'package:elite_team_training_app/controllers/sign_in_controller.dart/sign_in_states.dart';
 import 'package:elite_team_training_app/core/config/constants.dart';
 import 'package:elite_team_training_app/core/config/routes.dart';
+import 'package:elite_team_training_app/views/widgets/app/pattern_background.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../core/utils/validators.dart';
-import '../../widgets/app/pattern_background.dart';
 import '../../widgets/widgets.dart';
 
-class SellerLoginScreen extends StatelessWidget {
-  const SellerLoginScreen({super.key});
+class CustomerLoginScreen extends StatelessWidget {
+  const CustomerLoginScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final SignInCubit cubit = SignInCubit.get(context);
+    final cubit = SignInCubit.get(context);
 
     return Scaffold(
       resizeToAvoidBottomInset: false,
@@ -23,7 +23,7 @@ class SellerLoginScreen extends StatelessWidget {
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(140.h),
         child: CustomAppBar(
-          title: 'تسجيل الدخول كبائع',
+          title: 'تسجيل الدخول كمشتري',
           onBack: () {
             Navigator.pop(context);
           },
@@ -52,7 +52,6 @@ class SellerLoginScreen extends StatelessWidget {
                 builder: (_) => const LoadingIndicator(),
               );
             }
-
             if (state is SignInSuccessState) {
               if (Navigator.canPop(context)) {
                 Navigator.pop(context);
@@ -122,14 +121,14 @@ class SellerLoginScreen extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       CustomImageWidget(
-                        imagePath: AppAssets.sellerLogin,
+                        imagePath: AppAssets.customerLogin,
                         width: 300.w,
                         height: 300.h,
                       ),
                       Padding(
                         padding: EdgeInsets.only(bottom: 12.h),
                         child: CustomText(
-                          'سجّل دخولك كبائع وابدأ إدارة متجرك بسهولة',
+                          'سجّل دخولك وابدأ تجربة تسوّق لا مثيل لها',
                           color: AppColors.darkA30,
                           fontSize: 22.sp,
                         ),
@@ -139,15 +138,15 @@ class SellerLoginScreen extends StatelessWidget {
                         children: [
                           CustomTextField(
                             title: 'رقم الهاتف',
-                            hintText: "الرجاء إدخال رقم هاتفك",
-                            keyboardType: TextInputType.phone,
+                            hintText: "الرجاء ادخال رقم هاتفك",
                             isPhoneNumber: true,
+                            keyboardType: TextInputType.phone,
                             controller: cubit.phoneController,
                             validator: Validators.phone,
                           ),
                           CustomTextField(
                             title: 'كلمة المرور',
-                            hintText: "الرجاء إدخال كلمة المرور",
+                            hintText: "الرجاء ادخال كلمة المرور",
                             keyboardType: TextInputType.visiblePassword,
                             controller: cubit.passController,
                             obscureText: cubit.isPassword,
@@ -156,6 +155,7 @@ class SellerLoginScreen extends StatelessWidget {
                             iconOnPressed: cubit.changePassVisibilty,
                             validator: Validators.password,
                           ),
+
                           RowWithAction(
                             alignment: MainAxisAlignment.start,
                             onActionTap: () {

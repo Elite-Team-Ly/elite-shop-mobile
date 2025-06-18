@@ -4,9 +4,7 @@ import 'package:dartz/dartz.dart';
 import 'package:elite_team_training_app/core/errors/failure.dart';
 import 'package:elite_team_training_app/models/categories/category_model.dart';
 import '../../core/config/constants.dart';
-import '../../core/enum/enum.dart';
 import '../../core/services/app_services.dart';
-import '../../core/services/local_storage_service.dart';
 
 abstract class CategoriesService {
   final ApiService apiService;

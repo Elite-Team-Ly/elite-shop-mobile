@@ -2,7 +2,6 @@
 import 'package:elite_team_training_app/models/address/district.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'dart:convert';
-
 import '../../models/address/city.dart';
 
 class LocalStorageService {

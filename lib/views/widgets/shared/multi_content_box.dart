@@ -28,7 +28,7 @@ class MultiContentBoxWidget extends StatelessWidget {
       child: Container(
         width: width?.w,
         margin: margin ?? EdgeInsets.symmetric(horizontal: 24.w, vertical: 8.h),
-        padding: padding ?? EdgeInsets.all(20.w),
+        padding: padding ?? EdgeInsets.symmetric(horizontal: 30.w,vertical: 30.h),
         decoration: BoxDecoration(
           color: backgroundColor ?? AppColors.lightColor,
           borderRadius: BorderRadius.circular(borderRadius!.r),

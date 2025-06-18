@@ -3,13 +3,17 @@ import 'package:elite_team_training_app/data/auth/auth_service.dart';
 import 'package:elite_team_training_app/models/auth/sign_up_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
+import '../../core/services/local_storage_service.dart';
 
 class SignupCubit extends Cubit<SignupStates> {
-  SignupCubit(this.authService) : super(SignupInitialState());
+  SignupCubit(this.authService) : super(SignupInitialState()) {
+    loadCities();
+  }
 
   static SignupCubit get(context) => BlocProvider.of(context);
 
+  List<Map<String, dynamic>> cities = [];
+  List<Map<String, dynamic>> districts = [];
   int currentPartIndex = 0;
   AuthService authService;
   ValueNotifier<String> roleNotifier = ValueNotifier('مشتري');
@@ -17,8 +21,8 @@ class SignupCubit extends Cubit<SignupStates> {
   IconData suffixIcon = Icons.visibility_outlined;
   bool isPassword = true;
   bool agreeTerms = false;
-
   String? userId;
+
   TextEditingController fullNameController = TextEditingController();
   TextEditingController phoneController = TextEditingController();
   TextEditingController passController = TextEditingController();
@@ -35,6 +39,37 @@ class SignupCubit extends Cubit<SignupStates> {
     GlobalKey<FormState>(),
   ];
 
+  Future<void> loadCities() async {
+    if (state is CitiesLoadingState) return;
+    emit(CitiesLoadingState());
+
+    try {
+      final loadedCities = await LocalStorageService.getCitiesFromLocal();
+      cities = loadedCities.map((city) => city.toJson()).toList();
+      emit(CitiesLoadedState());
+    } catch (e) {
+      emit(SignupErrorState('Failed to load cities'));
+    }
+  }
+
+  Future<void> loadDistrictsForCity(String cityId) async {
+    if (state is DistrictsLoadingState) return;
+    emit(DistrictsLoadingState());
+
+    try {
+      final allDistricts = await LocalStorageService.getDistrictFromLocal();
+      final filteredDistricts =
+          allDistricts
+              .where((district) => district.city.id == cityId)
+              .map((district) => district.toJson())
+              .toList();
+
+      districts = filteredDistricts;
+      emit(DistrictsLoadedState());
+    } catch (e) {
+      emit(SignupErrorState('Failed to load districts'));
+    }
+  }
 
   Future<SignUpModel> signup() async {
     emit(SignupLoadingState());
@@ -64,10 +99,10 @@ class SignupCubit extends Cubit<SignupStates> {
 
     authService.signUp(signUpModel).then((result) {
       result.fold(
-            (failure) {
+        (failure) {
           emit(SignupErrorState(failure.message));
         },
-            (user) {
+        (user) {
           //this user is a String because the API returns success message only not the user object
           emit(SignupSuccessState(user));
         },
@@ -80,12 +115,10 @@ class SignupCubit extends Cubit<SignupStates> {
   void changePassVisibilty() {
     isPassword = !isPassword;
     suffixIcon =
-    isPassword ? Icons.visibility_outlined : Icons.visibility_off_outlined;
+        isPassword ? Icons.visibility_outlined : Icons.visibility_off_outlined;
 
     emit(SignupChangePassVisibiltyState());
   }
-
-  // this update by hemo
 
   void goToNextPart() {
     if (currentPartIndex < 2) {
@@ -109,8 +142,14 @@ class SignupCubit extends Cubit<SignupStates> {
   void onCityChanged(String? id) {
     cityController.text = id ?? '';
     districtController.clear();
+    districts = [];
     emit(CityChangedState());
+
+    if (id != null && id.isNotEmpty) {
+      loadDistrictsForCity(id);
+    }
   }
+
   void ondDistrictChanged(String? id) {
     districtController.text = id ?? '';
     emit(DistrictChangedState());

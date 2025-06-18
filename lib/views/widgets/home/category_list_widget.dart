@@ -2,16 +2,17 @@ import 'package:elite_team_training_app/core/config/constants.dart';
 import 'package:elite_team_training_app/views/widgets/shared/buttons_widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-
 import '../../../models/categories/category_model.dart';
 
 class CategoryListWidget extends StatelessWidget {
-  final List<Category> categories;
+  final CategoryModel categoryModel;
 
-  const CategoryListWidget({super.key, required this.categories});
+  const CategoryListWidget({super.key, required this.categoryModel});
 
   @override
   Widget build(BuildContext context) {
+    final categories = categoryModel.data;
+
     return SizedBox(
       height: 100.h,
       child: ListView.separated(
@@ -25,13 +26,13 @@ class CategoryListWidget extends StatelessWidget {
             children: [
               MainSvgIconButton(
                 onPressed: () {
-
                 },
                 width: 66,
                 height: 66,
                 backgroundColor:
                 AppColors.primaryA50.withAlpha((0.2 * 255).toInt()),
-                svgPath: '${AppLink.imageServer}${item.icon}',
+                // svgPath: '${AppLink.imageServer}${item.icon}',
+                svgPath: AppAssets.facebook,
               ),
               SizedBox(height: 6.h),
               Text(

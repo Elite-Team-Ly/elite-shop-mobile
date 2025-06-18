@@ -3,7 +3,6 @@ import 'package:elite_team_training_app/controllers/otp_controller/otp_cubit.dar
 import 'package:elite_team_training_app/controllers/reset_password_controller/reset_password_cubit.dart';
 import 'package:elite_team_training_app/core/services/locator.dart';
 import 'package:elite_team_training_app/core/utils/navigation_transitions.dart';
-import 'package:elite_team_training_app/views/screens/auth/new_auth/signup/sign_up_screen.dart';
 import 'package:elite_team_training_app/views/screens/auth/new_password_screen.dart';
 import 'package:elite_team_training_app/views/screens/splash_screen.dart';
 import 'package:flutter/material.dart';
@@ -13,12 +12,12 @@ import 'package:elite_team_training_app/controllers/sign_up_controller/sign_up_c
 import 'core/config/routes.dart';
 import 'data/auth/auth_service.dart';
 import 'models/auth/otp/otp_model.dart';
+import 'views/screens/auth/signup/sign_up_screen.dart';
 import 'views/screens/screens.dart';
 
 class RouteGenerator {
   static Route<dynamic> generateRoute(RouteSettings settings) {
     switch (settings.name) {
-
       case RouteNames.splash:
         return slideRoute(const SplashScreen());
 
@@ -129,8 +128,8 @@ class RouteGenerator {
           ),
         );
 
-      case RouteNames.home:
-        return slideRoute(const HomeScreen());
+      case RouteNames.buyerHome:
+        return slideRoute(BuyerHomeScreen());
 
       default:
         return slideRoute(
