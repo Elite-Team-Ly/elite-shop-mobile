@@ -5,8 +5,9 @@ class RouteNames {
   static const String signup = '/signup';
   static const String verifyCode = '/verifyCode';
   static const String resetPassword = '/resetPassword';
-  static const String customerLogin = '/customerLogin';
+  static const String buyerLogin = '/customerLogin';
   static const String sellerLogin = '/sellerLogin';
   static const String newPassword = '/newPassword';
   static const String buyerHome = '/buyerHome';
+  static const String buyerFavorite = '/buyerFavorite';
 }

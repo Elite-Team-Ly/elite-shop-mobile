@@ -108,7 +108,7 @@ class RouteGenerator {
                 ),
           );
         }
-      case RouteNames.customerLogin:
+      case RouteNames.buyerLogin:
         return slideRoute(
           BlocProvider(
             create:
@@ -131,6 +131,8 @@ class RouteGenerator {
       case RouteNames.buyerHome:
         return slideRoute(BuyerHomeScreen());
 
+      case RouteNames.buyerFavorite:
+        return slideRoute(BuyerFavoriteScreen());
       default:
         return slideRoute(
           const Scaffold(body: Center(child: Text('404 - الصفحة غير موجودة'))),

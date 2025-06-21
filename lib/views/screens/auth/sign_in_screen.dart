@@ -30,7 +30,7 @@ class SignInScreen extends StatelessWidget {
               SizedBox(height: 32.h),
               MainButton(
                 onPressed: () {
-                  Navigator.pushNamed(context, RouteNames.customerLogin);
+                  Navigator.pushNamed(context, RouteNames.buyerLogin);
                 },
                 borderRadius: BorderRadius.circular(18),
                 margin: EdgeInsets.symmetric(vertical: 10.h, horizontal: 0.w),

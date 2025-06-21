@@ -5,8 +5,8 @@ import 'package:elite_team_training_app/views/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../core/data/demo/onboarding_data.dart';
-import '../widgets/onBoarding_Widgets/onboarding_dots.dart';
-import '../widgets/onBoarding_Widgets/onboarding_page.dart';
+import '../widgets/app/onboarding/onboarding_dots.dart';
+import '../widgets/app/onboarding/onboarding_page.dart';
 
 class OnboardingScreen extends StatefulWidget {
   const OnboardingScreen({super.key});

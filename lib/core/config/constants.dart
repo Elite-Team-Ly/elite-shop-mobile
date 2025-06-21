@@ -80,7 +80,7 @@ class AppLink {
 }
 
 class AppAssets {
-  static const String app = "assets/app/";
+  static const String assetsApp = "assets/app";
   static const String lottie = "assets/lottie/";
 
   // logo app
@@ -88,17 +88,18 @@ class AppAssets {
   static const String logoApp2 = "assets/app/logo2.png";
   static const String logoWidget = "assets/app/logoWidget.png";
   static const String pattern = "assets/app/elite_shop_pattern.png";
-
-  static const String customerLogin =
-      "assets/app/loginBundle/customerLogin.png";
-  static const String sellerLogin = "assets/app/loginBundle/SellerLogin.png";
+  // images
+  static const String customerLogin = "$assetsApp/loginBundle/customerLogin.png";
+  static const String sellerLogin = "$assetsApp/loginBundle/SellerLogin.png";
+  static const String emptyFavorite = "$assetsApp/buyer/empty_favorite.png";
 
   // icons
   static const String icons = "assets/icons";
-
+  static const String iconBack = "$icons/back.svg";
+  static const String iconFilter = "$icons/filter.svg";
+  static const String iconTask = "$icons/task.svg";
   // social media icons
   static const String socialMediaIcons = "$icons/social_media"; // root folder for social media icons files
-
   static const String facebook = "$socialMediaIcons/facebook.svg";
   static const String whatsapp = "$socialMediaIcons/whatsapp.svg";
   static const String instagram = "$socialMediaIcons/instagram.svg";

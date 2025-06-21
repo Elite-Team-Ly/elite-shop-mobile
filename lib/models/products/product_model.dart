@@ -31,7 +31,9 @@ class Product {
   final List<String> images;
   final String description;
   final double salePrice;
-  final double discountPrice;
+  final double currentPrice;
+  final double discountPercent;
+  final DateTime discountStartDate;
   final DateTime discountEndDate;
   final Store store;
   final Category category;
@@ -51,7 +53,9 @@ class Product {
     required this.images,
     required this.description,
     required this.salePrice,
-    required this.discountPrice,
+    required this.currentPrice,
+    required this.discountPercent,
+    required this.discountStartDate,
     required this.discountEndDate,
     required this.store,
     required this.category,
@@ -73,7 +77,9 @@ class Product {
       images: List<String>.from(json['images']),
       description: json['description'],
       salePrice: (json['salePrice'] as num).toDouble(),
-      discountPrice: (json['discountPrice'] as num).toDouble(),
+      currentPrice: (json['currentPrice'] as num).toDouble(),
+      discountPercent: (json['discountPercent'] as num).toDouble(),
+      discountStartDate: DateTime.parse(json['discountStartDate']),
       discountEndDate: DateTime.parse(json['discountEndDate']),
       store: Store.fromJson(json['store']),
       category: Category.fromJson(json['category']),

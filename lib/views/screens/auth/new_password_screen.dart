@@ -36,7 +36,7 @@ class NewPasswordScreen extends StatelessWidget {
       extendBody: true,
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(140.h),
-        child: CustomAppBar(
+        child: CustomAppBarV1(
           title: 'إعادة تعيين كلمة المرور',
 
           onBack: () {

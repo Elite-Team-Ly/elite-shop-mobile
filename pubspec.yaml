@@ -51,6 +51,7 @@ flutter:
     - assets/app/
     - assets/app/onBoarding/
     - assets/app/loginBundle/
+    - assets/app/buyer/
     - assets/icons/
     - assets/icons/social_media/
 

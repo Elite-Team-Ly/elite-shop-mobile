@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import '../../../core/config/constants.dart';
-import '../../../models/brands/brand_model.dart';
+import '../../../../core/config/constants.dart';
+import '../../../../models/brands/brand_model.dart';
 
 class BrandListWidget extends StatelessWidget {
-  final BrandModel brandModel;
+  final BrandModel brand;
 
-  const BrandListWidget({super.key, required this.brandModel});
+  const BrandListWidget({super.key, required this.brand});
 
   @override
   Widget build(BuildContext context) {
-    final brands = brandModel.data;
+    final brands = brand.data;
 
     return SizedBox(
       height: 80.h,

@@ -22,7 +22,7 @@ class SellerLoginScreen extends StatelessWidget {
       extendBody: true,
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(140.h),
-        child: CustomAppBar(
+        child: CustomAppBarV1(
           title: 'تسجيل الدخول كبائع',
           onBack: () {
             Navigator.pop(context);

@@ -113,13 +113,21 @@ class MainIconButton extends StatelessWidget {
         onPressed: isEnabled ? onPressed : null,
         fillColor:
             showBackgroundColor
-                ? (backgroundColor ?? AppStatusHandler.backgroundColor(appStatus, isEnabled: isEnabled))
+                ? (backgroundColor ??
+                    AppStatusHandler.backgroundColor(
+                      appStatus,
+                      isEnabled: isEnabled,
+                    ))
                 : Colors.transparent,
         splashColor: isEnabled ? AppColors.primaryA50 : Colors.transparent,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
         elevation: 0,
         disabledElevation: 0,
-        child: Icon(icon, size: iconSize, color: iconColor ?? AppColors.primaryColor),
+        child: Icon(
+          icon,
+          size: iconSize,
+          color: iconColor ?? AppColors.primaryColor,
+        ),
       ),
     );
   }
@@ -134,6 +142,7 @@ class MainSvgIconButton extends StatelessWidget {
   final bool isEnabled;
   final bool showBackgroundColor;
   final Color? backgroundColor;
+  final bool showSplashEffect;
 
   const MainSvgIconButton({
     super.key,
@@ -145,21 +154,55 @@ class MainSvgIconButton extends StatelessWidget {
     this.iconSize = 20,
     this.showBackgroundColor = true,
     this.backgroundColor,
+    this.showSplashEffect = true,
   });
 
   @override
   Widget build(BuildContext context) {
+    final buttonContent = Container(
+      width: (width ?? 48).w,
+      height: (height ?? 48).h,
+      decoration: BoxDecoration(
+        color: showBackgroundColor
+            ? (backgroundColor ?? AppColors.lightColor)
+            : Colors.transparent,
+        borderRadius: BorderRadius.circular(30),
+      ),
+      alignment: Alignment.center,
+      child: SvgPicture.asset(
+        svgPath,
+        width: iconSize,
+        height: iconSize,
+        colorFilter: ColorFilter.mode(
+          AppColors.primaryColor,
+          BlendMode.srcIn,
+        ),
+      ),
+    );
+
+    if (!showSplashEffect) {
+      return GestureDetector(
+        onTap: isEnabled ? onPressed : null,
+        behavior: HitTestBehavior.opaque,
+        child: buttonContent,
+      );
+    }
+
     return SizedBox(
       width: (width ?? 48).w,
       height: (height ?? 48).h,
       child: RawMaterialButton(
         onPressed: isEnabled ? onPressed : null,
-        fillColor:
-            showBackgroundColor
-                ? (backgroundColor ?? AppColors.lightColor)
-                : Colors.transparent,
-        splashColor: isEnabled ? AppColors.primaryA50 : Colors.transparent,
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
+        fillColor: showBackgroundColor
+            ? (backgroundColor ?? AppColors.lightColor)
+            : Colors.transparent,
+        splashColor: AppColors.primaryA50,
+        highlightColor: null,
+        hoverColor: null,
+        focusColor: null,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(30),
+        ),
         elevation: 0,
         disabledElevation: 0,
         child: SvgPicture.asset(

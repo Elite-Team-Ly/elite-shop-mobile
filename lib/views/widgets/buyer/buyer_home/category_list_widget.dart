@@ -2,16 +2,16 @@ import 'package:elite_team_training_app/core/config/constants.dart';
 import 'package:elite_team_training_app/views/widgets/shared/buttons_widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import '../../../models/categories/category_model.dart';
+import '../../../../models/categories/category_model.dart';
 
 class CategoryListWidget extends StatelessWidget {
-  final CategoryModel categoryModel;
+  final CategoryModel category;
 
-  const CategoryListWidget({super.key, required this.categoryModel});
+  const CategoryListWidget({super.key, required this.category});
 
   @override
   Widget build(BuildContext context) {
-    final categories = categoryModel.data;
+    final categories = category.data;
 
     return SizedBox(
       height: 100.h,
@@ -21,7 +21,7 @@ class CategoryListWidget extends StatelessWidget {
         itemCount: categories.length,
         separatorBuilder: (_, __) => SizedBox(width: 18.w),
         itemBuilder: (context, index) {
-          final item = categories[index];
+          final category = categories[index];
           return Column(
             children: [
               MainSvgIconButton(
@@ -31,12 +31,11 @@ class CategoryListWidget extends StatelessWidget {
                 height: 66,
                 backgroundColor:
                 AppColors.primaryA50.withAlpha((0.2 * 255).toInt()),
-                // svgPath: '${AppLink.imageServer}${item.icon}',
-                svgPath: AppAssets.facebook,
+                svgPath: '${AppLink.imageServer}${category.icon}',
               ),
               SizedBox(height: 6.h),
               Text(
-                item.name,
+                category.name,
                 style: TextStyle(
                   fontSize: 13.sp,
                   fontWeight: FontWeight.w500,
